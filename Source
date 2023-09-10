@@ -3720,7 +3720,7 @@ spawn(function()
     end)
 
     M:AddToggle({
-        Name = "Auto Chest[Bypass][Error!]",
+        Name = "Auto Chest[Bypass]",
         Default = false,
         Callback = function(Value)
             _G.ChestBypass = Value
@@ -3730,7 +3730,7 @@ spawn(function()
 spawn(function()
 	while wait() do 
 		if _G.ChestBypass then
-			for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do 
+			for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
 				if v.Name:find("Chest") then
 					if game:GetService("Workspace"):FindFirstChild(v.Name) then
 						if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000+_G.MagnitudeAdd then
