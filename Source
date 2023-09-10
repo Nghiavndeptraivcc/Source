@@ -6581,6 +6581,267 @@ spawn(function()
     end
 end)
 
+local RA = Window:MakeTab({
+	Name = "Raid",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = RA:AddSection({
+	Name = "Raid Menu"
+})
+
+local TimeRaid = RA:AddLabel("Wait For Dungeon")
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if game:GetService("Players").LocalPlayer.PlayerGui.Main.Timer.Visible == true then
+                TimeRaid:Set(game:GetService("Players").LocalPlayer.PlayerGui.Main.Timer.Text)
+            else
+                TimeRaid:Set("Wait For Dungeon")
+            end
+        end
+    end)
+end)
+
+local checkisland = RA:AddLabel("Island : Not Raid")
+
+spawn(function()
+    pcall(function()
+        while wait() do
+if game.Workspace._WorldOrigin.Locations:FindFirstChild('Island 1') then
+checkisland:Set(' Island : 1')
+        end
+    end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+if game.Workspace._WorldOrigin.Locations:FindFirstChild('Island 2') then
+checkisland:Set('Island : 2')
+        end
+    end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+if game.Workspace._WorldOrigin.Locations:FindFirstChild('Island 3') then
+checkisland:Set('Island : 3')
+        end
+    end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+if game.Workspace._WorldOrigin.Locations:FindFirstChild('Island 4') then
+checkisland:Set('Island : 4')
+end
+end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+if game.Workspace._WorldOrigin.Locations:FindFirstChild('Island 5') then
+checkisland:Set('Island : 5')
+        end
+    end
+    end)
+end)
+
+_G.SelectChip = selectraids or ""
+	Raidslist = {}
+	RaidsModule = require(game.ReplicatedStorage.Raids)
+	for i,v in pairs(RaidsModule.raids) do
+		table.insert(Raidslist,v)
+	end
+	for i,v in pairs(RaidsModule.advancedRaids) do
+		table.insert(Raidslist,v)
+	end
+
+
+    RA:AddDropdown({
+        Name = "Select Chips",
+        Default = "",
+        Options = Raidslist,
+        Callback = function(Value)
+            _G.SelectChip = Value
+        end    
+    })
+
+
+
+RA:AddButton({
+	Name = "Buy Chip",
+	Callback = function()
+      	_G.AutoBuyChip = value
+  	end    
+})
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.AutoBuyChip then
+                if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip") then
+                    if not game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Select", _G.SelectChip)
+                    end
+                end
+            end
+        end
+    end)
+end)
+
+RA:AddButton({
+	Name = "Buy Chips Select",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc","Select",_G.SelectChip)
+  	end    
+})
+
+RA:AddToggle({
+	Name = "Auto Start Raid",
+	Default = false,
+	Callback = function(Value)
+		_G.Auto_StartRaid = Value
+	end    
+})
+spawn(function()
+    while wait(.1) do
+        pcall(function()
+            if _G.Auto_StartRaid then
+                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
+                    if not game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip") then
+                        if World2 then
+                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
+                        elseif World3 then
+                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+RA:AddToggle({
+	Name = "KillAura",
+	Default = false,
+	Callback = function(Value)
+		_G.Kill_Aura = Value
+	end    
+})
+spawn(function()
+    while wait() do
+        if _G.Kill_Aura then
+            for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                    pcall(function()
+                        repeat wait(.1)
+                            v.Humanoid.Health = 0
+                            v.HumanoidRootPart.CanCollide = false
+							sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                        until not _G.Kill_Aura  or not v.Parent or v.Humanoid.Health <= 0
+                    end)
+                end
+            end
+        end
+    end
+    end)
+
+    RA:AddToggle({
+        Name = "Next Island",
+        Default = false,
+        Callback = function(Value)
+            _G.Auto_Dungeon = Value
+            StopTween(_G.Auto_Dungeon)
+        end    
+    })
+    spawn(function()
+        pcall(function()
+            while wait() do
+                if _G.Auto_Dungeon then
+                    if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true then
+                        if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
+                            topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5").CFrame*RaidPos)
+                        elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") then
+                            topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4").CFrame*RaidPos)
+                        elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") then
+                            topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3").CFrame*RaidPos)
+                        elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") then
+                            topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2").CFrame*RaidPos)
+                        elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+                            topos(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1").CFrame*RaidPos)
+                        end
+                    end
+                end
+            end
+        end)
+    end)
+    
+    Type = 1
+spawn(function()
+    while wait(.1) do
+        if Type == 1 then
+            RaidPos = CFrame.new(0,25,0)
+		elseif Type == 2 then
+			RaidPos = CFrame.new(0,25,-40)
+		elseif Type == 3 then
+			RaidPos = CFrame.new(40,25,0)
+		elseif Type == 4 then
+			RaidPos = CFrame.new(0,25,40)	
+		elseif Type == 5 then
+			RaidPos = CFrame.new(-40,25,0)
+		elseif Type == 6 then
+			RaidPos = CFrame.new(0,25,0)
+        end
+        end
+    end)
+
+spawn(function()
+    while wait(.1) do
+        Type = 1
+        wait(0.9)
+        Type = 2
+        wait(0.9)
+        Type = 3
+        wait(0.9)
+        Type = 4
+        wait(0.9)
+        Type = 5
+        wait(0.9)
+    end
+end)
+
+RA:AddToggle({
+	Name = "Auto Awakener",
+	Default = false,
+	Callback = function(Value)
+		_G.Auto_Awakener = Value
+	end    
+})
+spawn(function()
+    pcall(function()
+        while wait(.1) do
+            if _G.Auto_Awakener then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Check")
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Awaken")
+            end
+        end
+    end)
+end)
+
+
+
+
+
 local LC = Window:MakeTab({
 	Name = "Local Players",
 	Icon = "rbxassetid://4483345998",
