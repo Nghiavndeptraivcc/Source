@@ -8075,7 +8075,7 @@ R:AddToggle({
 	Name = "Auto Buy Gear",
 	Default = false,
 	Callback = function(Value)
-        _G.Auto_Farm_Bone4 = Vaalue
+        _G.Auto_Farm_Bone4 = Value
         StopTween(_G.Auto_Farm_Bone4)
 	end    
 })
@@ -8113,7 +8113,6 @@ spawn(function()
             if _G.AutoRace then
                 if game.Players.LocalPlayer.Character.RaceTransformed.Value == true then
                     _G.AutoDoughtBoss = false
-                    topos(CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375))
                 end
             end
         end
@@ -8399,6 +8398,14 @@ spawn(function()
 		end)
     end
     end)
+
+    R:AddButton({
+        Name = "Teleport to Clock",
+        Callback = function()
+            game:GetService("Workspace").Map["Temple of Time"].DoNotEnter:Remove()
+            game:GetService("Workspace").Map["Temple of Time"].ClockRoomExit:Remove()
+          end    
+    })
 
 local SH = Window:MakeTab({
 	Name = "Shop",
