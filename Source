@@ -1995,7 +1995,7 @@ end)
 
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "NIGHT HUB", HidePremium = false, IntroText = "Loading setting", SaveConfig = true, ConfigFolder = "ConfigSetting"})
+local Window = OrionLib:MakeWindow({Name = "NIGHT HUB", HidePremium = false, IntroText = "NIGHT HUB Library", SaveConfig = true, ConfigFolder = "ConfigSetting"})
 
 OrionLib:MakeNotification({
 	Name = "NIGHT HUB BOT",
@@ -2759,6 +2759,55 @@ spawn(function()
         end
     end)
 end)
+
+M:AddLabel("Setting Mastery Farm")
+
+    M:AddSlider({
+        Name = "Health Mob",
+        Min = 0,
+        Max = 100,
+        Default = 25,
+        Color = Color3.fromRGB(255,255,255),
+        Increment = 1,
+        ValueName = "Health",
+        Callback = function(Value)
+            _G.Kill_At = Value
+        end    
+    })
+
+    M:AddToggle({
+        Name = "Skill Z",
+        Default = false,
+        Callback = function(Value)
+            _G.SkillZ = Value
+        end    
+    })
+
+    M:AddToggle({
+        Name = "Skill! X",
+        Default = false,
+        Callback = function(Value)
+            _G.SkillX = Value
+        end    
+    })
+
+
+    M:AddToggle({
+        Name = "Skill C",
+        Default = false,
+        Callback = function(Value)
+            _G.SkillC = Value
+        end    
+    })
+
+
+    M:AddToggle({
+        Name = "Skill V",
+        Default = false,
+        Callback = function(Value)
+            _G.SkillV = Value
+        end    
+    })
 
 
 M:AddToggle({
@@ -4821,6 +4870,21 @@ local S = Window:MakeTab({
     end)
 
     S:AddToggle({
+        Name = "Anti Afk",
+        Default = false,
+        Callback = function(Value)
+            local vu = game:GetService("VirtualUser")
+    repeat wait() until game:IsLoaded() 
+	game:GetService("Players").LocalPlayer.Idled:connect(function()
+    game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+		vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		wait(1)
+		vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            end)
+        end    
+    })
+
+    S:AddToggle({
         Name = "White screen",
         Default = false,
         Callback = function(Value)
@@ -4833,9 +4897,9 @@ elseif _G.WhiteScreen == false then
     end
     })
 
-    S:AddLabel("Setting Mastery Farm")
+    M:AddLabel("Setting Mastery Farm")
 
-    S:AddSlider({
+    M:AddSlider({
         Name = "Health Mob",
         Min = 0,
         Max = 100,
@@ -4848,7 +4912,7 @@ elseif _G.WhiteScreen == false then
         end    
     })
 
-    S:AddToggle({
+    M:AddToggle({
         Name = "Skill Z",
         Default = false,
         Callback = function(Value)
@@ -4856,7 +4920,7 @@ elseif _G.WhiteScreen == false then
         end    
     })
 
-    S:AddToggle({
+    M:AddToggle({
         Name = "Skill! X",
         Default = false,
         Callback = function(Value)
@@ -4865,7 +4929,7 @@ elseif _G.WhiteScreen == false then
     })
 
 
-    S:AddToggle({
+    M:AddToggle({
         Name = "Skill C",
         Default = false,
         Callback = function(Value)
@@ -4874,7 +4938,7 @@ elseif _G.WhiteScreen == false then
     })
 
 
-    S:AddToggle({
+    M:AddToggle({
         Name = "Skill V",
         Default = false,
         Callback = function(Value)
@@ -8498,6 +8562,47 @@ local C = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
+local Section = C:AddSection({
+	Name = "Open Tab"
+})
+
+C:AddButton({
+	Name = "Open Devil Fruit Shop",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetFruits")
+        game:GetService("Players").LocalPlayer.PlayerGui.Main.FruitShop.Visible = true	
+  	end    
+})
+
+C:AddButton({
+	Name = "Open Inventory[Old]",
+	Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventoryFruits")
+        game:GetService("Players").LocalPlayer.PlayerGui.Main.FruitInventory.Visible = true
+  	end    
+})
+
+C:AddButton({
+	Name = "Title Tab",
+	Callback = function()
+        local args = {
+            [1] = "getTitles"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        game.Players.localPlayer.PlayerGui.Main.Titles.Visible = true
+  	end    
+})
+
+C:AddButton({
+	Name = "Color Haki",
+	Callback = function()
+        game.Players.localPlayer.PlayerGui.Main.Colors.Visible = true
+  	end    
+})
+
+
+
 
 C:AddToggle({
 	Name = "Hunter Players",
