@@ -6652,6 +6652,7 @@ E:AddToggle({
 		DevilFruitESP = b
         while DevilFruitESP do wait()
         UpdateDevilChams() 
+        end
 	end    
 })
 function UpdateDevilChams() 
