@@ -7887,10 +7887,21 @@ D:AddToggle({
 	Name = "Teleport To Fruit Spawn",
 	Default = false,
 	Callback = function(Value)
-        _G.Tweenfruit = value
-         StopTween(_G.Tweenfruit)
+        _G.Tweenfruit = Value
+        StopTween(_G.Tweenfruit)
 	end    
 })
+spawn(function()
+    while wait(.1) do
+        if _G.Tweenfruit then
+            for i,v in pairs(game.Workspace:GetChildren()) do
+                if string.find(v.Name, "Fruit") then
+                    topos(v.Handle.CFrame)
+                end
+            end
+        end
+end
+end)
 
 D:AddToggle({
 	Name = "Auto Drop Fruit",
@@ -7899,6 +7910,36 @@ D:AddToggle({
 		_G.DropFruit = Value
 	end    
 })
+spawn(function()
+    while wait() do
+        if _G.DropFruit then
+            pcall(function()
+                for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                    if string.find(v.Name, "Fruit") then
+                        EquipWeapon(v.Name)
+                        wait(.1)
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible == true then
+                            game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible = false
+                        end
+                        EquipWeapon(v.Name)
+                        game:GetService("Players").LocalPlayer.Character:FindFirstChild(SelectFruit).EatRemote:InvokeServer("Drop")
+                    end
+                end
+            for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+                    if string.find(v.Name, "Fruit") then
+                        EquipWeapon(v.Name)
+                        wait(.1)
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible == true then
+                            game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible = false
+                        end
+                        EquipWeapon(v.Name)
+                        game:GetService("Players").LocalPlayer.Character:FindFirstChild(SelectFruit).EatRemote:InvokeServer("Drop")
+                    end
+                end
+            end)
+        end
+    end
+end)
 
 D:AddToggle({
 	Name = "Bring All Fruit[75% Kick]",
@@ -8156,6 +8197,7 @@ spawn(function()
 			    if v.Name and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
 			        if v.Humanoid.Health > 0 then
 			            repeat wait()
+                        AutoHaki()
 			              EquipWeapon(_G.SelectWeapon)
 			                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
 			                	local args = {
