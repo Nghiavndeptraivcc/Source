@@ -4860,7 +4860,7 @@ elseif _G.WhiteScreen == false then
         Name = "Skill! X",
         Default = false,
         Callback = function(Value)
-            _G.SkillX = value
+            _G.SkillX = Value
         end    
     })
 
