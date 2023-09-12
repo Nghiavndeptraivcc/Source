@@ -5743,8 +5743,7 @@ local CavandisPos = CFrame.new(5314.58203, 22.8796749, -125.942276, 1, 1.6963919
                 end
             end
         end)
-
-
+        
         local Section = IQ:AddSection({
             Name = "ArenaTrainer"
         })
