@@ -4718,7 +4718,7 @@ local S = Window:MakeTab({
 
     S:AddToggle({
         Name = "Anti Afk",
-        Default = false,
+        Default = true,
         Callback = function(Value)
             local vu = game:GetService("VirtualUser")
     repeat wait() until game:IsLoaded() 
@@ -4744,54 +4744,6 @@ elseif _G.WhiteScreen == false then
     end
     })
 
-    M:AddLabel("Setting Mastery Farm")
-
-    M:AddSlider({
-        Name = "Health Mob",
-        Min = 0,
-        Max = 100,
-        Default = 25,
-        Color = Color3.fromRGB(255,255,255),
-        Increment = 1,
-        ValueName = "Health",
-        Callback = function(Value)
-            _G.Kill_At = Value
-        end    
-    })
-
-    M:AddToggle({
-        Name = "Skill Z",
-        Default = false,
-        Callback = function(Value)
-            _G.SkillZ = Value
-        end    
-    })
-
-    M:AddToggle({
-        Name = "Skill! X",
-        Default = false,
-        Callback = function(Value)
-            _G.SkillX = Value
-        end    
-    })
-
-
-    M:AddToggle({
-        Name = "Skill C",
-        Default = false,
-        Callback = function(Value)
-            _G.SkillC = Value
-        end    
-    })
-
-
-    M:AddToggle({
-        Name = "Skill V",
-        Default = false,
-        Callback = function(Value)
-            _G.SkillV = Value
-        end    
-    })
 
 
 local IQ = Window:MakeTab({
@@ -4835,7 +4787,33 @@ IQ:AddToggle({
         _G.AutoBuyLegendarySword = Value
 	end    
 })
-
+spawn(function()
+    while wait() do
+        if _G.AutoBuyLegendarySword then
+            pcall(function()
+                local args = {
+                    [1] = "LegendarySwordDealer",
+                    [2] = "1"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                local args = {
+                    [1] = "LegendarySwordDealer",
+                    [2] = "2"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                local args = {
+                    [1] = "LegendarySwordDealer",
+                    [2] = "3"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                if _G.AutoBuyLegendarySword_Hop and _G.AutoBuyLegendarySword and World2 then
+                    wait(10)
+                    Hop()
+                end
+            end)
+        end 
+    end
+end)
 
 
 
@@ -8139,7 +8117,6 @@ spawn(function()
         while wait() do
             if _G.AutoRace then
                 if game.Players.LocalPlayer.Character.RaceTransformed.Value == true then
-                    _G.AutoDoughtBoss = false
                 end
             end
         end
@@ -8151,7 +8128,6 @@ spawn(function()
         while wait() do
             if _G.AutoRace then
                 if game.Players.LocalPlayer.Character.RaceTransformed.Value == false then
-                    _G.AutoDoughtBoss = true
                 end
             end
         end
