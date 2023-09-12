@@ -5748,7 +5748,7 @@ IQ:AddToggle({
 		_G.Hop = Value
 	end    
 })
-local CavandisPos = CFrame.new(5311.07421875, 426.0243835449219, 165.12762451171875)
+local CavandisPos = CFrame.new(5314.58203, 22.8796749, -125.942276, 1, 1.69639192e-10, 1.5617945e-15, -1.69639192e-10, 1, 5.38001999e-08, -1.55266783e-15, -5.38001999e-08, 1)
     spawn(function()
         while wait() do
             if  _G.AutoCarvender and World3 then
@@ -5931,11 +5931,9 @@ local CavandisPos = CFrame.new(5311.07421875, 426.0243835449219, 165.12762451171
             Default = false,
             Callback = function(Value)
                 _G.AutoElitehunter = Value
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                 StopTween(_G.AutoElitehunter)
             end    
         })
-        
         spawn(function()
             while wait() do
                 if _G.AutoElitehunter and World3 then
@@ -5943,7 +5941,7 @@ local CavandisPos = CFrame.new(5311.07421875, 426.0243835449219, 165.12762451171
                         local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                             repeat  wait()
-                                topos(CFrame.new(-5418.892578125, 313.74130249023, -2826.2260742188)) 
+                                Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5418.892578125, 313.74130249023, -2826.2260742188)
                             until not _G.AutoElitehunter or (Vector3.new(-5418.892578125, 313.74130249023, -2826.2260742188)-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3
                             if (Vector3.new(-5418.892578125, 313.74130249023, -2826.2260742188)-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 then
                                 wait(0.1)
@@ -5991,7 +5989,7 @@ local CavandisPos = CFrame.new(5311.07421875, 426.0243835449219, 165.12762451171
                 end
             end
         end)
-
+    
         IQ:AddToggle({
             Name = "Auto Elite[HOP]",
             Default = false,
@@ -7354,15 +7352,16 @@ LC:AddToggle({
 	end    
 })
 
-LC:AddButton({
-	Name = "Teleport to seabeast",
-	Callback = function()
-        for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+LC:AddToggle({
+	Name = "Teleport to Seabeast",
+	Default = false,
+	Callback = function(Value)
+		for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
             if v:FindFirstChild("HumanoidRootPart") then
                 topos(v.HumanoidRootPart.CFrame*CFrame.new(0,100,0))
             end
         end
-  	end    
+	end    
 })
 
 LC:AddButton({
