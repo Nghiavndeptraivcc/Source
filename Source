@@ -8076,6 +8076,31 @@ spawn(function()
     end
 end)
 
+R:AddButton({
+	Name = "Teleport to Gear",
+	Callback = function()
+        _G.TweenMGear = Value
+        StopTween(_G.TweenMGear)	
+  	end    
+})
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.TweenMGear then
+				if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+					for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do 
+						if v:IsA("MeshPart")then 
+                            if v.Material ==  Enum.Material.Neon then  
+                                topos(v.CFrame)
+                            end
+                        end
+					end
+				end
+			end
+        end
+    end)
+    end)
+
 R:AddToggle({
 	Name = "Auto Buy Gear",
 	Default = false,
@@ -8150,6 +8175,7 @@ R:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.AutoRace = Value
+    StopTween(_G.AutoRace)
 	end    
 })
 spawn(function()
