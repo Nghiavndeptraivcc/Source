@@ -1991,7 +1991,22 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
     game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
-
+spawn(function() 
+    repeat
+        task.wait()
+    until game:IsLoaded()
+    repeat
+        task.wait()
+    until game.Players
+    repeat
+        task.wait()
+    until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
+    wait(1.5)
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>Chào Mừng Đến Với NIGHT HUB<Color=/>"):Display()
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>Sử Dụng Fluxus để có trải nghiệm tốt<Color=/>"):Display()
+    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Discord : https://discord.gg/xBTmd3ff <Color=/>"):Display()
+    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Tham gia disocrd để cập nhật thông tin mới nhất nhé<Color=/>"):Display()
+end)
 
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
@@ -2196,7 +2211,6 @@ local locallv = W:AddLabel("Level")
     local   BartiloQuest =            W:AddLabel("❌ : Bartilo Quest")
     local   DonSwanQuest =             W:AddLabel("❌ : Don Swan Quest")
     local    KillDonSwan =           W:AddLabel("❌ : Kill Don Swan")
-    game:GetService("UserInputService").WindowFocused:connect(function()game.RunService:Set3dRenderingEnabled(true)end)game:GetService("UserInputService").WindowFocusReleased:connect(function()game.RunService:Set3dRenderingEnabled(false)end)
     task.spawn(function()while true do wait()_G.rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(Kick) if not _G.Rejoin then if Kick.Name == 'ErrorPrompt' and Kick:FindFirstChild('MessageArea') and Kick.MessageArea:FindFirstChild("ErrorFrame") then game:GetService("TeleportService"):Teleport(game.PlaceId)wait()end;end;end)end;end)
     task.spawn(function()while wait() do if getgenv().LevelFarm then pcall(function()game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer","1")game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer","2")game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer","3")if _G.AutoBuyLegendarySword_Hop and getgenv().LevelFarm and SecondSea then wait(1)Hop()end;end)end;end;end)
     task.spawn(function()while wait() do pcall(function()if getgenv().LevelFarm then if game:GetService("Players").localPlayer.Data.Stats.Melee.Level.Value<=2400 then game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint","Melee",_G.PointStats)end;end;end)end;end)
@@ -2334,6 +2348,79 @@ task.spawn(function()
 		end)
 	end
     end)
+
+    local Section = M:AddSection({
+        Name = "BOOTS"
+    })
+
+    M:AddButton({
+        Name = "Revome all Sound",
+        Callback = function(Value)
+               _G.RemoveHit = Value 
+          end    
+    })  
+    spawn(function()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if _G.RemoveHit == true then
+                game:GetService("ReplicatedStorage").Effect.Container.LevelUp:Destroy()
+            game:GetService("ReplicatedStorage").Util.Sound:Destroy()
+            game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy"):Destroy()
+            game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
+            game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()     
+            end
+        end)
+    end)
+
+    M:AddButton({
+        Name = "BOOST FPS",
+        Callback = function()
+            pcall(function()
+                game:GetService("Lighting").FantasySky:Destroy()
+                local g = game
+                local w = g.Workspace
+                local l = g.Lighting
+                local t = w.Terrain
+                t.WaterWaveSize = 0
+                t.WaterWaveSpeed = 0
+                t.WaterReflectance = 0
+                t.WaterTransparency = 0
+                l.GlobalShadows = false
+                l.FogEnd = 9e9
+                l.Brightness = 0
+                settings().Rendering.QualityLevel = "Level01"
+                for i, v in pairs(g:GetDescendants()) do
+                    if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
+                        v.Material = "Plastic"
+                        v.Reflectance = 0
+                    elseif v:IsA("Decal") or v:IsA("Texture") then
+                        v.Transparency = 1
+                    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                        v.Lifetime = NumberRange.new(0)
+                    elseif v:IsA("Explosion") then
+                        v.BlastPressure = 1
+                        v.BlastRadius = 1
+                    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+                        v.Enabled = false
+                    elseif v:IsA("MeshPart") then
+                        v.Material = "Plastic"
+                        v.Reflectance = 0
+                        v.TextureID = 10385902758728957
+                    end
+                end
+                for i, e in pairs(l:GetChildren()) do
+                    if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+                        e.Enabled = false
+                    end
+                end
+                for i, v in pairs(game:GetService("Workspace").Camera:GetDescendants()) do
+                    if v.Name == ("Water;") then
+                        v.Transparency = 1
+                        v.Material = "Plastic"
+                    end
+                end
+            end)
+          end    
+    })
 
     local Section = M:AddSection({
         Name = "Auto Farm Level"
@@ -8132,8 +8219,8 @@ R:AddToggle({
 	Name = "Auto Train Race",
 	Default = false,
 	Callback = function(Value)
-	_G.AutoRace = Value
-    _G.AutoDoughtBoss = Value
+    _G.AutoRace = Value
+    StardFarm = Value
     StopTween(_G.AutoRace)
 	end    
 })
@@ -8142,17 +8229,61 @@ spawn(function()
         while wait() do
             if _G.AutoRace then
                 if game.Players.LocalPlayer.Character.RaceTransformed.Value == true then
+                    StardFarm = false
+                    topos(CFrame.new(216.211181640625, 126.9352035522461, -12599.0732421875))
                 end
             end
         end
     end)
 end)
-
+spawn(function()
+    while wait() do 
+        if StardFarm and World3 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Cocoa Warrior [Lv. 2300]") or game:GetService("Workspace").Enemies:FindFirstChild("Chocolate Bar Battler [Lv. 2325]") or game:GetService("Workspace").Enemies:FindFirstChild("Sweet Thief [Lv. 2350]") or game:GetService("Workspace").Enemies:FindFirstChild("Candy Rebel [Lv. 2375]") then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Cocoa Warrior [Lv. 2300]" or v.Name == "Chocolate Bar Battler [Lv. 2325]" or v.Name == "Sweet Thief [Lv. 2350]" or v.Name == "Candy Rebel [Lv. 2375]" then
+                           if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                               repeat task.wait()
+                                    AutoHaki()
+                                    EquipWeapon(_G.SelectWeapon)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false 
+                                    FarmMag = true
+                                    PosGG = v.HumanoidRootPart.CFrame
+                                    topos(v.HumanoidRootPart.CFrame * Pos)
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                until not StardFarm or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                    FarmMag = false
+                    topos(CFrame.new(216.211181640625, 126.9352035522461, -12599.0732421875))
+                    for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do 
+                        if v.Name == "Cocoa Warrior [Lv. 2300]" then
+                            topos(v.HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        elseif v.Name == "Chocolate Bar Battler [Lv. 2325]" then
+                            topos(v.HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        elseif v.Name == "Sweet Thief [Lv. 2350]" then
+                            topos(v.HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        elseif v.Name == "Candy Rebel [Lv. 2375]" then
+                            topos(v.HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
 spawn(function()
     pcall(function()
         while wait() do
             if _G.AutoRace then
                 if game.Players.LocalPlayer.Character.RaceTransformed.Value == false then
+                    StardFarm = true
                 end
             end
         end
@@ -8174,14 +8305,14 @@ R:AddToggle({
 	Name = "Auto Turn On Race v4",
 	Default = false,
 	Callback = function(Value)
-		_G.AutoRace = Value
-    StopTween(_G.AutoRace)
+		_G.V4 = Value
+    StopTween(_G.V4)
 	end    
 })
 spawn(function()
     while wait() do
 		pcall(function()
-			if _G.AutoRace then
+			if _G.V4 then
 				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
 				wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
