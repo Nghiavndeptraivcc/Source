@@ -27,6 +27,22 @@ local keybind = keybind or Enum.KeyCode.RightControl
 local yoo = string.gsub(tostring(keybind),"Enum.KeyCode.","")
 -- Instances:
 
+spawn(function() 
+    repeat
+        task.wait()
+    until game:IsLoaded()
+    repeat
+        task.wait()
+    until game.Players
+    repeat
+        task.wait()
+    until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
+    wait(1.5)
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>Thanks For Use<Color=/>"):Display()
+    wait(.5)
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>Night Hub Is The Best Script!!!<Color=/>"):Display()
+end)
+
 -- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
 function Hop()
     local PlaceID = game.PlaceId
