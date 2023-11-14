@@ -1238,10 +1238,13 @@ spawn(function()
     NameTarget = v.Name
     Converted["_Target Name"].Text = "Target Name : "..v.Name..""
     if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
-    topos(v.HumanoidRootPart.CFrame * CFrame.new(0,0,2))
+    topos(v.HumanoidRootPart.CFrame * CFrame.new(0,4,2))
     elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
     if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
-    topos(v.HumanoidRootPart.CFrame * CFrame.new(0,0,2))
+    topos(v.HumanoidRootPart.CFrame * CFrame.new(0,4,2))
+    if tostring(game.Players.LocalPlayer.Character.Humanoid.Health) < 3000 then
+        topos(v.HumanoidRootPart.CFrame * CFrame.new(0,40,2))
+    end
     end
     end
 spawn(function()
