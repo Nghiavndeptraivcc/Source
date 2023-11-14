@@ -1,17 +1,21 @@
 -----getgen().config-----------
+
 _G.ConfigUse = true
 if _G.ConfigUse then
-    if getgenv().config["Melee"] then
+    if getgenv().config["Weapon"]["Melee"]["Enabled"] then
         Melee = true
     end
-    if getgenv().config["Sword"] then
+    if getgenv().config["Weapon"]["Sword"]["Enabled"] then
         Sword = true
     end
-    if getgenv().config["Gun"] then
+    if getgenv().config["Weapon"]["Gun"]["Enabled"] then
         Gun = true
     end
-    if getgenv().config["Devil Fruit"] then
+    if getgenv().config["Weapon"]["Devil Fruit"]["Enabled"] then
         DF = true
+    end
+    if getgenv().config["Click"]["Enabled"] then
+        Click2 = true
     end
 end
 -------Cusc----------
@@ -22,6 +26,14 @@ local currentpage = ""
 local keybind = keybind or Enum.KeyCode.RightControl
 local yoo = string.gsub(tostring(keybind),"Enum.KeyCode.","")
 -- Instances:
+
+spawn(function()
+    while wait() do
+    if Click1 and Click2 then
+    _G.AutoClick = true
+    end
+    end
+end)
 
 -- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
 function Hop()
@@ -668,7 +680,7 @@ end)
 
 spawn(function()
 game:GetService("RunService").RenderStepped:Connect(function()
-    if _G.AutoClick or Fastattack then
+    if _G.AutoClick then
          pcall(function()
             game:GetService'VirtualUser':CaptureController()
             game:GetService'VirtualUser':Button1Down(Vector2.new(0,1,0,1))
@@ -1174,12 +1186,6 @@ function autoskill()
     end
 end
 
-function Click()
-    wait(.1)
-    game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-end
-
 _G.AutoFarmBounty = true
 
     spawn(function()
@@ -1227,17 +1233,16 @@ spawn(function()
     Converted["_Target Name"].Text = "Target Name : "..v.Name..""
     if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
     topos(v.HumanoidRootPart.CFrame * CFrame.new(0,0,2))
-                elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
+    elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
     if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
     topos(v.HumanoidRootPart.CFrame * CFrame.new(0,0,2))
     end
     end
-    
 spawn(function()
 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 then
     spawn(function()
     autoskill()
-    Click()
+    Click1 = true
     Aimbot = true
     end)
 end
