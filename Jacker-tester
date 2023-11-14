@@ -247,7 +247,7 @@ function UpdateTime()
     local Hour = math.floor(GameTime/(60^2))%24
     local Minute = math.floor(GameTime/(60^1))%60
     local Second = math.floor(GameTime/(60^0))%60
-    Converted["_Time :"].Text = "H : "..Hour.." M : "..Minute.." S : "..Second
+    Converted["_Time :"].Text = ..Hour.."H "..Minute.." M"..Second.." S"
     end
     spawn(function()
     while task.wait() do
@@ -310,7 +310,7 @@ Converted["_Next Ply"].Name = "Next Ply"
 Converted["_Next Ply"].Parent = Converted["_Frame2"]
 Converted["_Next Ply"].MouseButton1Down:Connect(function()
     NextplySelect = true
-    wait(.2)
+    wait(.1)
     NextplySelect = false
 end)
 
@@ -1187,6 +1187,7 @@ _G.AutoFarmBounty = true
                     if not v.Humanoid.Health == 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or not v.Parent then
                         NextplySelect = true
                         wait(.2)
+                        NextplySelect = false
                     end
                 end
             end
@@ -1220,7 +1221,7 @@ spawn(function()
     if v:WaitForChild("Humanoid").Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 10000 then
     plyselecthunthelpold = v.Humanoid.Health
     repeat task.wait()
-    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+    v.HumanoidRootPart.Size = Vector3.new(30,30,30)
     NameTarget = v.Name
     Converted["_Target Name"].Text = "Target Name : "..v.Name..""
     if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
@@ -1344,15 +1345,32 @@ spawn(function()
         end
     end)
 
-spawn(function()
-    pcall(function()
-        game:GetService("RunService").RenderStepped:connect(function()
-            if Aimbot and TargetPlayerAim ~= nil and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name]:FindFirstChild("MousePos") then
-                local args = {
-                    [1] = game:GetService("Players"):FindFirstChild(TargetPlayerAim).Character.HumanoidRootPart.Position
-                }
-                game:GetService("Players").LocalPlayer.Character[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name].RemoteEvent:FireServer(unpack(args))
-            end
+    spawn(function()
+        while wait(.1) do
+            pcall(function()
+                local MaxDistance = math.huge
+                for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+                    if v.Name ~= game.Players.LocalPlayer.Name then
+                        local Distance = v:DistanceFromCharacter(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+                        if Distance < MaxDistance then
+                            MaxDistance = Distance
+                            TargetPlayerAim = v.Name
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+    
+    spawn(function()
+        pcall(function()
+            game:GetService("RunService").RenderStepped:connect(function()
+                if Aimbot and TargetPlayerAim ~= nil and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name]:FindFirstChild("MousePos") then
+                    local args = {
+                        [1] = game:GetService("Players"):FindFirstChild(TargetPlayerAim).Character.HumanoidRootPart.Position
+                    }
+                    game:GetService("Players").LocalPlayer.Character[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name].RemoteEvent:FireServer(unpack(args))
+                end
+            end)
         end)
     end)
-end)
