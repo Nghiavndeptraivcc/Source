@@ -27,14 +27,6 @@ local keybind = keybind or Enum.KeyCode.RightControl
 local yoo = string.gsub(tostring(keybind),"Enum.KeyCode.","")
 -- Instances:
 
-spawn(function()
-    while wait() do
-    if Click1 and Click2 then
-    _G.AutoClick = true
-    end
-    end
-end)
-
 -- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
 function Hop()
     local PlaceID = game.PlaceId
@@ -1342,6 +1334,14 @@ spawn(function()
     end
     end)
     end
+    end)
+
+    spawn(function()
+        while wait() do
+        if Click1 and Click2 then
+        _G.AutoClick = true
+        end
+        end
     end)
 
 spawn(function()
