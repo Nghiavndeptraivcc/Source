@@ -243,7 +243,7 @@ function UpdateTime()
     local Hour = math.floor(GameTime/(60^2))%24
     local Minute = math.floor(GameTime/(60^1))%60
     local Second = math.floor(GameTime/(60^0))%60
-    Converted["_Time :"].Text = "Time : "..Hour.." "..Minute.." "..Second
+    Converted["_Time :"].Text = "H : "..Hour.." M : "..Minute.." S : "..Second
     end
     spawn(function()
     while task.wait() do
@@ -1197,13 +1197,13 @@ _G.AutoFarmBounty = true
 
 spawn(function()
     while wait() do
-        if _G.AutoFarmBounty then
-            for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
-                if v.Name == "NotificationTemplate" then
-                    if string.find(v.Text,"attack") or string.find(v.Text,"players") or string.find(v.Text,"Players") or string.find(v.Text,"Safe Zone!") then
-                        NextplySelect = true
-                        wait(0.0000000000000000000000000000000001)
-                        NextplySelect = false
+    if _G.AutoFarmBounty then
+    for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+        if v.Name == "NotificationTemplate" then
+            if string.find(v.Text,"attack") or string.find(v.Text,"players") or string.find(v.Text,"Players") or string.find(v.Text,"Safe Zone!") then
+                NextplySelect = true
+                wait(0.0000000000000000000000000000000001)
+                NextplySelect = false
                     end
                 end
             end
@@ -1232,12 +1232,13 @@ spawn(function()
     topos(v.HumanoidRootPart.CFrame * CFrame.new(0,0,2))
     end
     end
+    
 spawn(function()
 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 then
     spawn(function()
+    autoskill()
     Click()
     Aimbot = true
-    autoskill()
     end)
 end
 end)
@@ -1271,30 +1272,6 @@ end
 end
 end)
 end)
-
-spawn(function()
-    pcall(function()
-    if _G.AutoFarmBounty then
-    while wait() do
-    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-    end
-    end
-    end
-    end)
-    end)
-
-spawn(function()
-    while wait() do
-    pcall(function()
-    if _G.AutoFarmBounty then
-    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-    end
-    end
-    end)
-    end
-    end)
 
 spawn(function()
     while wait() do
@@ -1337,6 +1314,30 @@ spawn(function()
         end
     end
 end)
+
+spawn(function()
+    pcall(function()
+    if _G.AutoFarmBounty then
+    while wait() do
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+    end
+    end
+    end
+    end)
+    end)
+
+spawn(function()
+    while wait() do
+    pcall(function()
+    if _G.AutoFarmBounty then
+    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+    end
+    end
+    end)
+    end
+    end)
 
 spawn(function()
     pcall(function()
