@@ -1227,6 +1227,7 @@ spawn(function()
     if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
     topos(v.HumanoidRootPart.CFrame * CFrame.new(0,4,2))
     end
+    end
 spawn(function()
 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 then
     spawn(function()
