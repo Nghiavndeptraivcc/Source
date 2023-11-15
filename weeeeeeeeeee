@@ -230,7 +230,7 @@ function UpdateTime()
     local Hour = math.floor(GameTime/(60^2))%24
     local Minute = math.floor(GameTime/(60^1))%60
     local Second = math.floor(GameTime/(60^0))%60
-    Converted["_Time :"].Text = "Hours : "..Hour.." Minute : "..Minute.." Second : "..Second
+    Converted["_Time"].Text = "Hours : "..Hour.." Minute : "..Minute.." Second : "..Second
     end
     spawn(function()
     while task.wait() do
