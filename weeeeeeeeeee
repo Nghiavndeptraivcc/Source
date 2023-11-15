@@ -665,8 +665,8 @@ spawn(function()
     pcall(function()
         while wait() do
             if _G.KillDarkbeard then
-                topos(CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375))
                 if game:GetService("Workspace").Enemies:FindFirstChild("Darkbeard") then
+                    topos(CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375))
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Darkbeard" and v.Humanoid.Health > 0 and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
                             repeat task.wait()
