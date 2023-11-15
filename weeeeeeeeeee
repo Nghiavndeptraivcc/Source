@@ -318,44 +318,6 @@ end)
 
 Converted["_UICorner9"].Parent = Converted["_Stop1"]
 
-Converted["_ImageLabel1"].Image = "rbxassetid://15239454525"
-Converted["_ImageLabel1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_ImageLabel1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ImageLabel1"].BorderSizePixel = 0
-Converted["_ImageLabel1"].Position = UDim2.new(0.0975073278, 0, 0.184738949, 0)
-Converted["_ImageLabel1"].Size = UDim2.new(0, 62, 0, 62)
-Converted["_ImageLabel1"].Parent = Converted["_ScreenGui"]
-Converted["_ImageLabel1"].MouseButton1Down:Connect(function()
-    Converted["_Frame"].Visible = false
-    Converted["_Frame"].Active = false
-    wait(.1)
-    Converted["_ImageLabel1"].Visible = false
-    Converted["_ImageLabel1"].Active = false
-    Converted["_ImageLabel12"].Visible = true
-    Converted["_ImageLabel12"].Active = true
-end)
-
-Converted["_UICorner10"].Parent = Converted["_ImageLabel1"]
-
-Converted["_ImageLabel12"].Image = "rbxassetid://15239454525"
-Converted["_ImageLabel12"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_ImageLabel12"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ImageLabel12"].BorderSizePixel = 0
-Converted["_ImageLabel12"].Position = UDim2.new(0.0975073278, 0, 0.184738949, 0)
-Converted["_ImageLabel12"].Size = UDim2.new(0, 62, 0, 62)
-Converted["_ImageLabel12"].Parent = Converted["_ScreenGui"]
-Converted["_ImageLabel12"].MouseButton1Down:Connect(function()
-    Converted["_Frame"].Visible = true
-    Converted["_Frame"].Active = true
-    wait(.1)
-    Converted["_ImageLabel12"].Visible = false
-    Converted["_ImageLabel12"].Active = false
-    Converted["_ImageLabel1"].Visible = true
-    Converted["_ImageLabel1"].Active = true
-end)
-
-Converted["_UICorner10"].Parent = Converted["_ImageLabel12"]
-
 function thisCode()
     repeat task.wait() until game:IsLoaded()
     local PlaceID = game.PlaceId
