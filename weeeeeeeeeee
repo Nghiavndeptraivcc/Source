@@ -364,6 +364,7 @@ end)
 
 Converted["_UICorner9"].Parent = Converted["_Stop1"]
 
+_G.SetupTeam = true
 function thisCode()
     repeat task.wait() until game:IsLoaded()
     local PlaceID = game.PlaceId
@@ -451,8 +452,7 @@ function thisCode()
             end)
         end
     end)
-    AllowRunService = true
-    _G.SetupTeam = true 
+    local AllowRunService = true
     local AllowRunServiceBind = Instance.new("BindableFunction")
     function AllowRunServiceBind.OnInvoke(args)
         if args == "Enable" then
