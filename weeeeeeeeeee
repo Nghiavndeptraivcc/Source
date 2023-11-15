@@ -243,6 +243,30 @@ Converted["_TextLabel1"].BorderSizePixel = 0
 Converted["_TextLabel1"].Position = UDim2.new(0.353579164, 0, 0.447619051, 0)
 Converted["_TextLabel1"].Size = UDim2.new(0, 200, 0, 36)
 Converted["_TextLabel1"].Parent = Converted["_Frame3"]
+spawn(function()
+	while wait() do
+		local count10 = 0
+		local count = 0
+		for i,v in pairs(game.workspace:GetChildren()) do
+			if string.find(v.Name,"Chest") and v:IsA("Part") then
+				count10 = count10 + 1
+			end
+		end
+		for i,v in pairs(game.Workspace:GetChildren()) do
+			if v.Name == "Blox Fruit Dealer" then
+			else
+				if string.find(v.Name, "Fruit") and v:IsA("Tool") then
+					count = count + 1
+				end
+				if string.find(v.Name, "Fruit") and v:IsA("Model") then
+					count = count + 1
+				end
+			end
+		end
+		Converted["_TextLabel1"].Text = "Chest in server : "..count10
+		wait(5)
+	end
+end)
 
 Converted["_Frame4"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Converted["_Frame4"].BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -285,7 +309,7 @@ Converted["_Stop"].Name = "Stop"
 Converted["_Stop"].Parent = Converted["_cc"]
 Converted["_Stop"].MouseButton1Down:Connect(function()
     AllowRunService = false
-    _G.SetTeam = false
+    _G.SetupTeam = false
 end)
 
 Converted["_UICorner7"].Parent = Converted["_Stop"]
@@ -313,7 +337,7 @@ Converted["_Stop1"].Name = "Stop"
 Converted["_Stop1"].Parent = Converted["_cc1"]
 Converted["_Stop1"].MouseButton1Down:Connect(function()
     AllowRunService = true
-    _G.SetTeam = true
+    _G.SetupTeam = true
 end)
 
 Converted["_UICorner9"].Parent = Converted["_Stop1"]
@@ -407,6 +431,7 @@ function thisCode()
     end)
 
     local AllowRunService = true
+    _G.SetupTeam = true
     local AllowRunServiceBind = Instance.new("BindableFunction")
     function AllowRunServiceBind.OnInvoke(args)
         if args == "Enable" then
@@ -459,6 +484,16 @@ function thisCode()
     end)
 
 end
+
+spawn(function()
+    while task.wait() do
+    if _G.SetupTeam then
+            local ohString1 = "SetTeam"
+            local ohString2 = "Pirates"
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(ohString1, ohString2)
+         end
+    end
+    end)
 
 task.spawn(function()
 	while wait() do
