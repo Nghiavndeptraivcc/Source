@@ -220,6 +220,20 @@ Converted["_Time"].Position = UDim2.new(0.353579164, 0, 0.104761906, 0)
 Converted["_Time"].Size = UDim2.new(0, 200, 0, 36)
 Converted["_Time"].Name = "Time"
 Converted["_Time"].Parent = Converted["_Frame3"]
+function UpdateTime()
+    local GameTime = math.floor(workspace.DistributedGameTime+0.5)
+    local Hour = math.floor(GameTime/(60^2))%24
+    local Minute = math.floor(GameTime/(60^1))%60
+    local Second = math.floor(GameTime/(60^0))%60
+    Converted["_Time :"].Text = "Hours : "..Hour.." Minute : "..Minute.." Second : "..Second
+    end
+    spawn(function()
+    while task.wait() do
+    pcall(function()
+    UpdateTime()
+    end)
+    end
+    end)
 
 Converted["_You Beli"].Font = Enum.Font.SourceSansBold
 Converted["_You Beli"].Text = "Your Beli :"
@@ -232,6 +246,13 @@ Converted["_You Beli"].Position = UDim2.new(0.353579164, 0, 0.27619049, 0)
 Converted["_You Beli"].Size = UDim2.new(0, 200, 0, 36)
 Converted["_You Beli"].Name = "You Beli"
 Converted["_You Beli"].Parent = Converted["_Frame3"]
+spawn(function()
+    while wait() do
+        pcall(function()
+            Converted["_You Beli"].Text = "Your Beli :".." "..game:GetService("Players").LocalPlayer.Data.Beli.Value
+        end)
+    end
+end)
 
 Converted["_TextLabel1"].Font = Enum.Font.SourceSansBold
 Converted["_TextLabel1"].Text = "Chest in Server :"
