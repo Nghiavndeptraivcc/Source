@@ -65,6 +65,7 @@ if _G.useconfig then
     if getgenv().config["Kill Darkbeard Settings"]["Select Weapon"] == "Devil Fruit" then
 		_G.SelectWeapon = "Devil Fruit"
 	end
+end
 
 ---------//[Ui Script Create By LMNGAMING]\\----------
 local Converted = {
