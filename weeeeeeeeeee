@@ -7,10 +7,10 @@ if _G.useconfig then
         AllowRunService = true
     end  
 	if getgenv().config["Team"] == "Pirates" then
-		_G.Team = "Pirates"
+		_G.SetupTeam = "Pirates"
 	end
 	if getgenv().config["Team"] == "Marines" then
-		_G.Team = "Marines"
+		_G.SetupTeam = "Marines"
 	end
 	if getgenv().config["Screen"]["White Screen"]["Enabled"] then
 		game:GetService("RunService"):Set3dRenderingEnabled(false)
@@ -367,13 +367,19 @@ Converted["_Stop1"].MouseButton1Down:Connect(function()
 end)
 
 Converted["_UICorner9"].Parent = Converted["_Stop1"]
+
 spawn(function()
 	while task.wait() do
-	if _G.SetupTeam then
+	if _G.SetupTeam == "Pirates" then
 			local ohString1 = "SetTeam"
 			local ohString2 = "Pirates"
 			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(ohString1, ohString2)
-		 end
+    if _G.SetupTeam == "Pirates" then
+        local ohString1 = "SetTeam"
+        local ohString2 = "Marines"
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(ohString1, ohString2)
+	end
+    end
 	end
 	end)
 
