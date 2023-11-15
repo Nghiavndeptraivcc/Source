@@ -668,7 +668,6 @@ spawn(function()
     if _G.KillDarkbeard and game.Players.LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
         EquipWeapon("Fist of Darkness")
         topos(CFrame.new(3777.50415, 14.6759758, -3499.30225))
-            end
         end
     end
 end)
