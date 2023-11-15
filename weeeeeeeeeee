@@ -363,6 +363,15 @@ Converted["_Stop1"].MouseButton1Down:Connect(function()
 end)
 
 Converted["_UICorner9"].Parent = Converted["_Stop1"]
+spawn(function()
+	while task.wait() do
+	if _G.SetupTeam then
+			local ohString1 = "SetTeam"
+			local ohString2 = "Pirates"
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(ohString1, ohString2)
+		 end
+	end
+	end)
 
 _G.SetupTeam = true
 function thisCode()
@@ -507,14 +516,17 @@ function thisCode()
 end
 
 spawn(function()
-    while task.wait() do
-    if _G.SetupTeam then
-            local ohString1 = "SetTeam"
-            local ohString2 = "Pirates"
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(ohString1, ohString2)
-         end
+	while wait() do
+	if _G.StopChest then
+		if game.Players.LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") or game.Players.LocalPlayer.Character:FindFirstChild("Fist of Darkness") or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") then
+			AllowRunService = false
+            _G.SetupTeam = false
+		    end
+	    end
     end
-    end)
+end)
+
+thisCode()
 
 task.spawn(function()
 	while wait() do
@@ -555,18 +567,6 @@ task.spawn(function()
 		end)
 	end
     end)
-
-spawn(function()
-	while wait() do
-	if _G.StopChest then
-		if game.Players.LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") or game.Players.LocalPlayer.Character:FindFirstChild("Fist of Darkness") or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") then
-			AllowRunService = false
-		    end
-	    end
-    end
-end)
-
-thisCode()
 
 join = game.Players.localPlayer.Neutral == false
 if (_G.Team == "Pirates" or _G.Team == "Marines") and not join then
