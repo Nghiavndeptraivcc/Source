@@ -1,0 +1,582 @@
+-------//[Function Script]\\------------
+_G.useconfig = true
+
+if _G.useconfig then
+	if getgenv().config["Team"] == "Pirates" then
+		_G.Team = "Pirates"
+	end
+	if getgenv().config["Team"] == "Marines" then
+		_G.Team = "Marines"
+	end
+	if getgenv().config["Screen"]["White Screen"]["Enabled"] then
+		game:GetService("RunService"):Set3dRenderingEnabled(false)
+	end
+	if getgenv().config["Screen"]["Boots FPS"]["Enabled"] then
+        local decalsyeeted = true -- Leaving this on makes games look shitty but the fps goes up by at least 20.
+		local g = game
+		local w = g.Workspace
+		local l = g.Lighting
+		local t = w.Terrain
+		t.WaterWaveSize = 0
+		t.WaterWaveSpeed = 0
+		t.WaterReflectance = 0
+		t.WaterTransparency = 0
+		l.GlobalShadows = false
+		l.FogEnd = 9e9
+		l.Brightness = 0
+		settings().Rendering.QualityLevel = "Level01"
+		for i, v in pairs(g:GetDescendants()) do
+			if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
+				v.Material = "Plastic"
+				v.Reflectance = 0
+			elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+				v.Transparency = 1
+			elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+				v.Lifetime = NumberRange.new(0)
+			elseif v:IsA("Explosion") then
+				v.BlastPressure = 1
+				v.BlastRadius = 1
+			elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+				v.Enabled = false
+			elseif v:IsA("MeshPart") then
+				v.Material = "Plastic"
+				v.Reflectance = 0
+				v.TextureID = 10385902758728957
+			end
+		end
+		for i, e in pairs(l:GetChildren()) do
+			if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+				e.Enabled = false
+			end
+		end
+	end
+	if getgenv().config["Chest Misc"]["Stop When Have God's Chaile or Dark Key"]["Enabled"] then
+		_G.StopChest = true
+	end
+	if getgenv().config["Chest Misc"]["Auto Summon Darkbeard and Kill"]["Enabled"] then
+		_G.KillDarkbeard = true
+	end
+    if getgenv().config["Kill Darkbeard Settings"]["Select Weapon"] == "Melee" then
+		_G.SelectWeapon = "Melee"
+	end
+    if getgenv().config["Kill Darkbeard Settings"]["Select Weapon"] == "Sword" then
+		_G.SelectWeapon = "Sword"
+	end
+    if getgenv().config["Kill Darkbeard Settings"]["Select Weapon"] == "Devil Fruit" then
+		_G.SelectWeapon = "Devil Fruit"
+	end
+
+---------//[Ui Script Create By LMNGAMING]\\----------
+local Converted = {
+	["_ScreenGui"] = Instance.new("ScreenGui");
+	["_Frame"] = Instance.new("Frame");
+	["_UICorner"] = Instance.new("UICorner");
+	["_shadowHolder"] = Instance.new("Frame");
+	["_umbraShadow"] = Instance.new("ImageLabel");
+	["_penumbraShadow"] = Instance.new("ImageLabel");
+	["_ambientShadow"] = Instance.new("ImageLabel");
+	["_Frame1"] = Instance.new("Frame");
+	["_UICorner1"] = Instance.new("UICorner");
+	["_TextLabel"] = Instance.new("TextLabel");
+	["_Frame2"] = Instance.new("Frame");
+	["_UICorner2"] = Instance.new("UICorner");
+	["_Frame3"] = Instance.new("Frame");
+	["_UICorner3"] = Instance.new("UICorner");
+	["_ImageLabel"] = Instance.new("ImageLabel");
+	["_Time"] = Instance.new("TextLabel");
+	["_You Beli"] = Instance.new("TextLabel");
+	["_TextLabel1"] = Instance.new("TextLabel");
+	["_Frame4"] = Instance.new("Frame");
+	["_UICorner4"] = Instance.new("UICorner");
+	["_Frame5"] = Instance.new("Frame");
+	["_UICorner5"] = Instance.new("UICorner");
+	["_cc"] = Instance.new("Frame");
+	["_UICorner6"] = Instance.new("UICorner");
+	["_Stop"] = Instance.new("TextButton");
+	["_UICorner7"] = Instance.new("UICorner");
+	["_cc1"] = Instance.new("Frame");
+	["_UICorner8"] = Instance.new("UICorner");
+	["_Stop1"] = Instance.new("TextButton");
+	["_UICorner9"] = Instance.new("UICorner");
+	["_ImageLabel1"] = Instance.new("ImageLabel");
+	["_UICorner10"] = Instance.new("UICorner");
+}
+
+-- Properties:
+
+Converted["_ScreenGui"].Parent = game:GetService("CoreGui")
+
+Converted["_Frame"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame"].BorderSizePixel = 0
+Converted["_Frame"].Position = UDim2.new(0.307184756, 0, 0.23694779, 0)
+Converted["_Frame"].Size = UDim2.new(0, 461, 0, 262)
+Converted["_Frame"].Parent = Converted["_ScreenGui"]
+Converted["_Frame"].Visible = true
+Converted["_Frame"].Active = true
+Converted["_Frame"].Draggable = true
+
+Converted["_UICorner"].Parent = Converted["_Frame"]
+
+Converted["_shadowHolder"].BackgroundTransparency = 1
+Converted["_shadowHolder"].Size = UDim2.new(1, 0, 1, 0)
+Converted["_shadowHolder"].ZIndex = 0
+Converted["_shadowHolder"].Name = "shadowHolder"
+Converted["_shadowHolder"].Parent = Converted["_Frame"]
+
+Converted["_umbraShadow"].Image = "rbxassetid://1316045217"
+Converted["_umbraShadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_umbraShadow"].ImageTransparency = 0.8600000143051147
+Converted["_umbraShadow"].ScaleType = Enum.ScaleType.Slice
+Converted["_umbraShadow"].SliceCenter = Rect.new(10, 10, 118, 118)
+Converted["_umbraShadow"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_umbraShadow"].BackgroundTransparency = 1
+Converted["_umbraShadow"].Position = UDim2.new(0.5, 0, 0.5, 6)
+Converted["_umbraShadow"].Size = UDim2.new(1, 10, 1, 10)
+Converted["_umbraShadow"].ZIndex = 0
+Converted["_umbraShadow"].Name = "umbraShadow"
+Converted["_umbraShadow"].Parent = Converted["_shadowHolder"]
+
+Converted["_penumbraShadow"].Image = "rbxassetid://1316045217"
+Converted["_penumbraShadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_penumbraShadow"].ImageTransparency = 0.8799999952316284
+Converted["_penumbraShadow"].ScaleType = Enum.ScaleType.Slice
+Converted["_penumbraShadow"].SliceCenter = Rect.new(10, 10, 118, 118)
+Converted["_penumbraShadow"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_penumbraShadow"].BackgroundTransparency = 1
+Converted["_penumbraShadow"].Position = UDim2.new(0.5, 0, 0.5, 6)
+Converted["_penumbraShadow"].Size = UDim2.new(1, 10, 1, 10)
+Converted["_penumbraShadow"].ZIndex = 0
+Converted["_penumbraShadow"].Name = "penumbraShadow"
+Converted["_penumbraShadow"].Parent = Converted["_shadowHolder"]
+
+Converted["_ambientShadow"].Image = "rbxassetid://1316045217"
+Converted["_ambientShadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ambientShadow"].ImageTransparency = 0.8799999952316284
+Converted["_ambientShadow"].ScaleType = Enum.ScaleType.Slice
+Converted["_ambientShadow"].SliceCenter = Rect.new(10, 10, 118, 118)
+Converted["_ambientShadow"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_ambientShadow"].BackgroundTransparency = 1
+Converted["_ambientShadow"].Position = UDim2.new(0.5, 0, 0.5, 6)
+Converted["_ambientShadow"].Size = UDim2.new(1, 10, 1, 10)
+Converted["_ambientShadow"].ZIndex = 0
+Converted["_ambientShadow"].Name = "ambientShadow"
+Converted["_ambientShadow"].Parent = Converted["_shadowHolder"]
+
+Converted["_Frame1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame1"].BorderSizePixel = 0
+Converted["_Frame1"].Size = UDim2.new(0, 461, 0, 50)
+Converted["_Frame1"].Parent = Converted["_Frame"]
+
+Converted["_UICorner1"].Parent = Converted["_Frame1"]
+
+Converted["_TextLabel"].Font = Enum.Font.SourceSansBold
+Converted["_TextLabel"].Text = "Night Hub Auto Chest [Version 2]"
+Converted["_TextLabel"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel"].TextSize = 18
+Converted["_TextLabel"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel"].BorderSizePixel = 0
+Converted["_TextLabel"].Position = UDim2.new(0.251626909, 0, 0, 0)
+Converted["_TextLabel"].Size = UDim2.new(0, 229, 0, 48)
+Converted["_TextLabel"].Parent = Converted["_Frame1"]
+
+Converted["_Frame2"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Frame2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame2"].BorderSizePixel = 0
+Converted["_Frame2"].Position = UDim2.new(0, 0, 0.187022895, 0)
+Converted["_Frame2"].Size = UDim2.new(0, 461, 0, 2)
+Converted["_Frame2"].Parent = Converted["_Frame"]
+
+Converted["_UICorner2"].Parent = Converted["_Frame2"]
+
+Converted["_Frame3"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame3"].BorderSizePixel = 0
+Converted["_Frame3"].Position = UDim2.new(0, 0, 0.194656491, 0)
+Converted["_Frame3"].Size = UDim2.new(0, 461, 0, 210)
+Converted["_Frame3"].Parent = Converted["_Frame"]
+
+Converted["_UICorner3"].Parent = Converted["_Frame3"]
+
+Converted["_ImageLabel"].Image = "rbxassetid://15033356012"
+Converted["_ImageLabel"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ImageLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ImageLabel"].BorderSizePixel = 0
+Converted["_ImageLabel"].Position = UDim2.new(0.0130151846, 0, 0.142857149, 0)
+Converted["_ImageLabel"].Size = UDim2.new(0, 100, 0, 100)
+Converted["_ImageLabel"].Parent = Converted["_Frame3"]
+
+Converted["_Time"].Font = Enum.Font.SourceSansBold
+Converted["_Time"].Text = "Time :"
+Converted["_Time"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Time"].TextSize = 14
+Converted["_Time"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Time"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Time"].BorderSizePixel = 0
+Converted["_Time"].Position = UDim2.new(0.353579164, 0, 0.104761906, 0)
+Converted["_Time"].Size = UDim2.new(0, 200, 0, 36)
+Converted["_Time"].Name = "Time"
+Converted["_Time"].Parent = Converted["_Frame3"]
+
+Converted["_You Beli"].Font = Enum.Font.SourceSansBold
+Converted["_You Beli"].Text = "Your Beli :"
+Converted["_You Beli"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_You Beli"].TextSize = 14
+Converted["_You Beli"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_You Beli"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_You Beli"].BorderSizePixel = 0
+Converted["_You Beli"].Position = UDim2.new(0.353579164, 0, 0.27619049, 0)
+Converted["_You Beli"].Size = UDim2.new(0, 200, 0, 36)
+Converted["_You Beli"].Name = "You Beli"
+Converted["_You Beli"].Parent = Converted["_Frame3"]
+
+Converted["_TextLabel1"].Font = Enum.Font.SourceSansBold
+Converted["_TextLabel1"].Text = "Chest in Server :"
+Converted["_TextLabel1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel1"].TextSize = 14
+Converted["_TextLabel1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel1"].BorderSizePixel = 0
+Converted["_TextLabel1"].Position = UDim2.new(0.353579164, 0, 0.447619051, 0)
+Converted["_TextLabel1"].Size = UDim2.new(0, 200, 0, 36)
+Converted["_TextLabel1"].Parent = Converted["_Frame3"]
+
+Converted["_Frame4"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Frame4"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame4"].BorderSizePixel = 0
+Converted["_Frame4"].Position = UDim2.new(0, 0, 0.747619033, 0)
+Converted["_Frame4"].Size = UDim2.new(0, 461, 0, 2)
+Converted["_Frame4"].Parent = Converted["_Frame3"]
+
+Converted["_UICorner4"].Parent = Converted["_Frame4"]
+
+Converted["_Frame5"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame5"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame5"].BorderSizePixel = 0
+Converted["_Frame5"].Position = UDim2.new(0, 0, 0.757142842, 0)
+Converted["_Frame5"].Size = UDim2.new(0, 461, 0, 51)
+Converted["_Frame5"].Parent = Converted["_Frame3"]
+
+Converted["_UICorner5"].Parent = Converted["_Frame5"]
+
+Converted["_cc"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_cc"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_cc"].BorderSizePixel = 0
+Converted["_cc"].Position = UDim2.new(0.0563991331, 0, 0.0653596744, 0)
+Converted["_cc"].Size = UDim2.new(0, 103, 0, 43)
+Converted["_cc"].Name = "cc"
+Converted["_cc"].Parent = Converted["_Frame5"]
+
+Converted["_UICorner6"].Parent = Converted["_cc"]
+
+Converted["_Stop"].Font = Enum.Font.SourceSansBold
+Converted["_Stop"].Text = "Stop"
+Converted["_Stop"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Stop"].TextSize = 14
+Converted["_Stop"].BackgroundColor3 = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867)
+Converted["_Stop"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Stop"].BorderSizePixel = 0
+Converted["_Stop"].Position = UDim2.new(0, 0, 0.067487143, 0)
+Converted["_Stop"].Size = UDim2.new(0, 103, 0, 36)
+Converted["_Stop"].Name = "Stop"
+Converted["_Stop"].Parent = Converted["_cc"]
+Converted["_Stop"].MouseButton1Down:Connect(function()
+    AllowRunService = false
+    _G.SetTeam = false
+end)
+
+Converted["_UICorner7"].Parent = Converted["_Stop"]
+
+Converted["_cc1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_cc1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_cc1"].BorderSizePixel = 0
+Converted["_cc1"].Position = UDim2.new(0.71149677, 0, 0.0653596744, 0)
+Converted["_cc1"].Size = UDim2.new(0, 103, 0, 43)
+Converted["_cc1"].Name = "cc"
+Converted["_cc1"].Parent = Converted["_Frame5"]
+
+Converted["_UICorner8"].Parent = Converted["_cc1"]
+
+Converted["_Stop1"].Font = Enum.Font.SourceSansBold
+Converted["_Stop1"].Text = "Start"
+Converted["_Stop1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Stop1"].TextSize = 14
+Converted["_Stop1"].BackgroundColor3 = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867)
+Converted["_Stop1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Stop1"].BorderSizePixel = 0
+Converted["_Stop1"].Position = UDim2.new(0, 0, 0.067487143, 0)
+Converted["_Stop1"].Size = UDim2.new(0, 103, 0, 36)
+Converted["_Stop1"].Name = "Stop"
+Converted["_Stop1"].Parent = Converted["_cc1"]
+Converted["_Stop1"].MouseButton1Down:Connect(function()
+    AllowRunService = true
+    _G.SetTeam = true
+end)
+
+Converted["_UICorner9"].Parent = Converted["_Stop1"]
+
+Converted["_ImageLabel1"].Image = "rbxassetid://15239454525"
+Converted["_ImageLabel1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ImageLabel1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ImageLabel1"].BorderSizePixel = 0
+Converted["_ImageLabel1"].Position = UDim2.new(0.0975073278, 0, 0.184738949, 0)
+Converted["_ImageLabel1"].Size = UDim2.new(0, 62, 0, 62)
+Converted["_ImageLabel1"].Parent = Converted["_ScreenGui"]
+Converted["_ImageLabel1"].MouseButton1Down:Connect(function()
+    Converted["_Frame"].Visible = false
+    Converted["_Frame"].Active = false
+    wait(.1)
+    Converted["_ImageLabel1"].Visible = false
+    Converted["_ImageLabel1"].Active = false
+    Converted["_ImageLabel12"].Visible = true
+    Converted["_ImageLabel12"].Active = true
+end)
+
+Converted["_UICorner10"].Parent = Converted["_ImageLabel1"]
+
+Converted["_ImageLabel12"].Image = "rbxassetid://15239454525"
+Converted["_ImageLabel12"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ImageLabel12"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ImageLabel12"].BorderSizePixel = 0
+Converted["_ImageLabel12"].Position = UDim2.new(0.0975073278, 0, 0.184738949, 0)
+Converted["_ImageLabel12"].Size = UDim2.new(0, 62, 0, 62)
+Converted["_ImageLabel12"].Parent = Converted["_ScreenGui"]
+Converted["_ImageLabel12"].MouseButton1Down:Connect(function()
+    Converted["_Frame"].Visible = true
+    Converted["_Frame"].Active = true
+    wait(.1)
+    Converted["_ImageLabel12"].Visible = false
+    Converted["_ImageLabel12"].Active = false
+    Converted["_ImageLabel1"].Visible = true
+    Converted["_ImageLabel1"].Active = true
+end)
+
+Converted["_UICorner10"].Parent = Converted["_ImageLabel1"]
+
+function thisCode()
+    repeat task.wait() until game:IsLoaded()
+    local PlaceID = game.PlaceId
+    local AllIDs = {}
+    local foundAnything = ""
+    local actualHour = os.date("!*t").hour
+    local Deleted = false
+    local File = pcall(function()
+        AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+    end)
+    if not File then
+        table.insert(AllIDs, actualHour)
+        writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+    end
+    function TPReturner()
+        local Site;
+        if foundAnything == "" then
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+        else
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+        end
+        local ID = ""
+        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+            foundAnything = Site.nextPageCursor
+        end
+        local num = 0;
+        for i,v in pairs(Site.data) do
+            local Possible = true
+            ID = tostring(v.id)
+            if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                for _,Existing in pairs(AllIDs) do
+                    if num ~= 0 then
+                        if ID == tostring(Existing) then
+                            Possible = false
+                        end
+                    else
+                        if tonumber(actualHour) ~= tonumber(Existing) then
+                            local delFile = pcall(function()
+                                delfile("NotSameServers.json")
+                                AllIDs = {}
+                                table.insert(AllIDs, actualHour)
+                            end)
+                        end
+                    end
+                    num = num + 1
+                end
+                if Possible == true then
+                    table.insert(AllIDs, ID)
+                    wait()
+                    pcall(function()
+                        writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+                        wait()
+                        game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                    end)
+                    wait(4)
+                end
+            end
+        end
+    end
+    
+    function Teleport()
+        while wait() do
+            pcall(function()
+                TPReturner()
+                if foundAnything ~= "" then
+                    TPReturner()
+                end
+            end)
+        end
+    end
+    local veryImportantWaitTime = 0.5
+    task.spawn(function()
+        while task.wait(veryImportantWaitTime) do
+            pcall(function()
+                for i,v in pairs(game.CoreGui:GetDescendants()) do
+                    pcall(function()
+                        if string.find(v.Name,"ErrorMessage") then
+                            if string.find(v.Text,"Security kick") then
+                                veryImportantWaitTime = 1e9
+                                Teleport()
+                            end
+                        end
+                    end)
+                end
+            end)
+        end
+    end)
+
+    local AllowRunService = true
+    local AllowRunServiceBind = Instance.new("BindableFunction")
+    function AllowRunServiceBind.OnInvoke(args)
+        if args == "Enable" then
+            AllowRunService = true
+        elseif args == "Disable" then
+            AllowRunService = false
+        end
+        local CoreGui = game:GetService("StarterGui")
+        CoreGui:SetCore("SendNotification", {
+            Title = "Night Hub",
+        	Text = "Best Script Farm Chest For Mobile and Pc",
+            Duration = math.huge,
+            Callback = AllowRunServiceBind,
+        })
+    end
+
+    local CoreGui = game:GetService("StarterGui")
+    CoreGui:SetCore("SendNotification", {
+        Title = "Night Hub",
+        Text = "Best Script Farm Chest For Mobile and Pc",
+        Duration = math.huge,
+        Callback = AllowRunServiceBind,
+    })
+    
+    task.spawn(function()
+        while true do
+            if AllowRunService == true then
+                local hasChar = game.Players.LocalPlayer:FindFirstChild("Character")
+                if not game.Players.LocalPlayer.Character then
+        
+                else
+                    local hasCrewTag = game.Players.LocalPlayer.Character:FindFirstChild("CrewBBG",true)
+                    if hasCrewTag then hasCrewTag:Destroy() end
+                    local hasHumanoid = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+                    if hasHumanoid then
+                        local Chest = game.Workspace:FindFirstChild("Chest4") or game.Workspace:FindFirstChild("Chest3") or game.Workspace:FindFirstChild("Chest2") or game.Workspace:FindFirstChild("Chest1") or game.Workspace:FindFirstChild("Chest")
+                        
+                        if Chest then
+                            game.Players.LocalPlayer.Character:PivotTo(Chest:GetPivot())
+                            firesignal(Chest.Touched,game.Players.LocalPlayer.Character.HumanoidRootPart)
+                        else
+                            Teleport()
+                            break
+                        end
+                    end 
+                end
+            end
+            task.wait()
+        end
+    end)
+
+end
+
+task.spawn(function()
+	while wait() do
+		pcall(function()
+			if _G.SelectWeapon == "Melee" then
+				for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Melee" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			elseif _G.SelectWeapon == "Sword" then
+				for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Sword" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			elseif _G.SelectWeapon == "Gun" then
+				for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Gun" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			elseif _G.SelectWeapon == "Devil Fruit" then
+				for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Blox Fruit" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							_G.SelectWeapon = v.Name
+						end
+					end
+				end
+			end
+		end)
+	end
+    end)
+
+spawn(function()
+	while wait() do
+	if _G.StopChest then
+		if game.Players.LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") or game.Players.LocalPlayer.Character:FindFirstChild("Fist of Darkness") or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") then
+			AutoFarmChest = false
+			StopTween(AutoFarmChest)
+			TweenChest:Set(false)
+		end
+	end
+end
+end)
+
+thisCode()
+
+join = game.Players.localPlayer.Neutral == false
+if (_G.Team == "Pirates" or _G.Team == "Marines") and not join then
+    repeat wait()
+        pcall(function()
+            join = game.Players.localPlayer.Neutral == false
+            if _G.Team == "Pirates" then
+                for i,v in pairs({"MouseButton1Click", "MouseButton1Down", "Activated"}) do
+                    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton[v])) do
+                        v.Function()
+                    end
+                end
+            elseif _G.Team == "Marines" then
+                for i,v in pairs({"MouseButton1Click", "MouseButton1Down", "Activated"}) do
+                    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton[v])) do
+                        v.Function()
+                    end
+                end
+            else
+                for i,v in pairs({"MouseButton1Click", "MouseButton1Down", "Activated"}) do
+                    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton[v])) do
+                        v.Function()
+                    end
+                end
+            end
+        end)
+    until join == true
+    game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible = false
+end
+
