@@ -109,6 +109,17 @@ local Converted = {
 
 -- Properties:
 
+function EquipWeapon(ToolSe)
+    if not _G.NotAutoEquip then
+        if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+            Tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+            wait(.1)
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(Tool)
+        end
+    end
+end
+
+
 function topos(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 25 then
@@ -133,6 +144,8 @@ function topos(Pos)
     ):Play()
 end
 
+
+_G.FastAttack = true
 FastAttackConnector =
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/Infhfefg/main/uhenvewbw"))()
 function AttackFunction()
@@ -652,8 +665,7 @@ task.spawn(function()
 
 spawn(function()
     while wait() do
-    if _G.KillDarkbeard then
-    if game.Players.LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
+    if _G.KillDarkbeard and game.Players.LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
         EquipWeapon("Fist of Darkness")
         topos(CFrame.new(3777.50415, 14.6759758, -3499.30225))
             end
@@ -683,10 +695,6 @@ spawn(function()
                             until _G.KillDarkbeard == false or v.Humanoid.Health <= 0
                         end
                     end
-                else 
-                    repeat task.wait()
-                        topos(CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375))
-                    until (CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 or _G.KillDarkbeard == false
                 end
             end
         end
