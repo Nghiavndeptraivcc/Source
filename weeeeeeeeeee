@@ -105,6 +105,7 @@ local Converted = {
 
 -- Properties:
 
+--------Djtconme----------
 Converted["_ScreenGui"].Parent = game:GetService("CoreGui")
 
 Converted["_Frame"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -450,9 +451,8 @@ function thisCode()
             end)
         end
     end)
-
-    local AllowRunService = true
-    _G.SetupTeam = true
+    AllowRunService = true
+    _G.SetupTeam = true 
     local AllowRunServiceBind = Instance.new("BindableFunction")
     function AllowRunServiceBind.OnInvoke(args)
         if args == "Enable" then
