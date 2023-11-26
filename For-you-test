@@ -568,20 +568,6 @@ spawn(function()
     end
     end)
 
-spawn(function()
-    while wait() do
-        if _G.AutoFarmBounty then
-            for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                if v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or not v.Parent then
-                    NextplySelect = true
-                    wait(0.1)
-                    NextplySelect = false
-                end
-            end
-        end
-    end
-end)
-
     CastlePostoMansion = CFrame.new(-5084.8447265625, 316.48101806641, -3145.3752441406)
     MansiontoCastlePos = CFrame.new(-12464.596679688, 376.30590820312, -7567.2626953125)
     Castletophydra = CFrame.new(-5095.33984375, 316.48101806641, -3168.3134765625)
@@ -648,6 +634,20 @@ end
 end
 end
 end)
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoFarmBounty then
+            for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                if v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or not v.Parent then
+                    NextplySelect = true
+                    wait(0.1)
+                    NextplySelect = false
+                end
+            end
+        end
+    end
 end)
 
 spawn(function()
