@@ -3,35 +3,98 @@ function GetDistance(target)
 end
 
 function BTP(P)
-repeat wait(1)
-    game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-    task.wait()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500
+    repeat
+        wait(1)
+        game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+        task.wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+    until (P.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500
 end
 
 function TelePPlayer(P)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
 end
 
-function topos(P1)
-    Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if Distance < 250 then
-        Speed = 600
-    elseif Distance < 500 then
-        Speed = 400
-    elseif Distance < 1000 then
+function topos(Pos)
+    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance < 25 then
+        Speed = 6000
+    elseif Distance < 50 then
+        Speed = 3000
+    elseif Distance < 150 then
+        Speed = 800
+    elseif Distance < 250 then
         Speed = 350
+    elseif Distance < 500 then
+        Speed = 300
+    elseif Distance < 750 then
+        Speed = 300
     elseif Distance >= 1000 then
-        Speed = 200
+        Speed = 300
     end
     game:GetService("TweenService"):Create(
-        game.Players.LocalPlayer.Character.HumanoidRootPart,
-        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
-        {CFrame = P1}
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        TweenInfo.new(Distance / Speed, Enum.EasingStyle.Linear),
+        {CFrame = Pos}
     ):Play()
 end
+
+function TPB(CFgo)
+    local tween_s = game:service "TweenService"
+    local info =
+        TweenInfo.new(
+        (game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat.CFrame.Position - CFgo.Position).Magnitude / 300,
+        Enum.EasingStyle.Linear
+    )
+    tween = tween_s:Create(game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat, info, {CFrame = CFgo})
+    tween:Play()
+
+    local tweenfunc = {}
+
+    function tweenfunc:Stop()
+        tween:Cancel()
+    end
+
+    return tweenfunc
+end
+
+spawn(
+    function()
+        while wait(.1) do
+            if Type == 1 then
+                Pos = CFrame.new(0, PosY, 0)
+            elseif Type == 2 then
+                Pos = CFrame.new(0, PosY, -30)
+            elseif Type == 3 then
+                Pos = CFrame.new(30, PosY, 0)
+            elseif Type == 4 then
+                Pos = CFrame.new(0, PosY, 30)
+            elseif Type == 5 then
+                Pos = CFrame.new(-30, PosY, 0)
+            elseif Type == 6 then
+                Pos = CFrame.new(0, 35, 0)
+            end
+        end
+    end
+)
+
+spawn(
+    function()
+        while wait(.1) do
+            Type = 1
+            wait(0.5)
+            Type = 2
+            wait(0.5)
+            Type = 3
+            wait(0.5)
+            Type = 4
+            wait(0.5)
+            Type = 5
+            wait(0.5)
+        end
+    end
+)
 
 spawn(function()
 game:GetService("RunService").Heartbeat:Connect(function()
@@ -511,6 +574,28 @@ function autoskill()
     end
 end
 
+spawn(function() 
+    repeat
+        task.wait()
+    until game:IsLoaded()
+    repeat
+        task.wait()
+    until game.Players
+    repeat
+        task.wait()
+    until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
+    wait(1.5)
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>Thanks For Use<Color=/>"):Display()
+    wait(5.0)
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>Welcome to Night Hub <Color=/>"):Display()
+    wait(7.0)
+    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Hãy sử dụng Fluxus để có trải nghiệm tốt!!<Color=/>"):Display()
+    wait(9.0)
+    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Đây là Auto Bounty bản BETA nhé!!<Color=/>"):Display()
+    wait(11.0)
+    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Channel : LMNGAMING <Color=/>"):Display()
+    wait()
+end)
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "Night Hub Bounty Hunter", HidePremium = false,IntroText = "Night Hub", SaveConfig = true, ConfigFolder = "Night Hub Hunt"})
