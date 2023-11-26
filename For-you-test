@@ -641,6 +641,12 @@ spawn(function()
                     NextplySelect = true
                     wait(0.1)
                     NextplySelect = false
+                    OrionLib:MakeNotification({
+                        Name = "Night Hub",
+                        Content = "Players Died!!",
+                        Image = "rbxassetid://4483345998",
+                        Time = 5
+                    })
                 end
             end
         end
