@@ -1,7 +1,3 @@
-
-
-
-
 function GetDistance(target)
     return math.floor((target.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
 end
@@ -540,6 +536,7 @@ G:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.AutoFarmBounty = Value
+        StopTween(_G.AutoFarmBounty)
 	end    
 })
 
@@ -582,7 +579,7 @@ spawn(function()
     plyselecthunthelpold = v.Humanoid.Health
     repeat task.wait()
     NameTarget = v.Name
-    Target:Set("Target Name : " .. v.Name .. "")
+    Target:Set("Target Name : " .. v.Name ..)
     v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
     if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
         topos(v.HumanoidRootPart.CFrame * CFrame.new(0,13,2))
