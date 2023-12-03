@@ -450,7 +450,7 @@ Hop.TextSize = 18.000
 Hop.MouseButton1Down:Connect(
     function()
         while wait() and uwu and uwu.Character do
-            HopServer(bO)
+            HopServer()
         end
     end
 )
@@ -893,7 +893,7 @@ function find_target()
         end
     end
     if not uwu then
-        return Hop()
+        return HopServer()
     end
     noti("Auto Bounty", tostring(uwu))
     -- if not uwu then return end
