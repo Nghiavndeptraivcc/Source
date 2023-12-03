@@ -73,6 +73,7 @@ getgenv().Setting = {
         }
     }
 }
+
 game:GetService("RunService"):Set3dRenderingEnabled(not Setting.Misc.WhiteScreen)
 
 if Setting.Misc.FPSBoost then
@@ -133,261 +134,204 @@ local cs = newcclosure
 
 HttpService = game:GetService("HttpService")
 --local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/memaybeohub/Function-Scripts/main/OrionLib.lua"))()
------Gui--By--Me------------------------------------
--- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
 
--- Instances:
-local NightHubAB = Instance.new("ScreenGui")
-local Main = Instance.new("Frame")
-local MainCorner = Instance.new("UICorner")
-local NightLogo = Instance.new("Frame")
-local NightLogoStroke = Instance.new("UIStroke")
-local NightLogoCorner = Instance.new("UICorner")
-local NightLogoImage = Instance.new("ImageLabel")
-local ClientTime = Instance.new("Frame")
-local ClientTimeStroke = Instance.new("UIStroke")
-local ClientTimeCorner = Instance.new("UICorner")
-local ClientTimeLabel_1 = Instance.new("TextLabel")
-local ClientTimeLabel_2 = Instance.new("TextLabel")
-local SkipPlayer = Instance.new("Frame")
-local SkipPlayerStroke = Instance.new("UIStroke")
-local SkipPlayerCorner = Instance.new("UICorner")
-local SkipPlayerButton = Instance.new("TextButton")
-local TargetNameEarnedTimeElapsed = Instance.new("Frame")
-local EarnedTimeElapsedStroke = Instance.new("UIStroke")
-local EarnedTimeElapsedCorner = Instance.new("UICorner")
-local EarnedLabel = Instance.new("TextLabel")
-local TimeElapsedLabel = Instance.new("TextLabel")
-local TargetNameLabel = Instance.new("TextLabel")
-local MainSection = Instance.new("Frame")
-local MainSectionCorner = Instance.new("UICorner")
-local MainSectionStroke = Instance.new("UIStroke")
-local MainSectionLabel_1 = Instance.new("TextLabel")
-local MainSectionLabel_2 = Instance.new("TextLabel")
-local MainStroke = Instance.new("UIStroke")
+function getDirection(Origin, Position)
+    return (Position - Origin).Unit * 1000
+end
 
-NightHubAB.Name = "NightHubAB"
-NightHubAB.Parent = game.CoreGui
-NightHubAB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+if game:GetService("CoreGui"):FindFirstChild("CelestialScreen") then
+    game.CoreGui.CelestialScreen:Destroy()
+end
+a000000009 = os.time()
 
-Main.Name = "Main"
-Main.Parent = NightHubAB
-Main.AnchorPoint = Vector2.new(0.5, 0.5)
-Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Main.BorderSizePixel = 0
-Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-Main.Size = UDim2.new(0, 300, 0, 230)
-Main.Draggable = true
+CelestialScreen = Instance.new("ScreenGui")
+DropShadowHolder = Instance.new("Frame")
+DropShadow = Instance.new("ImageLabel")
+UIGradient = Instance.new("UIGradient")
+MainFrame = Instance.new("Frame")
+UICorner = Instance.new("UICorner")
+Bounty = Instance.new("TextLabel")
+Celestial = Instance.new("TextLabel")
+TotalEarn = Instance.new("TextLabel")
+Elapsed = Instance.new("TextLabel")
+ServerEarn = Instance.new("TextLabel")
+Target = Instance.new("TextLabel")
+UIGradient1 = Instance.new("UIGradient")
+Skip = Instance.new("TextButton")
+Hop = Instance.new("TextButton")
 
+CelestialScreen.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+CelestialScreen.Name = "CelestialScreen"
+CelestialScreen.Parent = game:GetService("CoreGui")
 
-MainCorner.Name = "MainCorner"
-MainCorner.Parent = Main
+DropShadowHolder.AnchorPoint = Vector2.new(0.5, 0.5)
+DropShadowHolder.BackgroundTransparency = 1
+DropShadowHolder.BorderSizePixel = 0
+DropShadowHolder.Position = UDim2.new(0.5, 0, 0.5, 0)
+DropShadowHolder.Size = UDim2.new(0, 350, 0, 245)
+DropShadowHolder.ZIndex = 0
+DropShadowHolder.Name = "DropShadowHolder"
+DropShadowHolder.Parent = CelestialScreen
 
-NightLogo.Name = "NightLogo"
-NightLogo.Parent = Main
-NightLogo.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-NightLogo.BorderColor3 = Color3.fromRGB(27, 42, 53)
-NightLogo.BorderSizePixel = 0
-NightLogo.Position = UDim2.new(0.0500000007, 0, 0.0394444428, 0)
-NightLogo.Size = UDim2.new(0, 85, 0, 85)
+DropShadow.Image = "rbxassetid://6015897843"
+DropShadow.ImageTransparency = 0.5
+DropShadow.ScaleType = Enum.ScaleType.Slice
+DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+DropShadow.BackgroundTransparency = 1
+DropShadow.BorderSizePixel = 0
+DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+DropShadow.Size = UDim2.new(1, 47, 1, 47)
+DropShadow.ZIndex = 0
+DropShadow.Name = "DropShadow"
+DropShadow.Parent = DropShadowHolder
 
-NightLogoStroke.Color = Color3.fromRGB(255, 255, 255)
-NightLogoStroke.Name = "NightLogoStroke"
-NightLogoStroke.Parent = NightLogo
+UIGradient.Color =
+    ColorSequence.new {
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(85.0000025331974, 93.00000205636024, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(70.00000342726707, 246.0000005364418, 255))
+}
+UIGradient.Parent = DropShadow
 
-NightLogoCorner.Name = "NightLogoCorner"
-NightLogoCorner.Parent = NightLogo
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = Color3.fromRGB(45.00000111758709, 45.00000111758709, 45.00000111758709)
+MainFrame.BackgroundTransparency = 0.6000000238418579
+MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.5, 0, 0.497461915, 0)
+MainFrame.Size = UDim2.new(0, 350, 0, 245)
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = DropShadow
 
-NightLogoImage.Name = "NightLogoImage"
-NightLogoImage.Parent = NightLogo
-NightLogoImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-NightLogoImage.BackgroundTransparency = 1.000
-NightLogoImage.BorderColor3 = Color3.fromRGB(27, 42, 53)
-NightLogoImage.LayoutOrder = 2
-NightLogoImage.Size = UDim2.new(0, 84, 0, 85)
-NightLogoImage.Image = "rbxassetid://15467813210"
-NightLogoImage.ImageColor3 = Color3.fromRGB(1000, 1000, 1000)
+UICorner.CornerRadius = UDim.new(0, 2)
+UICorner.Parent = MainFrame
 
-ClientTime.Name = "ClientTime"
-ClientTime.Parent = Main
-ClientTime.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-ClientTime.BorderColor3 = Color3.fromRGB(27, 42, 53)
-ClientTime.BorderSizePixel = 0
-ClientTime.Position = UDim2.new(0.0500000007, 0, 0.495289803, 0)
-ClientTime.Size = UDim2.new(0, 85, 0, 51)
+Bounty.Font = Enum.Font.GothamBold
+Bounty.Text = "Bounty"
+Bounty.TextColor3 = Color3.fromRGB(230.00000149011612, 230.00000149011612, 230.00000149011612)
+Bounty.TextSize = 20
+Bounty.TextXAlignment = Enum.TextXAlignment.Left
+Bounty.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Bounty.BackgroundTransparency = 1
+Bounty.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Bounty.BorderSizePixel = 0
+Bounty.Position = UDim2.new(0.517142832, 0, 0.0775510222, 0)
+Bounty.Size = UDim2.new(0, 118, 0, 37)
+Bounty.Name = "Bounty"
+Bounty.Parent = MainFrame
 
-ClientTimeStroke.Color = Color3.fromRGB(255, 255, 255)
-ClientTimeStroke.Name = "ClientTimeStroke"
-ClientTimeStroke.Parent = ClientTime
+Celestial.Font = Enum.Font.GothamBold
+Celestial.Text = "Celestial"
+Celestial.TextColor3 = Color3.fromRGB(83.00000265240669, 160.00000566244125, 255)
+Celestial.TextSize = 20
+Celestial.TextXAlignment = Enum.TextXAlignment.Right
+Celestial.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Celestial.BackgroundTransparency = 1
+Celestial.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Celestial.BorderSizePixel = 0
+Celestial.Position = UDim2.new(0.177142859, 0, 0.0775510222, 0)
+Celestial.Size = UDim2.new(0, 105, 0, 37)
+Celestial.Name = "Celestial"
+Celestial.Parent = MainFrame
 
-ClientTimeCorner.Name = "ClientTimeCorner"
-ClientTimeCorner.Parent = ClientTime
+TotalEarn.Font = Enum.Font.GothamBold
+TotalEarn.Text = "Total Earned: "
+TotalEarn.TextColor3 = Color3.fromRGB(255, 255, 11.000000294297934)
+TotalEarn.TextSize = 18
+TotalEarn.AnchorPoint = Vector2.new(0.5, 0)
+TotalEarn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TotalEarn.BackgroundTransparency = 1
+TotalEarn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TotalEarn.BorderSizePixel = 0
+TotalEarn.Position = UDim2.new(0.5, 0, 0.387530655, 0)
+TotalEarn.Size = UDim2.new(0, 280, 0, 23)
+TotalEarn.Name = "TotalEarn"
+TotalEarn.Parent = MainFrame
 
-ClientTimeLabel_1.Name = "ClientTimeLabel_1"
-ClientTimeLabel_1.Parent = ClientTime
-ClientTimeLabel_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_1.BackgroundTransparency = 1.000
-ClientTimeLabel_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ClientTimeLabel_1.BorderSizePixel = 0
-ClientTimeLabel_1.Position = UDim2.new(-0.0117647061, 0, -0.0143791651, 0)
-ClientTimeLabel_1.Size = UDim2.new(0, 85, 0, 27)
-ClientTimeLabel_1.Font = Enum.Font.ArialBold
-ClientTimeLabel_1.Text = "Client Time:"
-ClientTimeLabel_1.TextColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_1.TextSize = 13.000
+Elapsed.Font = Enum.Font.GothamBold
+Elapsed.Text = "Time Elapsed: "
+Elapsed.TextColor3 = Color3.fromRGB(255, 255, 11.000000294297934)
+Elapsed.TextSize = 18
+Elapsed.AnchorPoint = Vector2.new(0.5, 0)
+Elapsed.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Elapsed.BackgroundTransparency = 1
+Elapsed.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Elapsed.BorderSizePixel = 0
+Elapsed.Position = UDim2.new(0.5, 0, 0.269163281, 0)
+Elapsed.Size = UDim2.new(0, 280, 0, 20)
+Elapsed.Name = "Elapsed"
+Elapsed.Parent = MainFrame
 
-ClientTimeLabel_2.Name = "ClientTimeLabel_2"
-ClientTimeLabel_2.Parent = ClientTime
-ClientTimeLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_2.BackgroundTransparency = 1.000
-ClientTimeLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ClientTimeLabel_2.BorderSizePixel = 0
-ClientTimeLabel_2.Position = UDim2.new(0.0117647061, 0, 0.444444448, 0)
-ClientTimeLabel_2.Size = UDim2.new(0, 84, 0, 25)
-ClientTimeLabel_2.Font = Enum.Font.ArialBold
-ClientTimeLabel_2.Text = "0M / 0S"
-ClientTimeLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_2.TextSize = 13.000
+ServerEarn.Font = Enum.Font.GothamBold
+ServerEarn.Text = "Server Earned: 0"
+ServerEarn.TextColor3 = Color3.fromRGB(255, 255, 11.000000294297934)
+ServerEarn.TextSize = 18
+ServerEarn.AnchorPoint = Vector2.new(0.5, 0)
+ServerEarn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ServerEarn.BackgroundTransparency = 1
+ServerEarn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ServerEarn.BorderSizePixel = 0
+ServerEarn.Position = UDim2.new(0.5, 0, 0.534469426, 0)
+ServerEarn.Size = UDim2.new(0, 280, 0, 19)
+ServerEarn.Name = "ServerEarn"
+ServerEarn.Parent = MainFrame
 
-SkipPlayer.Name = "SkipPlayer"
-SkipPlayer.Parent = Main
-SkipPlayer.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-SkipPlayer.BorderColor3 = Color3.fromRGB(27, 42, 53)
-SkipPlayer.BorderSizePixel = 0
-SkipPlayer.Position = UDim2.new(0.356666654, 0, 0.508333325, 0)
-SkipPlayer.Size = UDim2.new(0, 178, 0, 45)
+Target.Font = Enum.Font.GothamBold
+Target.Text = "Target:"
+Target.TextColor3 = Color3.fromRGB(230.00000149011612, 230.00000149011612, 230.00000149011612)
+Target.TextSize = 18
+Target.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Target.BackgroundTransparency = 1
+Target.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Target.BorderSizePixel = 0
+Target.Position = UDim2.new(0.340000004, 0, 0.673469365, 0)
+Target.Size = UDim2.new(0, 112, 0, 15)
+Target.Name = "Target"
+Target.Parent = MainFrame
 
-SkipPlayerStroke.Color = Color3.fromRGB(255, 255, 255)
-SkipPlayerStroke.Name = "SkipPlayerStroke"
-SkipPlayerStroke.Parent = SkipPlayer
+UIGradient1.Color =
+    ColorSequence.new {
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(85.0000025331974, 93.00000205636024, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(74.0000031888485, 201.00000321865082, 255))
+}
+UIGradient1.Parent = MainFrame
 
-SkipPlayerCorner.Name = "SkipPlayerCorner"
-SkipPlayerCorner.Parent = SkipPlayer
+Skip.Font = Enum.Font.GothamBold
+Skip.Text = "Skip Player"
+Skip.TextColor3 = Color3.fromRGB(230.00000149011612, 230.00000149011612, 230.00000149011612)
+Skip.TextSize = 18
+Skip.TextXAlignment = Enum.TextXAlignment.Right
+Skip.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Skip.BackgroundTransparency = 0.9900000095367432
+Skip.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Skip.BorderSizePixel = 0
+Skip.Position = UDim2.new(0.0457142852, 0, 0.759183645, 0)
+Skip.Size = UDim2.new(0, 144, 0, 43)
+Skip.Name = "Skip"
+Skip.Parent = MainFrame
 
-SkipPlayerButton.Name = "SkipPlayerButton"
-SkipPlayerButton.Parent = SkipPlayer
-SkipPlayerButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SkipPlayerButton.BackgroundTransparency = 1.000
-SkipPlayerButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-SkipPlayerButton.BorderSizePixel = 0
-SkipPlayerButton.Position = UDim2.new(0, 0, -0.0666666701, 0)
-SkipPlayerButton.Size = UDim2.new(0, 178, 0, 51)
-SkipPlayerButton.Font = Enum.Font.ArialBold
-SkipPlayerButton.Text = "Skip Players"
-SkipPlayerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-SkipPlayerButton.TextSize = 18.000
-SkipPlayerButton.MouseButton1Click:Connect(find_target)
-SkipPlayerButton.MouseButton1Click:Connect(
+Hop.Font = Enum.Font.GothamBold
+Hop.Text = "Hop Server"
+Hop.TextColor3 = Color3.fromRGB(230.00000149011612, 230.00000149011612, 230.00000149011612)
+Hop.TextSize = 18
+Hop.TextXAlignment = Enum.TextXAlignment.Left
+Hop.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Hop.BackgroundTransparency = 0.9900000095367432
+Hop.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Hop.BorderSizePixel = 0
+Hop.Position = UDim2.new(0.54285717, 0, 0.759183645, 0)
+Hop.Size = UDim2.new(0, 144, 0, 43)
+Hop.Name = "Hop"
+Hop.Parent = MainFrame
+
+Skip.Activated:Connect(find_target)
+Hop.Activated:Connect(
     function()
         while wait() and uwu and uwu.Character do
             find_target()
         end
     end
 )
-
-TargetNameEarnedTimeElapsed.Name = "TargetName/Earned/TimeElapsed"
-TargetNameEarnedTimeElapsed.Parent = Main
-TargetNameEarnedTimeElapsed.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-TargetNameEarnedTimeElapsed.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TargetNameEarnedTimeElapsed.BorderSizePixel = 0
-TargetNameEarnedTimeElapsed.Position = UDim2.new(0.0533333346, 0, 0.753260851, 0)
-TargetNameEarnedTimeElapsed.Size = UDim2.new(0, 270, 0, 50)
-
-EarnedTimeElapsedStroke.Color = Color3.fromRGB(255, 255, 255)
-EarnedTimeElapsedStroke.Name = "Earned/TimeElapsedStroke"
-EarnedTimeElapsedStroke.Parent = TargetNameEarnedTimeElapsed
-
-EarnedTimeElapsedCorner.Name = "Earned/TimeElapsedCorner"
-EarnedTimeElapsedCorner.Parent = TargetNameEarnedTimeElapsed
-
-EarnedLabel.Name = "EarnedLabel"
-EarnedLabel.Parent = TargetNameEarnedTimeElapsed
-EarnedLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-EarnedLabel.BackgroundTransparency = 1.000
-EarnedLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-EarnedLabel.Position = UDim2.new(0.0459771045, 0, 0.319999993, 0)
-EarnedLabel.Size = UDim2.new(0, 79, 0, 17)
-EarnedLabel.Font = Enum.Font.ArialBold
-EarnedLabel.Text = "Earned : 0"
-EarnedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-EarnedLabel.TextSize = 15.000
-EarnedLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-TimeElapsedLabel.Name = "TimeElapsedLabel"
-TimeElapsedLabel.Parent = TargetNameEarnedTimeElapsed
-TimeElapsedLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-TimeElapsedLabel.BackgroundTransparency = 1.000
-TimeElapsedLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TimeElapsedLabel.Position = UDim2.new(0.0422734022, 0, 0.555555582, 0)
-TimeElapsedLabel.Size = UDim2.new(0, 246, 0, 25)
-TimeElapsedLabel.Font = Enum.Font.ArialBold
-TimeElapsedLabel.Text = "Time Elapsed: 0H 0M 0S"
-TimeElapsedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TimeElapsedLabel.TextSize = 15.000
-TimeElapsedLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-TargetNameLabel.Name = "TargetNameLabel"
-TargetNameLabel.Parent = TargetNameEarnedTimeElapsed
-TargetNameLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-TargetNameLabel.BackgroundTransparency = 1.000
-TargetNameLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TargetNameLabel.Position = UDim2.new(0.0422734022, 0, 0, 0)
-TargetNameLabel.Size = UDim2.new(0, 258, 0, 18)
-TargetNameLabel.Font = Enum.Font.ArialBold
-TargetNameLabel.Text = "Target Name : "
-TargetNameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TargetNameLabel.TextSize = 15.000
-TargetNameLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-MainSection.Name = "MainSection"
-MainSection.Parent = Main
-MainSection.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainSection.BorderColor3 = Color3.fromRGB(27, 42, 53)
-MainSection.BorderSizePixel = 0
-MainSection.Position = UDim2.new(0.376666665, 0, 0.0399999991, 0)
-MainSection.Size = UDim2.new(0, 172, 0, 87)
-
-MainSectionCorner.Name = "MainSectionCorner"
-MainSectionCorner.Parent = MainSection
-
-MainSectionStroke.Color = Color3.fromRGB(255, 255, 255)
-MainSectionStroke.Name = "MainSectionStroke"
-MainSectionStroke.Parent = MainSection
-
-MainSectionLabel_1.Name = "MainSectionLabel_1"
-MainSectionLabel_1.Parent = MainSection
-MainSectionLabel_1.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainSectionLabel_1.BackgroundTransparency = 1.000
-MainSectionLabel_1.BorderColor3 = Color3.fromRGB(27, 42, 53)
-MainSectionLabel_1.BorderSizePixel = 0
-MainSectionLabel_1.Position = UDim2.new(0.0813953504, 0, 0, 0)
-MainSectionLabel_1.Size = UDim2.new(0, 158, 0, 50)
-MainSectionLabel_1.Font = Enum.Font.Unknown
-MainSectionLabel_1.Text = "Night Hub"
-MainSectionLabel_1.TextColor3 = Color3.fromRGB(210, 210, 210)
-MainSectionLabel_1.TextSize = 25.000
-MainSectionLabel_1.TextWrapped = true
-MainSectionLabel_1.TextXAlignment = Enum.TextXAlignment.Left
-
-MainSectionLabel_2.Name = "MainSectionLabel_2"
-MainSectionLabel_2.Parent = MainSection
-MainSectionLabel_2.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainSectionLabel_2.BackgroundTransparency = 1.000
-MainSectionLabel_2.BorderColor3 = Color3.fromRGB(27, 42, 53)
-MainSectionLabel_2.BorderSizePixel = 0
-MainSectionLabel_2.Position = UDim2.new(0.0813953504, 0, 0.338205963, 0)
-MainSectionLabel_2.Size = UDim2.new(0, 158, 0, 50)
-MainSectionLabel_2.Font = Enum.Font.Unknown
-MainSectionLabel_2.Text = "Auto Bounty"
-MainSectionLabel_2.TextColor3 = Color3.fromRGB(64, 64, 64)
-MainSectionLabel_2.TextSize = 20.000
-MainSectionLabel_2.TextWrapped = true
-MainSectionLabel_2.TextXAlignment = Enum.TextXAlignment.Left
-
-MainStroke.Color = Color3.fromRGB(210, 210, 210)
-MainStroke.Name = "MainStroke"
-MainStroke.Parent = Main
 
 if lp.PlayerGui.Main:FindFirstChild("ChooseTeam") then
     for i, v in pairs(
@@ -455,14 +399,14 @@ function save()
     celes.Total_Earned = a999 + tonumber(lp.leaderstats["Bounty/Honor"].Value - oldbty2)
     celes.Client_Eslaped = celes2.Client_Eslaped + (os.time() - a000000009)
 
-    EarnedLabel.Text = [[Total Earned: ]] .. celes.Total_Earned
-    TimeElapsedLabel.Text = [[Client Time Eslaped: ]] .. disp_time(celes.Client_Eslaped)
+    TotalEarn.Text = [[Total Earned: ]] .. celes.Total_Earned
+    Elapsed.Text = [[Client Time Eslaped: ]] .. disp_time(celes.Client_Eslaped)
     local a0 = HttpService:JSONEncode(celes)
     writefile(pathfile2, a0)
 end
 
 function noti(a, b, c)
-    print("[System]", a, b)
+    print("[Celestial Notify]", a, b)
 end
 
 local bM = {}
@@ -471,10 +415,10 @@ local HttpService = game:GetService("HttpService")
 local bN = "ServerCache"
 function SaveSettings2()
     local HttpService = game:GetService("HttpService")
-    if not isfolder("Night Hub Bounty/Cache/") then
-        makefolder("Night Hub Bounty/Cache/")
+    if not isfolder("Celestial/Cache/") then
+        makefolder("Celestial/Cache/")
     end
-    writefile("Night Hub Bounty/Cache/" .. bN, HttpService:JSONEncode(bM))
+    writefile("Celestial/Cache/" .. bN, HttpService:JSONEncode(bM))
 end
 function ReadSetting2()
     local s, o =
@@ -482,10 +426,10 @@ function ReadSetting2()
         function()
             local HttpService = game:GetService("HttpService")
             Hub = game:GetService("HttpService")
-            if not isfolder("Night Hub Bounty/Cache/") then
-                makefolder("Night Hub Bounty/Cache/")
+            if not isfolder("Celestial/Cache/") then
+                makefolder("Celestial/Cache/")
             end
-            return HttpService:JSONDecode(readfile("Night Hub Bounty/Cache/" .. bN))
+            return HttpService:JSONDecode(readfile("Celestial/Cache/" .. bN))
         end
     )
     if s then
@@ -497,67 +441,83 @@ function ReadSetting2()
 end
 bM = ReadSetting2()
 
-function Hop()
-    local PlaceID = game.PlaceId
-    local AllIDs = {}
-    local foundAnything = ""
-    local actualHour = os.date("!*t").hour
-    local Deleted = false
-    function TPReturner()
-        local Site;
-        if foundAnything == "" then
-            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
-        else
-            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
-        end
-        local ID = ""
-        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-            foundAnything = Site.nextPageCursor
-        end
-        local num = 0;
-        for i,v in pairs(Site.data) do
-            local Possible = true
-            ID = tostring(v.id)
-            if tonumber(v.maxPlayers) > tonumber(v.playing) then
-                for _,Existing in pairs(AllIDs) do
-                    if num ~= 0 then
-                        if ID == tostring(Existing) then
-                            Possible = false
+function HopServer(bO)
+    -- noti("Hop", "9999")
+    m10 = true
+    to(CFrame.new(999, 9999999, 99999))
+    if not bO then
+        bO = 10
+    end
+    ticklon = tick()
+    repeat
+        task.wait()
+    until tick() - ticklon >= 2
+    local function Hop()
+        noti("Hop Server", "Joining...")
+        for r = 1, 100 do
+            ChooseRegion = Setting.Misc.HopRegion
+            if ChooseRegion == nil or ChooseRegion == "" then
+                ChooseRegion = "Singapore"
+            else
+                game:GetService("Players").LocalPlayer.PlayerGui.ServerBrowser.Frame.Filters.SearchRegion.TextBox.Text =
+                    ChooseRegion
+            end
+            local bP = game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer(r)
+            for k, v in pairs(bP) do
+                if k ~= game.JobId and v["Count"] < bO then
+                    if not bM[k] or tick() - bM[k].Time > 60 * 10 then
+                        bM[k] = {Time = tick()}
+                        SaveSettings2()
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Main.InCombat.Visible then
+                            noti("Wait For End InCombat", 15)
+                            repeat
+                                wait()
+                                to(CFrame.new(0, math.random(9999, 99999), 0))
+                            until not check11()
+                        else
                         end
-                    else
-                        if tonumber(actualHour) ~= tonumber(Existing) then
-                            local delFile = pcall(function()
-                                AllIDs = {}
-                                table.insert(AllIDs, actualHour)
-                            end)
-                        end
+                        game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", k)
+                        return true
+                    elseif tick() - bM[k].Time > 60 * 60 then
+                        bM[k] = nil
                     end
-                    num = num + 1
-                end
-                if Possible == true then
-                    table.insert(AllIDs, ID)
-                    wait()
-                    pcall(function()
-                        wait()
-                        game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
-                    end)
-                    wait(4)
                 end
             end
         end
+        return false
     end
-    function Teleport() 
-        while wait() do
-            pcall(function()
-                TPReturner()
-                if foundAnything ~= "" then
-                    TPReturner()
+    if not getgenv().Loaded then
+        local function bQ(v)
+            if v.Name == "ErrorPrompt" then
+                if v.Visible then
+                    if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                        HopServer()
+                        v.Visible = false
+                    end
                 end
-            end)
+                v:GetPropertyChangedSignal("Visible"):Connect(
+                    function()
+                        if v.Visible then
+                            if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                                HopServer()
+                                v.Visible = false
+                            end
+                        end
+                    end
+                )
+            end
         end
+        for k, v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetChildren()) do
+            bQ(v)
+        end
+        game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(bQ)
+        getgenv().Loaded = true
     end
-    Teleport()
-end     
+    while not Hop() do
+        wait()
+    end
+    SaveSettings2()
+end
 
 function m0()
     return lp.PlayerGui.Main.InCombat.Visible and lp.PlayerGui.Main.InCombat.Text and
@@ -664,73 +624,81 @@ function check11()
         (string.find(string.lower(game:GetService("Players").LocalPlayer.PlayerGui.Main.InCombat.Text), "risk"))
 end
 
-function to(Pos)
-    pcall(function()
-        if lp.Character:FindFirstChild("HumanoidRootPart") and lp.Character:FindFirstChild("Humanoid").Health > 0 then
-            Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-            if not game.Players.LocalPlayer.Character.PrimaryPart:FindFirstChild("Hold") then
-                local Hold = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.PrimaryPart)
-                Hold.Name = "Hold"
-                Hold.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-                Hold.Velocity = Vector3.new(0, 0, 0)
-            end
-            for a, b in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                if b:IsA"BasePart" then
-                    b.CanCollide = false
-                end
-            end
-            if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
-                game.Players.LocalPlayer.Character.Humanoid.Sit = false
-            end
-            if Distance < 250 then
-                Speed = 400
-            elseif Distance < 1000 then
-                Speed = 375
-            elseif Distance >= 1000 then
-                Speed = 350
-            end
-            pcall(function()
-                tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance / Speed, Enum.EasingStyle.Linear),{CFrame = Pos})
-                tween:Play()
-            end)
-            if not stopbypass  then
-                if game:GetService("Players").LocalPlayer.PlayerGui.Main.InCombat.Visible then
-                    if not string.find(string.lower(game:GetService("Players").LocalPlayer.PlayerGui.Main.InCombat.Text), "risk") then
-                        bypass(Pos)
-                    else
-                        dist = math.huge
-                        is = nil
-                        for i , v in pairs(island) do
-                            if (Pos.Position-v.Position).magnitude < dist then
-                                is = v 
-                                dist = (Pos.Position-v.Position).magnitude 
-                            end
-                        end 
-                        if is == nil then return; end
-                        if (lp.Character.Head.Position-Pos.Position).magnitude > distbyp then 
-                            if (lp.Character.Head.Position-Pos.Position).magnitude > (is.Position-Pos.Position).magnitude then
-                                if tween then
-                                    tween:Destroy()
-                                end
-                                if (is.X == 61163.8515625 and is.Y ==11.6796875 and is.Z == 1819.7841796875) or is == CFrame.new(-12471.169921875 + 50, 374.94024658203, -7551.677734375) or is == CFrame.new(-5085.23681640625 + 50, 316.5072021484375, -3156.202880859375) or is == CFrame.new(5749.7861328125 + 50, 611.9736938476562, -276.2497863769531) then
-                                    if tween then
-                                    tween:Cancel()
-                                    end
-                                    repeat task.wait()
-                                        lp.Character.HumanoidRootPart.CFrame = is  
-                                    until lp.Character.PrimaryPart.CFrame == is   
-                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-                                end
-                            end
-                        end
-                    end
-                else
-                    bypass(Pos)
-                end
-            end
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X, Pos.Y, game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
+function to(vg1)
+    if sexroblox then
+        sexroblox:Cancel()
+    end
+    --print("ncall")
+    if olfdvg and q1(olfdvg, vg1) > 1000 then
+      
+        return
+    end
+    if not vg1 then
+        return
+    end
+    --  print("continue ")
+    vg2 = CFrame.new(vg1.X, vg1.Y, vg1.Z)
+    game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+    game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
+
+    for a, b in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+        if b:IsA "BasePart" then
+            b.CanCollide = false
         end
-    end)
+    end
+    if not game.Players.LocalPlayer.Character.Head:FindFirstChild "eltrul" then
+        local ngu = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.Head)
+        ngu.Name = "eltrul"
+        ngu.MaxForce = Vector3.new(0, math.huge, 0)
+        ngu.Velocity = Vector3.new(0, 0, 0)
+    end
+    vg3 = getPortal(vg2)
+    vg9 = getSpawn(vg2)
+    for mm = 0, 3, 1 do
+        if getSpawn(vg2) ~= vg9 then
+            return
+        end
+    end
+
+    vg5 = game.Players.LocalPlayer.Character.HumanoidRootPart
+    vg4 = vg5.CFrame
+    vg7 = q1(vg4, vg2)
+    if vg9 then
+        vg10 = q1(vg9, vg2)
+        if
+            Setting.Misc.BypassTP and not check11() and vg10 < vg7 and vg7 > 3600 and q1(vg4, vg9) > 500 and
+                vg10 < (q1(vg3, vg2) + 800)
+         then
+            return grgrgrgrg(vg9)
+        end
+    end
+
+    if vg7 > q1(vg3, vg2) and vg7 > 300 then
+        --print("request")
+        return request(vg3)
+    end
+    if vg7 < 220 then
+        vg5.CFrame = vg2
+        --    print("set")
+        return
+    end
+    if q1(vg2) > 250 and Setting.Misc["Silent Mode"] then
+        vg2 = vg2 + Vector3.new(0, 350, 0)
+    end
+
+    
+    safe_cp(lp).CFrame = CFrame.new(vg4.X, vg2.Y, vg4.Z)
+
+    vg6 = vg7 / 350
+    sexroblox =
+        game:GetService("TweenService"):Create(
+        game.Players.LocalPlayer.Character.HumanoidRootPart,
+        TweenInfo.new(vg6, Enum.EasingStyle.Linear),
+        {CFrame = vg2}
+    )
+
+    sexroblox:Play()
+    -- print("tween")
 end
 
 function q1(I, II)
@@ -821,7 +789,7 @@ function find_target()
         end
     end
     if not uwu then
-        return Hop()
+        return HopServer()
     end
     noti("Auto Bounty", tostring(uwu))
     -- if not uwu then return end
@@ -935,7 +903,7 @@ function calculate_earn()
     start_bounty = lp.leaderstats["Bounty/Honor"].Value
     if earned > 0 then
         LocalEarn = LocalEarn + earned
-        EarnedLabel.Text = "Server Earned: " .. LocalEarn
+        ServerEarn.Text = "Server Earned: " .. LocalEarn
         if Setting.Webhook.Enable then
             PostWebhook2(
                 {
