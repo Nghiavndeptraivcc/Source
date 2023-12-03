@@ -403,8 +403,13 @@ Next.Font = Enum.Font.SourceSansBold
 Next.Text = "Next Players"
 Next.TextColor3 = Color3.fromRGB(255, 255, 255)
 Next.TextSize = 18.000
-Next.MouseButton1Down:Connect(find_target)
-
+Next.MouseButton1Down:Connect(
+    function()
+        while wait() and uwu and uwu.Character do
+            find_target()
+        end
+    end
+)
 UICorner_14.Parent = Next
 
 Hop.Name = "Hop"
@@ -511,7 +516,84 @@ function Hop()
         end
     end
     Teleport()
-end     
+end       
+
+function HopServer(bO)
+    -- noti("Hop", "9999")
+    m10 = true
+    to(CFrame.new(999, 9999999, 99999))
+    if not bO then
+        bO = 10
+    end
+    ticklon = tick()
+    repeat
+        task.wait()
+    until tick() - ticklon >= 2
+    local function Hop()
+        noti("Hop Server", "Joining...")
+        for r = 1, 100 do
+            ChooseRegion = Setting.Misc.HopRegion
+            if ChooseRegion == nil or ChooseRegion == "" then
+                ChooseRegion = "Singapore"
+            else
+                game:GetService("Players").LocalPlayer.PlayerGui.ServerBrowser.Frame.Filters.SearchRegion.TextBox.Text =
+                    ChooseRegion
+            end
+            local bP = game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer(r)
+            for k, v in pairs(bP) do
+                if k ~= game.JobId and v["Count"] < bO then
+                    if not bM[k] or tick() - bM[k].Time > 60 * 10 then
+                        bM[k] = {Time = tick()}
+                        SaveSettings2()
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Main.InCombat.Visible then
+                            noti("Wait For End InCombat", 15)
+                            repeat
+                                wait()
+                                to(CFrame.new(0, math.random(9999, 99999), 0))
+                            until not check11()
+                        else
+                        end
+                        game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", k)
+                        return true
+                    elseif tick() - bM[k].Time > 60 * 60 then
+                        bM[k] = nil
+                    end
+                end
+            end
+        end
+        return false
+    end
+    if not getgenv().Loaded then
+        local function bQ(v)
+            if v.Name == "ErrorPrompt" then
+                if v.Visible then
+                    if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                        Hop()
+                        v.Visible = false
+                    end
+                end
+                v:GetPropertyChangedSignal("Visible"):Connect(
+                    function()
+                        if v.Visible then
+                            if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                                Hop()
+                                v.Visible = false
+                            end
+                        end
+                    end
+                )
+            end
+        end
+        for k, v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetChildren()) do
+            bQ(v)
+        end
+        game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(bQ)
+        getgenv().Loaded = true
+    end
+    while not Hop() do
+        wait()
+    end
+end
 
 function m0()
     return lp.PlayerGui.Main.InCombat.Visible and lp.PlayerGui.Main.InCombat.Text and
