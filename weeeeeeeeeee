@@ -1258,60 +1258,6 @@ function hidetext(originalString)
     return finalString
 end
 
-print("Player Logged: ", hidetext(game.Players.LocalPlayer.Name), NowSea)
-
-function post(name, typeh)
-    print("[Night Hub System] Waiting For Server Responsing...")
-    timenow = game:HttpGet("http://burger.eltrul.repl.co/api/v1/time")
-    print("[Night Hub System] Ok Bye")
-    if tonumber(timenow) - (os.time()) > 5 then
-        print("[Celestial Socket] Time missmatch, resend in 5second")
-        wait(5)
-
-        return
-     -- post(name, typeh)
-    end
-
-    outputing =
-        game:HttpGet(
-        "http://burger.eltrul.repl.co/api/v1/notify/" ..
-            typeh ..
-                "?data=" ..
-                    hash(
-                        {
-                            Name = name,
-                            ServerID = "game:GetService('TeleportService'):Teleport('" .. game.JobId .. "')",
-                            Sender = hidetext(game.Players.LocalPlayer.Name),
-                            Sea = NowSea
-                        }
-                    )
-    )
-    print("[Night Hub System] Result: ", outputing)
-    if not string.find(outputing, "Successfully Send") then
-        print("[Night Hub System] Failed to send, automatically retry...")
-        wait(5)
-        return
-     --  post(name, typeh)
-    end
-end
-
-posted = {}
-
-function post2()
-    if CheckSea(3) then
-        if moonTextures[game:GetService("Lighting").Sky.MoonTextureId] == " [🌕] Full Moon" and not posted.Moon then
-            posted.Moon = true
-            post("Full Moon", "Moon")
-            print("Post Moon")
-        end
-        if isMirageSpawn() and not posted.Mirage then
-            posted.Mirage = true
-            post("Mirage", "Mirage")
-            print("Post Mirage")
-        end
-    end
-end
-
 function AB(M)
     for _, Q in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         if Q.ToolTip == M then
