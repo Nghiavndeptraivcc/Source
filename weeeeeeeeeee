@@ -75,6 +75,7 @@ getgenv().Setting = {
     }
 }
 
+
 game:GetService("RunService"):Set3dRenderingEnabled(not Setting.Misc.WhiteScreen)
 
 if Setting.Misc.FPSBoost then
@@ -803,7 +804,7 @@ function find_target()
     -- noti("Auto Bounty", uwu.Name)
     niga[uwu.Name] = true
     fromtime = os.time()
-    Target.Text = "Target: " .. tostring(uwu)
+    TextLabel_3.Text = "Target Name : " .. tostring(uwu)
 
     if Setting.Chat.Enable then
         porn = split(tostring(Setting.Chat.Content), ",")
@@ -910,11 +911,11 @@ function calculate_earn()
     start_bounty = lp.leaderstats["Bounty/Honor"].Value
     if earned > 0 then
         LocalEarn = LocalEarn + earned
-        ServerEarn.Text = "Server Earned: " .. LocalEarn
+        TextLabel_4.Text = "Earned : " .. LocalEarn
         if Setting.Webhook.Enable then
             PostWebhook2(
                 {
-                    content = "🥶",
+                    content = ";D",
                     tts = false,
                     embeds = {
                         {
