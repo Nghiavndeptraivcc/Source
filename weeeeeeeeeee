@@ -426,7 +426,7 @@ Hop.TextSize = 18.000
 Hop.MouseButton1Down:Connect(
     function()
         while wait() and uwu and uwu.Character do
-            find_target()
+            HopServer(bO)
         end
     end
 )
