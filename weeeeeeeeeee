@@ -426,7 +426,7 @@ Hop.TextSize = 18.000
 Hop.MouseButton1Down:Connect(
     function()
         while wait() and uwu and uwu.Character do
-            HopServer()
+            find_target()
         end
     end
 )
@@ -516,20 +516,7 @@ function Hop()
         end
     end
     Teleport()
-end  
-
-spawn(function()
-    while wait() do
-        if _G.Hop then
-            pcall(function()
-                Hop()
-                Hop()
-                Hop()
-                Hop()
-            end)
-        end
-    end
-end)
+end       
 
 function HopServer(bO)
     -- noti("Hop", "9999")
@@ -580,7 +567,58 @@ function HopServer(bO)
             if v.Name == "ErrorPrompt" then
                 if v.Visible then
                     if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
-                        _G.Hop = true
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
+                        Hop()
                         v.Visible = false
                     end
                 end
@@ -588,7 +626,46 @@ function HopServer(bO)
                     function()
                         if v.Visible then
                             if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
-                                _G.Hop = true
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
+                                Hop()
                                 v.Visible = false
                             end
                         end
