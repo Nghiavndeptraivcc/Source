@@ -538,7 +538,6 @@ function HopServer(bO)
                         Hop()
                         Hop()
                         Hop()
-                        v.Visible = false
                     end
                 end
                 v:GetPropertyChangedSignal("Visible"):Connect(
@@ -584,8 +583,6 @@ function HopServer(bO)
                                 Hop()
                                 Hop()
                                 Hop()
-                                Hop()
-                                v.Visible = false
                             end
                         end
                     end
