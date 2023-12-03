@@ -1293,7 +1293,6 @@ old =
                 uwu.Character and
                 uwu.Character:FindFirstChild("Head")
          then
-           print("aim")
             local a2 = workspace.CurrentCamera:WorldToScreenPoint(uwu.Character.Head.Position)
             return a2
         end
