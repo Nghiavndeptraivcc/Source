@@ -115,9 +115,6 @@ Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0.24401474, 0, 0.140562251, 0)
 Frame.Size = UDim2.new(0, 340, 0, 373)
-Frame.Visible = true
-Frame.Active = true
-Frame.Draggable = true
 
 UICorner.Parent = Frame
 
@@ -172,20 +169,6 @@ Time.Font = Enum.Font.SourceSansBold
 Time.Text = "Time : 0H 0M 0S"
 Time.TextColor3 = Color3.fromRGB(0, 0, 0)
 Time.TextSize = 14.000
-function UpdateTime()
-    local GameTime = math.floor(workspace.DistributedGameTime+0.5)
-    local Hour = math.floor(GameTime/(60^2))%24
-    local Minute = math.floor(GameTime/(60^1))%60
-    local Second = math.floor(GameTime/(60^0))%60
-    Time.Text = "Hours : "..Hour.." Minute : "..Minute.." Second : "..Second
-    end
-    spawn(function()
-    while task.wait() do
-    pcall(function()
-    UpdateTime()
-    end)
-    end
-    end)
 
 UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
 UIStroke_2.Parent = Time
@@ -202,13 +185,6 @@ TextLabel_2.Font = Enum.Font.SourceSans
 TextLabel_2.Text = "Your Bounty :"
 TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel_2.TextSize = 14.000
-spawn(function()
-    while wait() do
-        pcall(function()
-            TextLabel_2.Text = "Your Bounty :".." "..game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
-        end)
-    end
-end)
 
 UICorner_7.Parent = TextLabel_2
 
@@ -349,7 +325,7 @@ Next.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Next.BorderSizePixel = 0
 Next.Size = UDim2.new(0, 164, 0, 50)
 Next.Font = Enum.Font.SourceSansBold
-Next.Text = "Next Players (Not Work)"
+Next.Text = "Next Players"
 Next.TextColor3 = Color3.fromRGB(255, 255, 255)
 Next.TextSize = 18.000
 Next.MouseButton1Down:Connect(find_target)
@@ -366,14 +342,13 @@ Hop.Font = Enum.Font.SourceSansBold
 Hop.Text = "Hop Servers"
 Hop.TextColor3 = Color3.fromRGB(255, 255, 255)
 Hop.TextSize = 18.000
-Hop.MouseButton1Down::Connect(
+Hop.MouseButton1Down:Connect(
     function()
         while wait() and uwu and uwu.Character do
             find_target()
         end
     end
 )
-
 UICorner_15.Parent = Hop
 
 if lp.PlayerGui.Main:FindFirstChild("ChooseTeam") then
