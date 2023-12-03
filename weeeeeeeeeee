@@ -244,6 +244,20 @@ Time.Font = Enum.Font.SourceSansBold
 Time.Text = "Time : 0H 0M 0S"
 Time.TextColor3 = Color3.fromRGB(0, 0, 0)
 Time.TextSize = 14.000
+function UpdateTime()
+    local GameTime = math.floor(workspace.DistributedGameTime+0.5)
+    local Hour = math.floor(GameTime/(60^2))%24
+    local Minute = math.floor(GameTime/(60^1))%60
+    local Second = math.floor(GameTime/(60^0))%60
+    Converted["_Time :"].Text = ..Hour.."Hours : "..Minute.." Minute : "..Second.." Second : "
+    end
+    spawn(function()
+    while task.wait() do
+    pcall(function()
+    UpdateTime()
+    end)
+    end
+    end)
 
 UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
 UIStroke_2.Parent = Time
@@ -260,6 +274,13 @@ TextLabel_2.Font = Enum.Font.SourceSans
 TextLabel_2.Text = "Your Bounty :"
 TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel_2.TextSize = 14.000
+spawn(function()
+    while wait() do
+        pcall(function()
+            TextLabel_2.Text = "Your Bounty :".." "..game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
+        end)
+    end
+end)
 
 UICorner_7.Parent = TextLabel_2
 
