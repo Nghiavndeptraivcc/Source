@@ -190,9 +190,6 @@ Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0.24401474, 0, 0.140562251, 0)
 Frame.Size = UDim2.new(0, 340, 0, 373)
-Frame.Draggable = true
-Frame.Active = true
-Frame.Visible = true
 
 UICorner.Parent = Frame
 
@@ -450,7 +447,7 @@ Hop.TextSize = 18.000
 Hop.MouseButton1Down:Connect(
     function()
         while wait() and uwu and uwu.Character do
-            HopServer()
+            HopServer(bO)
         end
     end
 )
@@ -893,7 +890,7 @@ function find_target()
         end
     end
     if not uwu then
-        return HopServer()
+        return Hop()
     end
     noti("Auto Bounty", tostring(uwu))
     -- if not uwu then return end
