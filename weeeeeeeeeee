@@ -75,6 +75,9 @@ getgenv().Setting = {
     }
 }
 
+spawn(function()
+    while wait() do
+        if 
 
 game:GetService("RunService"):Set3dRenderingEnabled(not Setting.Misc.WhiteScreen)
 
@@ -632,82 +635,75 @@ function check11()
         (string.find(string.lower(game:GetService("Players").LocalPlayer.PlayerGui.Main.InCombat.Text), "risk"))
 end
 
-function to(vg1)
-    if sexroblox then
-        sexroblox:Cancel()
-    end
-    --print("ncall")
-    if olfdvg and q1(olfdvg, vg1) > 1000 then
-      
-        return
-    end
-    if not vg1 then
-        return
-    end
-    --  print("continue ")
-    vg2 = CFrame.new(vg1.X, vg1.Y, vg1.Z)
-    game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
-    game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
-
-    for a, b in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-        if b:IsA "BasePart" then
-            b.CanCollide = false
+function to(Pos)
+    pcall(function()
+        if lp.Character:FindFirstChild("HumanoidRootPart") and lp.Character:FindFirstChild("Humanoid").Health > 0 then
+            Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if not game.Players.LocalPlayer.Character.PrimaryPart:FindFirstChild("Hold") then
+                local Hold = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.PrimaryPart)
+                Hold.Name = "Hold"
+                Hold.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                Hold.Velocity = Vector3.new(0, 0, 0)
+            end
+            for a, b in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if b:IsA"BasePart" then
+                    b.CanCollide = false
+                end
+            end
+            if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+                game.Players.LocalPlayer.Character.Humanoid.Sit = false
+            end
+            if Distance < 250 then
+                Speed = 400
+            elseif Distance < 1000 then
+                Speed = 375
+            elseif Distance >= 1000 then
+                Speed = 350
+            end
+            pcall(function()
+                tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance / Speed, Enum.EasingStyle.Linear),{CFrame = Pos})
+                tween:Play()
+            end)
+            if not stopbypass and not hide and usebypass then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.InCombat.Visible then
+                    if not string.find(string.lower(game:GetService("Players").LocalPlayer.PlayerGui.Main.InCombat.Text), "risk") then
+                        bypass(Pos)
+                    else
+                        dist = math.huge
+                        is = nil
+                        for i , v in pairs(island) do
+                            if (Pos.Position-v.Position).magnitude < dist then
+                                is = v 
+                                dist = (Pos.Position-v.Position).magnitude 
+                            end
+                        end 
+                        if is == nil then return; end
+                        if not hide and usebypass and (lp.Character.Head.Position-Pos.Position).magnitude > distbyp then 
+                            if (lp.Character.Head.Position-Pos.Position).magnitude > (is.Position-Pos.Position).magnitude then
+                                if tween then
+                                    tween:Destroy()
+                                end
+                                if (is.X == 61163.8515625 and is.Y ==11.6796875 and is.Z == 1819.7841796875) or is == CFrame.new(-12471.169921875 + 50, 374.94024658203, -7551.677734375) or is == CFrame.new(-5085.23681640625 + 50, 316.5072021484375, -3156.202880859375) or is == CFrame.new(5749.7861328125 + 50, 611.9736938476562, -276.2497863769531) then
+                                    if tween then
+                                    tween:Cancel()
+                                    end
+                                    repeat task.wait()
+                                        lp.Character.HumanoidRootPart.CFrame = is  
+                                    until lp.Character.PrimaryPart.CFrame == is   
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+                                end
+                            end
+                        end
+                    end
+                else
+                    bypass(Pos)
+                end
+            end
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X, Pos.Y, game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
         end
-    end
-    if not game.Players.LocalPlayer.Character.Head:FindFirstChild "eltrul" then
-        local ngu = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.Head)
-        ngu.Name = "eltrul"
-        ngu.MaxForce = Vector3.new(0, math.huge, 0)
-        ngu.Velocity = Vector3.new(0, 0, 0)
-    end
-    vg3 = getPortal(vg2)
-    vg9 = getSpawn(vg2)
-    for mm = 0, 3, 1 do
-        if getSpawn(vg2) ~= vg9 then
-            return
-        end
-    end
-
-    vg5 = game.Players.LocalPlayer.Character.HumanoidRootPart
-    vg4 = vg5.CFrame
-    vg7 = q1(vg4, vg2)
-    if vg9 then
-        vg10 = q1(vg9, vg2)
-        if
-            Setting.Misc.BypassTP and not check11() and vg10 < vg7 and vg7 > 3600 and q1(vg4, vg9) > 500 and
-                vg10 < (q1(vg3, vg2) + 800)
-         then
-            return grgrgrgrg(vg9)
-        end
-    end
-
-    if vg7 > q1(vg3, vg2) and vg7 > 300 then
-        --print("request")
-        return request(vg3)
-    end
-    if vg7 < 220 then
-        vg5.CFrame = vg2
-        --    print("set")
-        return
-    end
-    if q1(vg2) > 250 and Setting.Misc["Silent Mode"] then
-        vg2 = vg2 + Vector3.new(0, 350, 0)
-    end
-
-    
-    safe_cp(lp).CFrame = CFrame.new(vg4.X, vg2.Y, vg4.Z)
-
-    vg6 = vg7 / 350
-    sexroblox =
-        game:GetService("TweenService"):Create(
-        game.Players.LocalPlayer.Character.HumanoidRootPart,
-        TweenInfo.new(vg6, Enum.EasingStyle.Linear),
-        {CFrame = vg2}
-    )
-
-    sexroblox:Play()
-    -- print("tween")
+    end)
 end
+
 
 function q1(I, II)
     if not II then
@@ -1263,7 +1259,6 @@ old =
                 uwu.Character and
                 uwu.Character:FindFirstChild("Head")
          then
-           print("aim")
             local a2 = workspace.CurrentCamera:WorldToScreenPoint(uwu.Character.Head.Position)
             return a2
         end
