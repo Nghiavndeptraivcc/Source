@@ -277,11 +277,12 @@ SkipPlayerButton.Font = Enum.Font.ArialBold
 SkipPlayerButton.Text = "Skip Players"
 SkipPlayerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 SkipPlayerButton.TextSize = 18.000
+SkipPlayerButton.MouseButton1Click:Connect(find_target)
 SkipPlayerButton.MouseButton1Click:Connect(
     function()
-        NextPlayers = true
-        wait(0.5)
-        NextPlayers = false
+        while wait() and uwu and uwu.Character do
+            find_target()
+        end
     end
 )
 
@@ -388,15 +389,6 @@ MainStroke.Color = Color3.fromRGB(210, 210, 210)
 MainStroke.Name = "MainStroke"
 MainStroke.Parent = Main
 
-SkipPlayer.MouseButton1Down:Connect(find_target)
-SkipPlayer.MouseButton1Down:Connect(
-    function()
-        while wait() and uwu and uwu.Character do
-            find_target()
-        end
-    end
-)
-
 if lp.PlayerGui.Main:FindFirstChild("ChooseTeam") then
     for i, v in pairs(
         getconnections(
@@ -417,93 +409,9 @@ function safe_cp(p)
     --p.Character:WaitForChild("Head")
 end
 
-pathfile = "Celestial/Blox Fruit/Auto Bounty"
-pathfile2 = "Celestial/Blox Fruit/Auto Bounty/" .. lp.Name .. ".json"
-pathfile3 = "Celestial/Blox Fruit/Auto Bounty/Themes"
-function deploy()
-    if not isfolder(pathfile) then
-        makefolder(pathfile)
-    end
-    if not isfolder(pathfile3) then
-        makefolder(pathfile3)
-    end
-    if not isfile(pathfile2) then
-        writefile(pathfile2, "{}")
-    end
-    celes = HttpService:JSONDecode(readfile(pathfile2))
-    celes2 = HttpService:JSONDecode(readfile(pathfile2))
-end
-deploy()
-
-if not celes["Client_Eslaped"] then
-    celes = {
-        Client_Eslaped = 0,
-        Total_Earned = 0
-    }
-end
-celes2 = {
-    Client_Eslaped = celes.Client_Eslaped,
-    Total_Earned = celes.Total_Earned
-}
-
-function disp_time(time)
-    time = tonumber(time)
-    if not time then
-        return "[err]"
-    end
-    local days = math.floor(time / 86400)
-    local hours = math.floor(math.fmod(time, 86400) / 3600)
-    local minutes = math.floor(math.fmod(time, 3600) / 60)
-    local seconds = math.floor(math.fmod(time, 60))
-    return (days .. "day, " .. hours .. "hrs, " .. minutes .. "min, " .. seconds .. "s")
-end
-
-function save()
-    a999 = celes2.Total_Earned
-    celes.Total_Earned = a999 + tonumber(lp.leaderstats["Bounty/Honor"].Value - oldbty2)
-    celes.Client_Eslaped = celes2.Client_Eslaped + (os.time() - a000000009)
-
-    EarnedLabel.Text = [[Total Earned: ]] .. celes.Total_Earned
-    TimeElapsedLabel.Text = [[Client Time Eslaped: ]] .. disp_time(celes.Client_Eslaped)
-    local a0 = HttpService:JSONEncode(celes)
-    writefile(pathfile2, a0)
-end
-
 function noti(a, b, c)
     print("[System]", a, b)
 end
-
-local bM = {}
-
-local HttpService = game:GetService("HttpService")
-local bN = "ServerCache"
-function SaveSettings2()
-    local HttpService = game:GetService("HttpService")
-    if not isfolder("Night Hub Bounty/Cache/") then
-        makefolder("Night Hub Bounty/Cache/")
-    end
-    writefile("Night Hub Bounty/Cache/" .. bN, HttpService:JSONEncode(bM))
-end
-function ReadSetting2()
-    local s, o =
-        pcall(
-        function()
-            local HttpService = game:GetService("HttpService")
-            Hub = game:GetService("HttpService")
-            if not isfolder("Night Hub Bounty/Cache/") then
-                makefolder("Night Hub Bounty/Cache/")
-            end
-            return HttpService:JSONDecode(readfile("Night Hub Bounty/Cache/" .. bN))
-        end
-    )
-    if s then
-        return o
-    else
-        SaveSettings2()
-        return ReadSetting2()
-    end
-end
-bM = ReadSetting2()
 
 function Hop()
     local PlaceID = game.PlaceId
