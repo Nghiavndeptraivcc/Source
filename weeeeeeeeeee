@@ -75,9 +75,18 @@ getgenv().Setting = {
     }
 }
 
+_G.Buso = true
 spawn(function()
     while wait() do
-        if 
+    pcall(function()
+    if _G.Buso then
+    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+    end
+    end
+    end)
+    end
+    end)
 
 game:GetService("RunService"):Set3dRenderingEnabled(not Setting.Misc.WhiteScreen)
 
