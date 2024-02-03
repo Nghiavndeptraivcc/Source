@@ -864,3 +864,4 @@ local Battocv4 = Tabs.G:AddToggle("Battocv4", {Title = "Auto Turn V4", Default =
             end
         end
     end)
+end
