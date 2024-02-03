@@ -647,11 +647,12 @@ function Tween(Pos)
         end
     end)
 end
-function EquipTool(Succac)
-    if game.Players.Localplayer.Backpack:FindFirstChild(Succac) then
-        local Succacx2 = game.Players.Localplayer.Backpack:FindFirstChild(Succac)
+
+function EquipTool(Toolse)
+    local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Toolse)
+    if tool then
         wait(0.5)
-        game.Players.LocalPlayer.Character.Humanoid:EquipTool(Succacx2)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
     end
 end
 
