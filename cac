@@ -671,6 +671,7 @@ function Taixiu(Pos)
         wait(0.5)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+        game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible = false
     until (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
 end
 
@@ -723,7 +724,9 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
--- nhớ thêm do
+local Options = Fluent.Options
+
+do
 
 Fluent:Notify({
     Title = "Night Hub",
@@ -778,8 +781,8 @@ Tabs.I:AddButton({
 
 local WP = Tabs.G:AddSection("Select Weapons")
 
-local SelectWP = Tabs.Main:AddDropdown("Dropdown", {
-    Title = "Dropdown",
+local SelectWP = Tabs.G:AddDropdown("Select Weapons", {
+    Title = "Select Weapons",
     Values = {"Melee", "Sword"},
     Multi = false,
     Default = 1,
@@ -790,3 +793,74 @@ SelectWP:SetValue("Melee")
 SelectWP:OnChanged(function(Value)
     SelectWP = Value
 end)
+
+local FarmmingSettings = Tabs.G:AddSection("Farmming Settings")
+
+local Stats = Tabs.G:AddDropdown("Select Stats To Add", {
+    Title = "Select Stats To Add",
+    Values = {"Melee", "Defense", "Sword", "Gun", "Devil Fruit"},
+    Multi = false,
+    Default = 1,
+})
+
+Stats:SetValue("Melee")
+
+Stats:OnChanged(function(Value)
+    _G.Stats = Value
+end)
+
+local Battocv4 = Tabs.G:AddToggle("Battocv4", {Title = "Auto Turn V4", Default = false })
+
+    Battocv4:OnChanged(function(Value)
+        _G.LevelFarm = Value
+    end)
+
+    Options.Battocv4:SetValue(false)
+
+    spawn(function()
+        while task.wait() do
+            if _G.LevelFarm then
+                pcall(function()
+                    Checknhiemvu()
+                    if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                        if BypassTP then
+                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMob.Position).Magnitude > 2000 then
+                                Taixiu(CFrameMob)
+                            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMob.Position).Magnitude < 2000 then
+                                Tween(CFrameQuest)
+                            end
+                        else
+                            Tween(CFrameQuest)
+                        end
+                        if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
+                        end
+                    elseif string.find(questTitle, NameMob) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                        for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Name == Mob then
+                                repeat
+                                    task.wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.CanCollide = false
+                                    PosMon = v.HumanoidRootPart.CFrame
+                                    BringMob = true
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                            end
+                        end
+                        Tween(CFrameMon)
+                        BringMob = false
+                        if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        end
+                    end
+                end)
+            end
+        end
+    end)
