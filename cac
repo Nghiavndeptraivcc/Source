@@ -628,28 +628,25 @@ function Checknhiemvu()
     end
 end
 
-function Tween(Diadiem)
-    Memaybeo = (Diadiem.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    Speed = Memaybeo >= 1 and 300 or 1
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+function Tween(Pos)
+    local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if game.Players.LocalPlayer.Character.Humanoid.Sit and not _G.KillShark and not _G.KillPiranha and not _G.KillTerrorShark and not _G.KillFishCrew then
         game.Players.LocalPlayer.Character.Humanoid.Sit = false
     end
     pcall(function()
-        Bay = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Memaybeo/Speed, Enum.EasingStyle.Linear) {CFrame = Diadiem})
+        local tween = game:GetService("TweenService"):Create(
+            game.Players.LocalPlayer.Character.HumanoidRootPart,
+            TweenInfo.new(Distance/325, Enum.EasingStyle.Linear),
+            {CFrame = Pos}
+        )
+        tween:Play()
+        if Distance <= 250 or _G.StopTween then
+            tween:Cancel()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+            NoCLip = false
+        end
     end)
-    Bay:Play()
-    NoCLip = true
-    wait(Memaybeo/Speed)
-    if Distance <= 250 then
-        Bay:Cancel()
-        game.Player.LocalPlayer.Character.HumanoidRootPart.CFrame = Diadiem
-    end
-    if Dunglai then
-        Bay:Cancel()
-        NoCLip = false
-    end
 end
-
 function EquipTool(Succac)
     if game.Players.Localplayer.Backpack:FindFirstChild(Succac) then
         local Succacx2 = game.Players.Localplayer.Backpack:FindFirstChild(Succac)
@@ -810,6 +807,16 @@ Stats:OnChanged(function(Value)
 end)
 
 local Battocv4 = Tabs.G:AddToggle("Battocv4", {Title = "Auto Turn V4", Default = false })
+
+    Battocv4:OnChanged(function(Value)
+        _G.TurnV4 = Value
+    end)
+
+    Options.Battocv4:SetValue(false)
+
+    local FarmmingSettings = Tabs.G:AddSection("Farmming Toggle")
+
+local FarmToggle = Tabs.G:AddToggle("FarmToggle", {Title = "Auto Farm", Default = false })
 
     Battocv4:OnChanged(function(Value)
         _G.LevelFarm = Value
