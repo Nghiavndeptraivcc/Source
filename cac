@@ -630,7 +630,7 @@ end
 
 function Tween(Diadiem)
     Memaybeo = (Diadiem.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    Speed = if Memaybeo >= 1 and 300 or 1
+    Speed = Memaybeo >= 1 and 300 or 1
     if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
         game.Players.LocalPlayer.Character.Humanoid.Sit = false
     end
@@ -679,7 +679,7 @@ spawn(function()
         pcall(function()
             if NoCLip then
                 if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
-                    local NoClip = local Noclip = Instance.new("BodyVelocity")
+                    local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
                     Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                     Noclip.MaxForce = Vector3.new(100000,100000,100000)
