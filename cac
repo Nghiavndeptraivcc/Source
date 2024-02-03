@@ -881,7 +881,7 @@ local FarmToggle = Tabs.G:AddToggle("FarmToggle", {Title = "Auto Farm", Default 
                                 until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
                             end
                         end
-                        Tween(CFrameMon)
+                        Tween(CFrameMob)
                         BringMob = false
                         if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
                             Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
