@@ -796,7 +796,7 @@ end)
 
 local FarmmingSettings = Tabs.G:AddSection("Farmming Settings")
 
-local Stats = Tabs.G:AddDropdown("Select Stats To Add", {
+local Stats = Tabs.G:AddDropdown("Stats", {
     Title = "Select Stats To Add",
     Values = {"Melee", "Defense", "Sword", "Gun", "Devil Fruit"},
     Multi = false,
