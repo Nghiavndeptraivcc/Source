@@ -675,7 +675,7 @@ end
 spawn(function()
     while wait() do
         pcall(function()
-            if NoCLip then
+            if NoCLip == true then
                 if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -693,8 +693,8 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if NoCLip then
-                for i,v in pairs(game.Players.Localplayer.Character:GetDescendants()) do
+            if NoCLip == true then
+                for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
                     end
@@ -818,18 +818,18 @@ local Battocv4 = Tabs.G:AddToggle("Battocv4", {Title = "Auto Turn V4", Default =
 
 local FarmToggle = Tabs.G:AddToggle("FarmToggle", {Title = "Auto Farm", Default = false })
 
-    Battocv4:OnChanged(function(Value)
+    FarmToggle:OnChanged(function(Value)
         _G.LevelFarm = Value
     end)
 
-    Options.Battocv4:SetValue(false)
+    Options.FarmToggle:SetValue(false)
 
     spawn(function()
         while task.wait() do
             if _G.LevelFarm then
                 pcall(function()
                     Checknhiemvu()
-                    if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                    if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                         if BypassTP then
                             if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMob.Position).Magnitude > 2000 then
@@ -843,7 +843,7 @@ local FarmToggle = Tabs.G:AddToggle("FarmToggle", {Title = "Auto Farm", Default 
                         if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
                         end
-                    elseif string.find(questTitle, NameMob) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                    elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
                         for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                             if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Name == Mob then
                                 repeat
