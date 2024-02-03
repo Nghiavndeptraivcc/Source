@@ -1,9 +1,9 @@
 -- No Skid
-if game.PlaceID == 2753915549 then
+if game.PlaceId == 2753915549 then
     taodangosea1 = true
-elseif game.PlaceID == 4442272183 then
+elseif game.PlaceId == 4442272183 then
     taodangosea2 = true
-elseif game.PlaceID == 7449423635 then
+elseif game.PlaceId == 7449423635 then
     taodangosea3 = true
 else
     game.Players.LocalPlayer:Kick("You Are Blacklist :))")
