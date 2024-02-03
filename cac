@@ -675,7 +675,7 @@ end
 spawn(function()
     while wait() do
         pcall(function()
-            if NoCLip == true then
+            if _G.LevelFarm or NoCLip == true then
                 if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -693,7 +693,7 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if NoCLip == true then
+            if _G.LevelFarm or NoCLip == true then
                 for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -789,6 +789,26 @@ SelectWP:SetValue("Melee")
 
 SelectWP:OnChanged(function(Value)
     SelectWP = Value
+end)
+
+task.spawn(function()
+    while wait() do
+        pcall(function()
+            if SelectWP == "Melee" then
+                for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Melee" and game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                        SelectWP = v.Name
+                    end
+                end
+            elseif SelectWP == "Sword" then
+                for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Sword" and game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                        SelectWP = v.Name
+                    end
+                end
+            end
+        end)
+    end
 end)
 
 local FarmmingSettings = Tabs.G:AddSection("Farmming Settings")
