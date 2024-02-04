@@ -907,8 +907,8 @@ local SettingsToggle = Tabs.S:AddSection("Settings")
 local FastAttack = Tabs.S:AddToggle("FastAttack", {Title = "FastAttack", Default = true })
 
 FastAttack:OnChanged(function(Value)
-        _G.FastAttackOld = Value
-    end)
+    _G.FastAttackOld = Value
+end)
 
 Options.FastAttack:SetValue(true)
 
@@ -946,16 +946,16 @@ spawn(function()
     end)
 end)
 
-local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
+local FastDelay = Tabs.FastDelay:AddDropdown("Dropdown", {
     Title = "Dropdown",
     Values = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
     Multi = false,
     Default = 1,
 })
 
-Dropdown:SetValue("0.175")
+FastDelay:SetValue("0.175")
 
-Dropdown:OnChanged(function(Value)
+FastDelay:OnChanged(function(Value)
     _G.FastAttackDelay = Value
 end)
 
@@ -1034,7 +1034,6 @@ spawn(function()
     end
 end)
 
-
 local AutoBuso = Tabs.AutoBuso:AddToggle("AutoBuso", {Title = "Auto Buso", Default = true })
 
 AutoBuso:OnChanged(function(Value)
@@ -1054,3 +1053,4 @@ spawn(function()
         end)
     end
 end)
+end
