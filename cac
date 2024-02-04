@@ -1065,7 +1065,7 @@ spawn(function()
                             else
                                 if BypassTP then
                                     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosCake.Position).Magnitude > 2000 then
-                                        TaiXiu(PosCake)
+                                        Taixiu(PosCake)
                                     elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosCake.Position).Magnitude < 2000 then
                                         Tween(PosCake)
                                     end
@@ -1117,7 +1117,7 @@ spawn(function()
             pcall(function()
                 if BypassTP then
                     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosBone.Position).Magnitude > 2000 then
-                        BP(PosBone)
+                        Taixiu(PosBone)
                     elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosBone.Position).Magnitude < 2000 then
                         Tween(PosBone)
                     end
