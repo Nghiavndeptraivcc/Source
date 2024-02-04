@@ -967,7 +967,7 @@ AutoSecondSea:OnChanged(function(Value)
     _G.AutoSi2 = Value
 end)
 
-Options.FastAttack:SetValue(false)
+Options.AutoSecondSea:SetValue(false)
 
 spawn(function()
     while wait() do
