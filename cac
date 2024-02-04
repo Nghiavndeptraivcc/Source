@@ -713,27 +713,27 @@ end)
 -- Open & Close Ui :
 
 local ScreenGui = Instance.new("ScreenGui")
-local ImageLabel = Instance.new("ImageLabel")
+local ImageButton = Instance.new("ImageButton")
 local UICorner = Instance.new("UICorner")
 local UIStroke = Instance.new("UIStroke")
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-ImageLabel.Parent = ScreenGui
-ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageLabel.BorderSizePixel = 0
-ImageLabel.Position = UDim2.new(0.0775730312, 0, 0.131367147, 0)
-ImageLabel.Size = UDim2.new(0, 60, 0, 60)
-ImageLabel.Image = "rbxassetid://15541504459"
-ImageLabel.MouseButton1Click:Connect(function()
+ImageButton.Parent = ScreenGui
+ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.100739375, 0, 0.121457487, 0)
+ImageButton.Size = UDim2.new(0, 60, 0, 60)
+ImageButton.Image = "rbxassetid://16237266234"
+ImageButton.MouseButton1Click:Connect(function()
     game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
 end)
 
-UICorner.Parent = ImageLabel
+UICorner.Parent = ImageButton
 
 UIStroke.Color = Color3.fromRGB(255, 255, 255)
-UIStroke.Parent = ImageLabel
+UIStroke.Parent = ImageButton
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
