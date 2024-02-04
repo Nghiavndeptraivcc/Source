@@ -768,6 +768,8 @@ local Tabs = {
     G = Window:AddTab({ Title = "General", Icon = "home" }),
     IQ = Window:AddTab({ Title = "Item and Quest", Icon = "swords" }),
     LC = Window:AddTab({ Title = "LocalPlayer", Icon = "user" }),
+    ST = Window:AddTab({ Title = "Status and Servers", Icon = "bar-chart-4" }),
+    ST = Window:AddTab({ Title = "Devil Fruit and Raid", Icon = "bar-chart-4" }),
     UR = Window:AddTab({ Title = "Upgrate Race", Icon = "person-standing" }),
     SE = Window:AddTab({ Title = "Sea Event", Icon = "waves" }),
     S = Window:AddTab({ Title = "Settings", Icon = "settings" })
@@ -1111,6 +1113,7 @@ AutoBoneToggle:OnChanged(function(Value)
 
 Options.AutoBoneToggle:SetValue(false)
 
+local PosBone = CFrame.new(-9510.13184, 272.048004, 6251.6001)
 spawn(function()
     while task.wait() do
         if _G.AutoBone then
