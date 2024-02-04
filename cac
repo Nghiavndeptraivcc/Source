@@ -1173,7 +1173,7 @@ end)
 
 local OthersToggle = Tabs.G:AddSection("Others Toggle")
 
-local AutoFactory = Tabs.IQ:AddToggle("AutoFactory", {Title = "Auto Factory", Default = false })
+local AutoFactory = Tabs.G:AddToggle("AutoFactory", {Title = "Auto Factory", Default = false })
 
 AutoFactory:OnChanged(function(Value)
     _G.AutoFactory = Value
@@ -1209,7 +1209,7 @@ spawn(function()
     end
 end)
 
-local AutoElite = Tabs.IQ:AddToggle("AutoElite", {Title = "Auto Elite", Default = false })
+local AutoElite = Tabs.G:AddToggle("AutoElite", {Title = "Auto Elite", Default = false })
 
 AutoElite:OnChanged(function(Value)
     _G.AutoElite = Value
@@ -1260,7 +1260,7 @@ spawn(function()
     end
 end)
 
-local AutoPirates = Tabs.IQ:AddToggle("AutoPirates", {Title = "Auto Pirates", Default = false })
+local AutoPirates = Tabs.G:AddToggle("AutoPirates", {Title = "Auto Pirates", Default = false })
 
 AutoPirates:OnChanged(function(Value)
     _G.AutoPirates = Value
