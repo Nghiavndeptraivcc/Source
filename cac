@@ -834,6 +834,53 @@ Stats:OnChanged(function(Value)
     _G.Stats = Value
 end)
 
+spawn(function()
+    while wait() do
+        if game.Players.localPlayer.Data.Points.Value >= 1 then
+            if _G.Stats == "Melee" then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Melee",
+                    [3] = 1
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+            if _G.Stats == "Defense" then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Defense",
+                    [3] = 1
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+            if _G.Stats == "Sword" then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Sword",
+                    [3] = 1
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+            if _G.Stats == "Gun" then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Gun",
+                    [3] = 1
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+            if _G.Stats == "Blox Fruit" then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Blox Fruit",
+                    [3] = 1
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+end)
+
 local Battocv4 = Tabs.G:AddToggle("Battocv4", {Title = "Auto Turn V4", Default = false })
 
     Battocv4:OnChanged(function(Value)
@@ -841,6 +888,18 @@ local Battocv4 = Tabs.G:AddToggle("Battocv4", {Title = "Auto Turn V4", Default =
     end)
 
     Options.Battocv4:SetValue(false)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.TurnV4 then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
+                wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
+            end
+        end)
+    end
+end)
 
     local FarmmingSettings = Tabs.G:AddSection("Farmming Toggle")
 
@@ -899,7 +958,57 @@ local FarmToggle = Tabs.G:AddToggle("FarmToggle", {Title = "Auto Farm", Default 
             end
         end
     end)
-    
+
+-- Item and Quest :
+
+local AutoSecondSea = Tabs.IQ:AddToggle("AutoSecondSea", {Title = "Auto Sea 2", Default = false })
+
+AutoSecondSea:OnChanged(function(Value)
+    _G.AutoSi2 = Value
+end)
+
+Options.FastAttack:SetValue(false)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoSi2 then
+                if game.Players.LocalPlayer.Data.Level.Value >= 700 and taodangosea1 then
+                    if game.Workspace.Map.Ice.Door.CanCollide == true and game.Workspace.Map.Ice.Door.Transparency == 0 then
+                        Tween(CFrame.new(4855.90967, 5.9948287, 718.399536))
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
+                        wait(0.5)
+                        EquipTool("Key")
+                        wait(0.5)
+                        Tween(CFrame.new(1347.7124, 37.3751602, -1325.6488))
+                    elseif game.Workspace.Map.Ice.Door.CanCollide == false and game.Workspace.Map.Ice.Door.Transparency == 1 then
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Ice Admiral") then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "Ice Admiral" and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoSi2 then
+                                    repeat task.wait()
+                                        EnableBuso()
+                                        EquipTool(SelectWP)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.CanCollide = false
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    until not _G.AutoSi2 or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                                end
+                            end
+                        else
+                            Tween(CFrame.new(1347.7124, 37.3751602, -1325.6488))
+                        end
+                    else
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+                    end
+                end
+            end
+        end)
+    end
+end)
+                                        
 -- Settings Tab :
 
 local SettingsToggle = Tabs.S:AddSection("Settings")
@@ -1034,7 +1143,7 @@ spawn(function()
     end
 end)
 
-local AutoBuso = Tabs.AutoBuso:AddToggle("AutoBuso", {Title = "Auto Buso", Default = true })
+local AutoBuso = Tabs.S:AddToggle("AutoBuso", {Title = "Auto Buso", Default = true })
 
 AutoBuso:OnChanged(function(Value)
     _G.TurnBuso = Value
