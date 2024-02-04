@@ -726,7 +726,7 @@ ImageLabel.BorderSizePixel = 0
 ImageLabel.Position = UDim2.new(0.0775730312, 0, 0.131367147, 0)
 ImageLabel.Size = UDim2.new(0, 60, 0, 60)
 ImageLabel.Image = "rbxassetid://15541504459"
-ImageLabel.MouseButton1Down:Connect(function()
+ImageLabel.MouseButton1Click:Connect(function()
     game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
 end)
 
