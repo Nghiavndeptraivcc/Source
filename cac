@@ -918,14 +918,14 @@ v = debug.getupvalues(CombatFrameworkR)[2]
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
         if _G.FastAttackOld then
-            if typeof(y) == "table" then
+            if typeof(v) == "table" then
                 pcall(function()
                     CameraShaker:Stop()
                     v.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
                     v.activeController.timeToNextAttack = 0
                     v.activeController.hitboxMagnitude = 60
                     v.activeController.active = false
-                    y.activeController.timeToNextBlock = 0
+                    v.activeController.timeToNextBlock = 0
                     v.activeController.focusStart = 1655503339.0980349
                     v.activeController.increment = 1
                     v.activeController.blocking = false
@@ -946,7 +946,7 @@ spawn(function()
     end)
 end)
 
-local FastDelay = Tabs.FastDelay:AddDropdown("Dropdown", {
+local FastDelay = Tabs.S:AddDropdown("FastDelay", {
     Title = "Dropdown",
     Values = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
     Multi = false,
