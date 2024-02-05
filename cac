@@ -1273,6 +1273,7 @@ end)
 
 Options.AutoPirates:SetValue(false)
 
+local PosRaid = CFrame.new(-5418.75488, 415.658325, -2812.33228)
 spawn(function()
     while wait() do
         if _G.AutoPirates then
