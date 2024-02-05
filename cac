@@ -1425,10 +1425,6 @@ local JobId = Tabs.ST:AddInput("JobId", {
     end
 })
 
-JobId:OnChanged(function()
-    _G.ImPutJobId = Value
-end)
-
 Tabs.ST:AddButton({
     Title = "Join Job Id",
     Description = "Go to the job id you entered in the box above",
