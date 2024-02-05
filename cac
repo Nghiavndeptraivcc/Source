@@ -1360,6 +1360,64 @@ spawn(function()
         end)
     end
 end)
+
+-- LocalPlayer Tab :
+
+
+
+-- Status and Servers Tab :
+
+local StatusTab = Tabs.ST:AddSection("Status")
+
+Tabs.ST:AddParagraph({
+    Title = "Status Moon",
+    Content = "Comming Soon."
+})
+
+Tabs.ST:AddParagraph({
+    Title = "Status Elite",
+    Content = "Comming Soon."
+})
+
+Tabs.ST:AddParagraph({
+    Title = "Status Mirage",
+    Content = "Comming Soon."
+})
+
+Tabs.ST:AddParagraph({
+    Title = "Status Frozen Leviathan",
+    Content = "Comming Soon."
+})
+
+Tabs.ST:AddParagraph({
+    Title = "Status Kitsune island",
+    Content = "Comming Soon."
+})
+
+local ServersTab = Tabs.ST:AddSection("Servers")
+
+local JobId = Tabs.ST:AddInput("JobId", {
+    Title = "Put Job Id Here",
+    Default = "",
+    Placeholder = "",
+    Numeric = false,
+    Finished = false,
+    Callback = function(Value)
+        _G.ImPutJobId = Value
+    end
+})
+
+JobId:OnChanged(function()
+    _G.ImPutJobId = Value
+end)
+
+Tabs.ST:AddButton({
+    Title = "Join Job Id",
+    Description = "Go to the job id you entered in the box above",
+    Callback = function()
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId,_G.ImPutJobId, game.Players.LocalPlayer)
+    end
+})
                                         
 -- Settings Tab :
 
