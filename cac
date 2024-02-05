@@ -1181,6 +1181,34 @@ end)
 
 Options.AutoFactory:SetValue(false)
 
+spawn(function()
+    while wait() do
+        if _G.AutoFactory then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Core") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Core" and v.Humanoid.Health > 0 and v:FindFirstChild("Humanoid") and v.Parent then
+                            repeat task.wait()
+                                EnableBuso()
+                                EquipTool(SelectWP)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                Tween(CFrame.new(424.12698364258, 211.16171264648, -427.54049682617))
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                            until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoFactory
+                        end
+                    end
+                else
+                    Tween(CFrame.new(424.12698364258, 211.16171264648, -427.54049682617))
+                end
+            end)
+        end
+    end
+end)
+
 local AutoElite = Tabs.G:AddToggle("AutoElite", {Title = "Auto Elite", Default = false })
 
 AutoElite:OnChanged(function(Value)
