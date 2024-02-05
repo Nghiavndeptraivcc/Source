@@ -9,6 +9,23 @@ else
     game.Players.LocalPlayer:Kick("You Are Blacklist :))")
 end
 
+-- Join Teams :
+
+if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    for i, v in pairs(
+        getconnections(
+            game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated
+        )
+    ) do
+        for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+            b:Fire()
+        end
+        v.Function()
+    end
+end
+
+-- cac :
+
 function Checknhiemvu()
     YourLevel = game: GetService("Players").LocalPlayer.Data.Level.Value
     if taodangosea1 then
