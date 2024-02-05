@@ -1556,7 +1556,7 @@ local SelectSea = Tabs.LC:AddDropdown("SelectSea", {
     Default = 1,
 })
 
-Dropdown:OnChanged(function(Value)
+SelectSea:OnChanged(function(Value)
     _G.SelectSea = Value
 end)
 
