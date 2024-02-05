@@ -769,7 +769,7 @@ local Tabs = {
     IQ = Window:AddTab({ Title = "Item and Quest", Icon = "swords" }),
     LC = Window:AddTab({ Title = "LocalPlayer", Icon = "user" }),
     ST = Window:AddTab({ Title = "Status and Servers", Icon = "bar-chart-4" }),
-    ST = Window:AddTab({ Title = "Devil Fruit and Raid", Icon = "bar-chart-4" }),
+    ST = Window:AddTab({ Title = "Devil Fruit and Raid", Icon = "apple" }),
     UR = Window:AddTab({ Title = "Upgrate Race", Icon = "person-standing" }),
     SE = Window:AddTab({ Title = "Sea Event", Icon = "waves" }),
     S = Window:AddTab({ Title = "Settings", Icon = "settings" })
@@ -1273,6 +1273,41 @@ end)
 
 Options.AutoPirates:SetValue(false)
 
+spawn(function()
+    while wait() do
+        if _G.AutoPirates then
+            pcall(function()
+                if (PosRaid.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if _G.AutoPirates and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                            repeat task.wait()
+                                EnableBuso()
+                                EquipTool(SelectWP)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                            until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoPirates
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (PosRaid.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-5005.29834, 314.858734, -3025.00659))
+                        elseif (PosRaid.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(PosRaid)
+                        end
+                    else
+                        Tween(PosRaid)
+                    end
+                end
+            end)
+        end
+    end
+end)
 -- Item and Quest :
 
 local AutoSecondSea = Tabs.IQ:AddToggle("AutoSecondSea", {Title = "Auto Sea 2", Default = false })
