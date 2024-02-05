@@ -695,6 +695,16 @@ function Taixiu(Pos)
     until (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
 end
 
+function teleporttosea()
+    if _G.SelectSea == "1" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
+    elseif _G.SelectSea == "2" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+    elseif _G.SelectSea == "3" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+    end
+end
+
 spawn(function()
     while wait() do
         pcall(function()
@@ -1200,7 +1210,7 @@ Options.AutoFactory:SetValue(false)
 
 spawn(function()
     while wait() do
-        if _G.AutoFactory then
+        if _G.AutoFactory and taodangosea2 then
             pcall(function()
                 if game:GetService("Workspace").Enemies:FindFirstChild("Core") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -1236,7 +1246,7 @@ Options.AutoElite:SetValue(false)
 
 spawn(function()
     while wait() do
-        if _G.AutoElite then
+        if _G.AutoElite and taodangosea3 then
             pcall(function()
                 if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
@@ -1293,7 +1303,7 @@ Options.AutoPirates:SetValue(false)
 local PosRaid = CFrame.new(-5418.75488, 415.658325, -2812.33228)
 spawn(function()
     while wait() do
-        if _G.AutoPirates then
+        if _G.AutoPirates and taodangosea3 then
             pcall(function()
                 if (PosRaid.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -1340,7 +1350,7 @@ Options.AutoSaberToggle:SetValue(false)
 local PosJungle = CFrame.new(-1612.55884, 36.9774132, 148.719543)
 spawn(function()
     while wait() do
-        if _G.AutoSaber and game.Players.LocalPlayer.Data.Level.Value >= 200 then
+        if _G.AutoSaber and game.Players.LocalPlayer.Data.Level.Value >= 200 and taodangosea1 then
             pcall(function()
                 if game:GetService("Workspace").Map.Jungle.Final.Part.Transparency == 0 then
                     if game:GetService("Workspace").Map.Jungle.QuestPlates.Door.Transparency == 0 then
@@ -1454,7 +1464,7 @@ Options.AutoPoleToggle:SetValue(false)
 
 spawn(function()
     while wait() do
-        if _G.AutoPole then
+        if _G.AutoPole and taodangosea1 then
             pcall(function()
                 if game:GetService("Workspace").Enemies:FindFirstChild("Thunder God") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -1498,7 +1508,7 @@ Options.AutoSecondSea:SetValue(false)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.AutoSi2 then
+            if _G.AutoSi2 and taodangosea1 then
                 if game.Players.LocalPlayer.Data.Level.Value >= 700 and taodangosea1 then
                     if game.Workspace.Map.Ice.Door.CanCollide == true and game.Workspace.Map.Ice.Door.Transparency == 0 then
                         Tween(CFrame.new(4855.90967, 5.9948287, 718.399536))
@@ -1539,8 +1549,31 @@ end)
 
 -- LocalPlayer Tab :
 
+local SelectSea = Tabs.LC:AddDropdown("SelectSea", {
+    Title = "Select Sea To Teleport",
+    Values = {"1", "2", "3"},
+    Multi = false,
+    Default = 1,
+})
 
+Dropdown:OnChanged(function(Value)
+    _G.SelectSea = Value
+end)
 
+Tabs.LC:AddButton({
+    Title = "Teleport To Sea",
+    Description = "Teleport To Travel You Select",
+    Callback = function()
+        Fluent:Notify({
+            Title = "[Night Hub]",
+            Content = "Wait 5 Seconds",
+            SubContent = "Notify", -- Optional
+            Duration = 5
+        })
+        wait(5)
+        teleporttosea()
+    end
+})
 -- Status and Servers Tab :
 
 local Statuscac = Tabs.ST:AddSection("Status")
