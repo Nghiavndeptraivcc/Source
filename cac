@@ -786,7 +786,7 @@ local Tabs = {
     IQ = Window:AddTab({ Title = "Item and Quest", Icon = "swords" }),
     LC = Window:AddTab({ Title = "LocalPlayer", Icon = "user" }),
     ST = Window:AddTab({ Title = "Status and Servers", Icon = "bar-chart-4" }),
-    ST = Window:AddTab({ Title = "Devil Fruit and Raid", Icon = "apple" }),
+    DR = Window:AddTab({ Title = "Devil Fruit and Raid", Icon = "apple" }),
     UR = Window:AddTab({ Title = "Upgrate Race", Icon = "person-standing" }),
     SE = Window:AddTab({ Title = "Sea Event", Icon = "waves" }),
     S = Window:AddTab({ Title = "Settings", Icon = "settings" })
@@ -1326,6 +1326,7 @@ spawn(function()
         end
     end
 end)
+
 -- Item and Quest :
 
 local AutoSecondSea = Tabs.IQ:AddToggle("AutoSecondSea", {Title = "Auto Sea 2", Default = false })
@@ -1384,7 +1385,7 @@ end)
 
 -- Status and Servers Tab :
 
-local StatusTab = Tabs.ST:AddSection("Status")
+local Statuscac = Tabs.ST:AddSection("Status")
 
 Tabs.ST:AddParagraph({
     Title = "Status Moon",
@@ -1411,7 +1412,7 @@ Tabs.ST:AddParagraph({
     Content = "Comming Soon."
 })
 
-local ServersTab = Tabs.ST:AddSection("Servers")
+local Serverscac = Tabs.ST:AddSection("Servers")
 
 local JobId = Tabs.ST:AddInput("JobId", {
     Title = "Put Job Id Here",
