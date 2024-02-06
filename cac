@@ -1817,7 +1817,7 @@ Tabs.DR:AddButton({
     end
 })
 
-local AutoRandomDF = Tabs.S:AddToggle("AutoRandomDF", {Title = "Auto Random Fruit", Default = false })
+local AutoRandomDF = Tabs.DR:AddToggle("AutoRandomDF", {Title = "Auto Random Fruit", Default = false })
 
 AutoRandomDF:OnChanged(function(Value)
     _G.AutoRandomFruit = Value
@@ -1835,7 +1835,7 @@ spawn(function()
     end)
 end)
 
-local TeleportDF = Tabs.S:AddToggle("AutoRandomDF", {Title = "Auto Random Fruit", Default = false })
+local TeleportDF = Tabs.DR:AddToggle("AutoRandomDF", {Title = "Auto Random Fruit", Default = false })
 
 TeleportDF:OnChanged(function(Value)
     _G.TeleportToFruit = Value
