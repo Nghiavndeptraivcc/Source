@@ -1145,7 +1145,7 @@ Options.AutoBoneToggle:SetValue(false)
 local PosBone = CFrame.new(-9510.13184, 272.048004, 6251.6001)
 spawn(function()
     while task.wait() do
-        if _G.AutoBone then
+        if _G.AutoBone and taodangosea3 then
             pcall(function()
                 if BypassTP then
                     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosBone.Position).Magnitude > 2000 then
@@ -1547,6 +1547,100 @@ spawn(function()
     end
 end)
 
+local AutoGhoulRace = Tabs.IQ:AddToggle("AutoGhoulRace", {Title = "Auto Ghoul Race", Default = false })
+
+AutoGhoulRace:OnChanged(function(Value)
+    _G.AutoGhoulRace = Value
+end)
+
+Options.AutoGhoulRace:SetValue(false)
+
+local PosCursedBoss = CFrame.new(913.893311, 187.405502, 33598.7578)
+local PosGhoulRace = CFrame.new(923.748596, 125.529785, 33454.4883)
+spawn(function()
+    while wait() do
+        if _G.AutoGhoulRace then
+            pcall(function()
+                if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hellfire Torch") then
+                    if BypassTP then
+                        if (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                        elseif (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(PosGhoulRace)
+                            wait(0.5)
+                            local a = {
+                                [1] = "Ectoplasm",
+                                [2] = "BuyCheck",
+                                [3] = 4
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                            local a = {
+                                [1] = "Ectoplasm",
+                                [2] = "Change",
+                                [3] = 4
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                        end
+                    else
+                        Tween(PosGhoulRace)
+                        wait(0.5)
+                        local a = {
+                            [1] = "Ectoplasm",
+                            [2] = "BuyCheck",
+                            [3] = 4
+                        }
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                        local a = {
+                            [1] = "Ectoplasm",
+                            [2] = "Change",
+                            [3] = 4
+                        }
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                    end
+                elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hellfire Torch") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Captain") then
+                        for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Cursed Captain" then
+                                if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoGhoulRace then
+                                    repeat task.wait()
+                                        EnableBuso()
+                                        EquipTool(SelectWP)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoGhoulRace == false
+                                end
+                            end
+                        end
+                    else
+                        if BypassTP then
+                            if (PosCursedBoss.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                            elseif (PosCursedBoss.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                                Tween(PosCursedBoss)
+                            end
+                        else
+                            Tween(PosCursedBoss)
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local Auto = Tabs.IQ:AddToggle("AutoSecondSea", {Title = "Auto Sea 2", Default = false })
+
+AutoSecondSea:OnChanged(function(Value)
+    _G.AutoSi2 = Value
+end)
+
+Options.AutoSecondSea:SetValue(false)
+
 -- LocalPlayer Tab :
 
 local SelectSea = Tabs.LC:AddDropdown("SelectSea", {
@@ -1567,10 +1661,17 @@ Tabs.LC:AddButton({
         Fluent:Notify({
             Title = "[Night Hub]",
             Content = "Wait 5 Seconds",
-            SubContent = "Notify", -- Optional
+            SubContent = "Notify Hop Servers", -- Optional
             Duration = 5
         })
-        wait(5)
+        wait(4)
+        Fluent:Notify({
+            Title = "[Night Hub]",
+            Content = "Hop Servers",
+            SubContent = "Notify Hop Servers", -- Optional
+            Duration = 5
+        })
+        wait(1)
         teleporttosea()
     end
 })
