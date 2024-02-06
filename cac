@@ -1835,7 +1835,7 @@ spawn(function()
     end)
 end)
 
-local TeleportDF = Tabs.DR:AddToggle("TeleportDF", {Title = "Auto Random Fruit", Default = false })
+local TeleportDF = Tabs.DR:AddToggle("TeleportDF", {Title = "Teleport To Fruit[Spawn]", Default = false })
 
 TeleportDF:OnChanged(function(Value)
     _G.TeleportToFruit = Value
