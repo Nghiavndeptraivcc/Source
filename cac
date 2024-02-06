@@ -1353,7 +1353,7 @@ spawn(function()
             pcall(function()
                 for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
                     if v.Name:find("Chest") then
-                        if game:GetService("Workspace"):FindFirstChild(v.Name) then
+                        if game:GetService("Workspace"):FindFirstChild(v.Name) and (v.Position - game.Players.LocalPlayer.Character.Positon).Magnitude <= 5000 then
                             Tween(v.CFrame)
                         end
                     end
