@@ -1352,8 +1352,10 @@ spawn(function()
         if _G.AutoChest then
             pcall(function()
                 for i, v in pairs(game:GetService("Worksapce"):GetChildren()) do
-                    if string.find(v.Name, "Chest") then
-                        Tween(v.CFrame)
+                    if v.Name:find("Chest") then
+                        if game:GetService("Workspace"):FindFirstChild(v.Name) then
+                            Tween(v.CFrame)
+                        end
                     end
                 end
             end)
