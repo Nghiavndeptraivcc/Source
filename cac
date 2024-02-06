@@ -1439,7 +1439,7 @@ spawn(function()
             pcall(function()
                 for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
                     if v.Name:find("Chest") then
-                        if game:GetService("Workspace"):FindFirstChild(v.Name) and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Positon).Magnitude <= 5000 then
+                        if game:GetService("Workspace"):FindFirstChild(v.Name) then
                             Tween(v.CFrame)
                         end
                     end
@@ -1774,7 +1774,7 @@ spawn(function()
                 if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
                     for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
                         if v.Name:find("Chest") then
-                            if game:GetService("Workspace"):FindFirstChild(v.Name) and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000 then
+                            if game:GetService("Workspace"):FindFirstChild(v.Name) then
                                 Tween(v.CFrame)
                             end
                         end
