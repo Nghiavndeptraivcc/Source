@@ -1788,6 +1788,24 @@ local StatusMoon Tabs.ST:AddParagraph({
     Content = "Comming Soon."
 })
 
+spawn(function()
+    while wait() do
+        if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
+            StatusMoon:SetDesc("🌕: Full Moon 100%")
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" then
+            StatusMoon:SetDesc("🌖’ : Full Moon 75%")
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
+            StatusMoon:SetDesc("🌗“ : Full Moon 50%")
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
+            StatusMoon:SetDesc("🌘 : Full Moon 25%")
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
+            StatusMoon:SetDesc("🌘: Full Moon 15%")
+        else
+            StatusMoon:SetDesc("Deo co môn")
+        end
+    end
+end)
+
 local StatusElite = Tabs.ST:AddParagraph({
     Title = "Status Elite",
     Content = "Comming Soon."
@@ -1807,6 +1825,31 @@ local StatusKitsune = Tabs.ST:AddParagraph({
     Title = "Status Kitsune island",
     Content = "Comming Soon."
 })
+
+spawn(function()
+    while task.wait() do
+        if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
+            StatusFrozen:SetDesc("Frozen Dimension : ✅ Spawn")
+        else
+            StatusFrozen:SetDesc("Frozen Dimension : ❌ Not Spawn")
+        end
+        if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
+            Statusdao:SetDesc("Mirrage : ✅ Spawn")
+        else
+            Statusdao:SetDesc("Mirrage : ❌ Not Spawn")
+        end
+        if game:GetService("Workspace").Map:FindFirstChild('KitsuneIsland') then
+            StatusKitsune:SetDesc("Kitsune Island : ✅ Spawn")
+        else
+            StatusKitsune:SetDesc("Kitsune Island : ❌ Not Spawn")
+        end
+        if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+            StatusElite:SetDesc("Elite : ✅ Spawn")	
+        else
+            StatusElite:SetDesc("Elite : ❌ Not Spawn")	
+        end
+    end
+end)
 
 local Serverscac = Tabs.ST:AddSection("Servers")
 
