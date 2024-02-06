@@ -1857,7 +1857,7 @@ spawn(function()
     end
 end)
 
-local AutoStoreFruit = Tabs.S:AddToggle("AutoStoreFruit", {Title = "Auto Store Fruit", Default = false })
+local AutoStoreFruit = Tabs.DR:AddToggle("AutoStoreFruit", {Title = "Auto Store Fruit", Default = false })
 
 AutoStoreFruit:OnChanged(function(Value)
     _G.AutoStoreFruit = Value
