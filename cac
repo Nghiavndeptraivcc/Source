@@ -1677,23 +1677,22 @@ spawn(function()
                             if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoDarkbeard then
                                 repeat task.wait()
                                     EnableBuso()
-                                        EquipTool(SelectWP)
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        game:GetService'VirtualUser':CaptureController()
-                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                    until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoGhoulRace == false
-                                end
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoGhoulRace == false
                             end
                         end
-                    else
-                        Tween(CFrame.new(3677.08203125, 62.751937866211, -3144.8332519531))
-                        if game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard") then
-                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                        end
+                    end
+                else
+                    Tween(CFrame.new(3677.08203125, 62.751937866211, -3144.8332519531))
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
             end)
