@@ -705,6 +705,30 @@ function teleporttosea()
     end
 end
 
+function RaceVCheck()
+    local bucu = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Wenlocktoad", "1")
+    local night = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Alchemist", "1")
+    if game.Players.LocalPlayer.Character:FindFirstChild("RaceTransformed") then
+        return game:GetService("Players").LocalPlayer.Data.Race.Value .. " V4"
+    end
+    if bucu == -2 then
+        return game:GetService("Players").LocalPlayer.Data.Race.Value .. " V3"
+    end
+    if night == -2 then
+        return game:GetService("Players").LocalPlayer.Data.Race.Value .. " V2"
+    end
+    return game:GetService("Players").LocalPlayer.Data.Race.Value .. " V1"
+end
+
+function Nhannvtocv3()
+    local cac = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Wenlocktoad", "1")
+    if cac == 0 then
+        game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Wenlocktoad", "2")
+        wait(.1)
+    elseif cac == -1 then
+    end
+end
+
 spawn(function()
     while wait() do
         pcall(function()
@@ -1994,6 +2018,117 @@ spawn(function()
     wait(0.3)
 end
 end)
+
+-- Upgrate Race Tab :
+
+local SettingsToggle = Tabs.UR:AddSection("Race V2 - V3")
+
+local AutoRaceV2 = Tabs.UR:AddToggle("AutoRaceV2", {Title = "Auto Race V2", Default = false })
+
+AutoRaceV23:OnChanged(function(Value)
+    _G.AutoRaceV2 = Value
+end)
+
+Options.AutoRaceV2:SetValue(fakse)
+
+local PosUpgrateV2 = CFrame.new(-2779.83521, 72.9661407, -3574.02002)
+spawn(function()
+    pcall(function()
+        while wait(.1) do
+            if _G.AutoRaceV2 then
+                if not game:GetService("Players").LocalPlayer.Data.Race:FindFirstChild("Evolved") then
+                    if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","1") == 0 then
+                        Tween(PosUpgrateV2)
+                        if (PosUpgrateV2 - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 then
+                            wait(1.3)
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","2")
+                        end
+                    elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","1") == 1 then
+                        pcall(function()
+                            if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 1") and not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Flower 1") then
+                                Tween(game:GetService("Workspace").Flower1.CFrame)
+                            elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 2") and not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Flower 2") then
+                                Tween(game:GetService("Workspace").Flower2.CFrame)
+                            elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 3") and not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Flower 3") then
+                                if game:GetService("Workspace").Enemies:FindFirstChild("Zombie") then
+                                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                        if v.Name == "Zombie" then
+                                            repeat task.wait()
+                                                EnableBuso()
+                                                EquipTool(SelectWP)
+                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                                game:GetService("VirtualUser"):CaptureController()
+                                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                                            until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 3") or not v.Parent or v.Humanoid.Health <= 0 or _G.AutoRaceV2 == false
+                                            StartEvoMagnet = false
+                                        end
+                                    end
+                                else
+                                    Tween(PosUpgrateV2)
+                                end
+                            end
+                        end)
+                    elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","1") == 2 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","3")
+                    end
+                end
+            end
+        end
+    end)
+end)
+
+local AutoRaceV3 = Tabs.UR:AddToggle("AutoRaceV3", {Title = "Auto Race V3", Default = false })
+
+AutoRaceV3:OnChanged(function(Value)
+    _G.AutoRaceV3 = Value
+end)
+
+Options.AutoRaceV3:SetValue(false)
+
+spawn(function()
+    while wait() do
+        if _G.AutoRaceV3 then
+            pcall(function()
+                RaceV = RaceVCheck()
+                if RaceV == "Ghoul V2" then
+                    repeat task.wait()
+                        _G.KillNear = true
+                    until not _G.AutoRaceV3 or not game.Players.LocalPlayer.Data.Race.Value ~= "Ghoul" or string.find(RaceV, "V3")
+                end
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.KillNear then
+            pcall(function()
+                for i, v in pairs(game.Workspace.Characters:GetChildren()) do
+                    if v.Name ~= game.Players.LocalPlayer.Name then
+                        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 5000 then
+                            repeat task.wait()
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 3))
+                                EnableBuso()
+                                EquipTool(SelectWP)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Head.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                Click()
+                                game:GetService("VirtualUser"):CaptureController()
+                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                            until _G.KillNear == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 -- Settings Tab :
 
 local SettingsToggle = Tabs.S:AddSection("Settings")
