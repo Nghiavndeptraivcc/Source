@@ -2082,7 +2082,7 @@ spawn(function()
                 if not game:GetService("Players").LocalPlayer.Data.Race:FindFirstChild("Evolved") then
                     if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","1") == 0 then
                         Tween(PosUpgrateV2)
-                        if (PosUpgrateV2 - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 then
+                        if (PosUpgrateV2.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 then
                             wait(1.3)
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist","2")
                         end
