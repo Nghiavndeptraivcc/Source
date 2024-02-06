@@ -2225,21 +2225,4 @@ BypassTeleport:OnChanged(function(Value)
 end)
 
 Options.BypassTeleport:SetValue(true)
-
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
-
--- Ignore keys that are used by ThemeManager.
--- (we dont want configs to save themes, do we?)
-SaveManager:IgnoreThemeSettings()
-
-SaveManager:SetIgnoreIndexes({})
-
-
-InterfaceManager:SetFolder("Night Hub")
-SaveManager:SetFolder("Night Hub/Blox-Fruit")
-
-InterfaceManager:BuildInterfaceSection(Tabs.S)
-SaveManager:BuildConfigSection(Tabs.S)
-SaveManager:LoadAutoloadConfig()
 end
