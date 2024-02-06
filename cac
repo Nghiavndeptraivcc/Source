@@ -1039,7 +1039,7 @@ spawn(function()
     end
 end)
 
-local PosCake = CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375)
+local CakeIsland = CFrame.new(-2029.82544, 378.380157, -12582.4658)
 spawn(function()
     while wait() do
         if _G.AutoKatakuri then
@@ -1095,13 +1095,13 @@ spawn(function()
                                 end
                             else
                                 if BypassTP then
-                                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosCake.Position).Magnitude > 2000 then
-                                        Taixiu(PosCake)
-                                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosCake.Position).Magnitude < 2000 then
-                                        Tween(PosCake)
+                                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CakeIsland.Position).Magnitude > 2000 then
+                                        Taixiu(CakeIsland)
+                                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CakeIsland.Position).Magnitude < 2000 then
+                                        Tween(CakeIsland)
                                     end
                                 else
-                                    Tween(PosCake)
+                                    Tween(CakeIsland)
                                 end
                                 BringKatakuriMob = false
                                 if game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter") then
@@ -1693,7 +1693,7 @@ Tabs.LC:AddButton({
         wait(4)
         Fluent:Notify({
             Title = "[Night Hub]",
-            Content = "Hop Servers",
+            Content = "Hop Go To Travel Select",
             SubContent = "Notify Hop Servers", -- Optional
             Duration = 5
         })
