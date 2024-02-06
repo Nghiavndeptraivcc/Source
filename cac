@@ -1339,7 +1339,7 @@ end)
 
 local OthersToggle = Tabs.G:AddSection("Sub Famming")
 
-local AutoChestToggle = Tabs.IQ:AddToggle("AutoChestToggle", {Title = "Auto Chest[Tween]", Default = false })
+local AutoChestToggle = Tabs.G:AddToggle("AutoChestToggle", {Title = "Auto Chest[Tween]", Default = false })
 
 AutoChestToggle:OnChanged(function(Value)
     _G.AutoChest = Value
