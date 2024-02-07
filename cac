@@ -2590,7 +2590,7 @@ Tabs.SH:AddButton({
     end
 })
 
-Tabs.Main:AddButton({
+Tabs.SH:AddButton({
     Title = "Buy Sanguine Art(New)",
     Description = "Click The Buttons To Buy The Sanguine Art",
     Callback = function()
