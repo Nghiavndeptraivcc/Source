@@ -1761,11 +1761,11 @@ end)
 
 local AutoCyborgToggle = Tabs.IQ:AddToggle("AutoCyborgToggle", {Title = "Auto Cyborg Race", Default = false })
 
-AutoGhoulRace:OnChanged(function(Value)
+AutoCyborgToggle:OnChanged(function(Value)
     _G.AutoCyboryRace = Value
 end)
 
-Options.AutoGhoulRace:SetValue(false)
+Options.AutoCyborgToggle:SetValue(false)
 
 spawn(function()
     while wait() do
