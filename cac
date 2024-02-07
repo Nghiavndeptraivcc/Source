@@ -790,6 +790,10 @@ function Nhannvtocv3()
     end
 end
 
+function RedeemCode(Code)
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Code)
+end
+
 spawn(function()
     while wait() do
         pcall(function()
@@ -1019,6 +1023,35 @@ spawn(function()
         end
     end
 end)
+
+Tabs.G:AddButton({
+    Title = "Redeem All Codes",
+    Description = "Click the buttons to redeem all codes",
+    Callback = function()
+        RedeemCode("NEWTROLL")
+        RedeemCode("SECRET_ADMIN")
+        RedeemCode("KITT_RESET")
+        RedeemCode("JULYUPDATE_RESET")
+        RedeemCode("staffbattle")
+        RedeemCode("Sub2CaptainMaui")
+        RedeemCode("Sub2Fer999")
+        RedeemCode("Enyu_is_Pro")
+        RedeemCode("Magicbus")
+        RedeemCode("JCWK")
+        RedeemCode("SUB2GAMERROBOT_RESET1")
+        RedeemCode("Starcodeheo")
+        RedeemCode("Bluxxy")
+        RedeemCode("THEGREATACE")
+        RedeemCode("SUB2GAMERROBOT_EXP1")
+        RedeemCode("StrawHatMaine")
+        RedeemCode("Sub2OfficialNoobie")
+        RedeemCode("SUB2NOOBMASTER123")
+        RedeemCode("Sub2Daigrock")
+        RedeemCode("Axiore")
+        RedeemCode("TantaiGaming")
+        RedeemCode("STRAWHATMAINE")
+    end
+})
 
 local Battocv4 = Tabs.G:AddToggle("Battocv4", {Title = "Auto Turn V4", Default = false })
 
