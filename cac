@@ -1518,7 +1518,7 @@ spawn(function()
                         if game:GetService("Workspace").Map.Desert.Burn.Part.Transparency == 0 then
                             if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Torch") or game.Players.LocalPlayer.Character:FindFirstChild("Torch") then
                                 EquipTool("Torch")
-                                Tween(CFrame.new(1114.61475, 5.04679728, 4350.22803))
+                                Tween(CFrame.new(1114.01001, 4.92146635, 4350.58838, -0.28003493, 7.86557486e-09, 0.959989786, 1.55394595e-08, 1, -3.66043795e-09, -0.959989786, 1.38926719e-08, -0.28003493))
                               else
                                 Tween(CFrame.new(-1610.00757, 11.5049858, 164.001587))
                             end
@@ -1704,7 +1704,7 @@ local PosCursedBoss = CFrame.new(913.893311, 187.405502, 33598.7578)
 local PosGhoulRace = CFrame.new(923.748596, 125.529785, 33454.4883)
 spawn(function()
     while wait() do
-        if _G.AutoGhoulRace then
+        if _G.AutoGhoulRace and taodangosea2 then
             pcall(function()
                 if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hellfire Torch") then
                     if BypassTP then
@@ -1801,7 +1801,7 @@ Options.AutoCyborgToggle:SetValue(false)
 
 spawn(function()
     while wait() do
-        if _G.AutoCyborgRace then
+        if _G.AutoCyborgRace and taodangosea2 then
             pcall(function()
                 if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
                     for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
@@ -1855,7 +1855,7 @@ spawn(function()
     end
 end)
 
-local AutoRipIndraToggle = Tabs.IQ:AddToggle("AutoRipIndraToggle", {Title = "Auto Darkbeard", Default = false })
+local AutoRipIndraToggle = Tabs.IQ:AddToggle("AutoRipIndraToggle", {Title = "Auto Rip Indra", Default = false })
 
 AutoRipIndraToggle:OnChanged(function(Value)
     _G.AutoRipIndra = Value
@@ -1865,7 +1865,7 @@ Options.AutoRipIndraToggle:SetValue(false)
 
 spawn(function()
     while wait() do
-        if _G.AutoRipIndra then
+        if _G.AutoRipIndra and taodangosea3 then
             pcall(function()
                 if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") or game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -1910,7 +1910,7 @@ Options.AutoDarkbeardToggle:SetValue(false)
 
 spawn(function()
     while wait() do
-        if _G.AutoDarkbeard then
+        if _G.AutoDarkbeard and taodangosea2 then
             pcall(function()
                 if game:GetService("Workspace").Enemies:FindFirstChild("Darkbeard") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -1940,15 +1940,6 @@ spawn(function()
         end
     end
 end)
-
-local Auto = Tabs.IQ:AddToggle("AutoSecondSea", {Title = "Auto Sea 2", Default = false })
-
-AutoSecondSea:OnChanged(function(Value)
-    _G.AutoSi2 = Value
-end)
-
-Options.AutoSecondSea:SetValue(false)
-
 -- LocalPlayer Tab :
 
 local SelectSea = Tabs.LC:AddDropdown("SelectSea", {
