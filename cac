@@ -794,6 +794,15 @@ function RedeemCode(Code)
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Code)
 end
 
+function NightHubNoSkid(Item)
+    for k, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventory")) do
+        if v.Name == Item then
+            return v.Name .. " "
+        end
+    end
+    return lon
+end
+
 spawn(function()
     while wait() do
         pcall(function()
@@ -1565,7 +1574,7 @@ spawn(function()
                                     wait(0.5)
                                     EquipTool("Relic")
                                     wait(0.5)
-                                    Tween(CFrame.new(-1404.91504, 29.9773273, 3.80598116))
+                                    Tween(CFrame.new(-1404.91504, 29.9773273, 3.80598116, 0.876514494, 5.66906877e-09, 0.481375456, 2.53851997e-08, 1, -5.79995607e-08, -0.481375456, 6.30572643e-08, 0.876514494))
                                 end
                             end
                         end
@@ -1584,7 +1593,8 @@ spawn(function()
                                         v.HumanoidRootPart.CanCollide = false
                                         game:GetService'VirtualUser':CaptureController()
                                         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672),workspace.CurrentCamera.CFrame)
-                                    until v.Humanoid.Health <= 0 or not _G.AutoSaber
+                                    until v.Humanoid.Health <= 0 or not _G.AutoSaber or NightHubNoSkid("Saber")
+                                    Options.AutoSaberToggle:SetValue(false)
                                     if v.Humanoid.Health <= 0 then
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","PlaceRelic")
                                     end
