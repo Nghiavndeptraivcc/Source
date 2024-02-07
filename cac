@@ -1825,7 +1825,7 @@ end)
 
 local AutoRipIndraToggle = Tabs.IQ:AddToggle("AutoRipIndraToggle", {Title = "Auto Darkbeard", Default = false })
 
-AutoDarkbeardToggle:OnChanged(function(Value)
+AutoRipIndraToggle:OnChanged(function(Value)
     _G.AutoRipIndra = Value
 end)
 
