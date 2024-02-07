@@ -904,7 +904,7 @@ local Tabs = {
     DR = Window:AddTab({ Title = "Devil Fruit and Raid", Icon = "apple" }),
     UR = Window:AddTab({ Title = "Upgrate Race", Icon = "person-standing" }),
     SE = Window:AddTab({ Title = "Sea Event", Icon = "waves" }),
-    SH = Window:AddTab({ Title = "Shop", Icon = "store" }),
+    SH = Window:AddTab({ Title = "Shop", Icon = "shopping-cart" }),
     S = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
