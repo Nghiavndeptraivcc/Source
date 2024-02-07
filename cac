@@ -1660,13 +1660,13 @@ spawn(function()
     end
 end)
 
-local AutoGhoulRace = Tabs.IQ:AddToggle("AutoGhoulRace", {Title = "Auto Ghoul Race", Default = false })
+local AutoGhoulRaceToggle = Tabs.IQ:AddToggle("AutoGhoulRaceToggle", {Title = "Auto Ghoul Race", Default = false })
 
-AutoGhoulRace:OnChanged(function(Value)
+AutoGhoulRaceToggle:OnChanged(function(Value)
     _G.AutoGhoulRace = Value
 end)
 
-Options.AutoGhoulRace:SetValue(false)
+Options.AutoGhoulRaceToggle:SetValue(false)
 
 local PosCursedBoss = CFrame.new(913.893311, 187.405502, 33598.7578)
 local PosGhoulRace = CFrame.new(923.748596, 125.529785, 33454.4883)
@@ -1823,6 +1823,50 @@ spawn(function()
     end
 end)
 
+local AutoRipIndraToggle = Tabs.IQ:AddToggle("AutoRipIndraToggle", {Title = "Auto Darkbeard", Default = false })
+
+AutoDarkbeardToggle:OnChanged(function(Value)
+    _G.AutoRipIndra = Value
+end)
+
+Options.AutoRipIndraToggle:SetValue(false)
+
+spawn(function()
+    while wait() do
+        if _G.AutoRipIndra then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") or game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "rip_indra True Form" or v.Name == "rip_indra" then
+                            if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoRipIndra then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                until v.Humanoid.Health <= 0  or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or not _G.AutoRipIndra
+                            end
+                        end
+                    end
+                else
+                    Tween(CFrame.new(-5418.75488, 415.658325, -2812.33228))
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("rip_indra True Form") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("rip_indra True Form").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    else
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("rip_indra") then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("rip_indra").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
 
 local AutoDarkbeardToggle = Tabs.IQ:AddToggle("AutoDarkbeardToggle", {Title = "Auto Darkbeard", Default = false })
 
@@ -1850,7 +1894,7 @@ spawn(function()
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                     game:GetService'VirtualUser':CaptureController()
                                     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoGhoulRace == false
+                                until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoDarkbeard == false
                             end
                         end
                     end
@@ -2223,6 +2267,7 @@ end)
 
 Options.AutoRaceV2:SetValue(false)
 
+local PosZombieMob = CFrame.new(-5685.9233398438, 48.480125427246, -853.23724365234)
 local PosUpgrateV2 = CFrame.new(-2779.83521, 72.9661407, -3574.02002)
 spawn(function()
     pcall(function()
@@ -2258,7 +2303,7 @@ spawn(function()
                                         end
                                     end
                                 else
-                                    Tween(PosUpgrateV2)
+                                    Tween(PosZombieMob)
                                 end
                             end
                         end)
