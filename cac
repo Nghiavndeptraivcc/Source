@@ -709,25 +709,17 @@ end
 
 function Tween(Pos)
     local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if game.Players.LocalPlayer.Character.Humanoid.Sit and not _G.KillShark and not _G.KillPiranha and not _G.KillTerrorShark and not _G.KillFishCrew then
-        game.Players.LocalPlayer.Character.Humanoid.Sit = false
-    end
     local Speed = Distance >= 1 and 325 or 1
     pcall(function()
-        local tween = game:GetService("TweenService"):Create(
-            game.Players.LocalPlayer.Character.HumanoidRootPart,
-            TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
-            {CFrame = Pos}
-        )
-        tween:Play()
+        local teleport = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = Pos})
+        teleport:Play()
+        if _G.StopTween then
+            teleport:Cancel()
+            NoClip = false
+        end
         NoClip = true
         wait(Distance/Speed)
         NoClip = false
-        if Distance <= 250 or _G.StopTween then
-            tween:Cancel()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-            NoCLip = false
-        end
     end)
 end
 
@@ -2564,7 +2556,7 @@ end)
 
 -- Sea Event Tab :
 
-Tabs.SH:AddButton({
+Tabs.SE:AddButton({
     Title = "Buy Boats",
     Description = "Click The Buttons to buy the Buy Boats",
     Callback = function()
