@@ -2573,19 +2573,7 @@ Tabs.SE:AddButton({
     end
 })
 
-local SelectZoneDropDown = Tabs.SE:AddDropdown("SelectZoneDropDown", {
-    Title = "Select Zone",
-    Values = {"Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5", "Zone 6"},
-    Multi = false,
-    Default = 1,
-})
-
-SelectZoneDropDown:OnChanged(function(Value)
-    _G.SelectZone = Value
-end)
-
-
-local SailBoatToZoneSelect = Tabs.SE:AddToggle("SailBoatToZoneSelect", {Title = "Sail Boat To Zone Select", Default = false })
+local SailBoatToZone6 = Tabs.SE:AddToggle("SailBoatToZone6", {Title = "Sail Boat To Zone 6", Default = false })
 
 SailBoatToZoneSelect:OnChanged(function(Value)
         _G.AutoSailBoat = Value
@@ -2609,18 +2597,8 @@ spawn(function()
                             print("Vailon")
                             end
                         end)
-                        if _G.SelectZone == "Zone 1" then
-                            v:FindFirstChild("VehicleSeat").CFrame = CFrame.new(-21357.2266, 10.7780914, 1155.76111)
-                        elseif _G.SelectZone == "Zone 2" then
-                            v:FindFirstChild("VehicleSeat").CFrame =  CFrame.new(-24182.0918, 10.778532, 4834.44336)
-                        elseif _G.SelectZone == "Zone 3" then
-                            v:FindFirstChild("VehicleSeat").CFrame =  CFrame.new(-29711.7559, 10.7788849, 10440.8223)
-                        elseif _G.SelectZone == "Zone 4" then
-                            v:FindFirstChild("VehicleSeat").CFrame =  CFrame.new(-31355.7344, 11.2131805, 13939.2627)
-                        elseif _G.SelectZone == "Zone 5" then
-                            v:FindFirstChild("VehicleSeat").CFrame =  CFrame.new(-32875.5742, 10.7767515, 13985.6514)
-                        elseif _G.SelectZone == "Zone 6" then
-                            v:FindFirstChild("VehicleSeat").CFrame =  CFrame.new(-44842.3945, 10.7790766, 16911.3477)
+                            v:FindFirstChild("VehicleSeat").CFrame = CFrame.new(-44842.3945, 10.7790766, 16911.3477)
+                            wait(0.5)
                         end
                     end
                 end
