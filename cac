@@ -710,8 +710,8 @@ end
 function Tween(Pos)
     local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     local Speed = Distance >= 1 and 325 or 1
-    if game.Players.LocalPlayer.Humanoid.Sit == true and not _G.AutoTerror and not _G.AutoShark and not _G.AutoFish and not _G.AutoPiranha then
-        game.Players.LocalPlayer.Humanoid.Sit = false
+    if game.Players.LocalPlayer.Character.Humanoid.Sit == true and not _G.AutoTerror and not _G.AutoShark and not _G.AutoFish and not _G.AutoPiranha then
+        game.Players.LocalPlayer.Character.Humanoid.Sit = false
     end
     pcall(function()
         local teleport = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = Pos})
