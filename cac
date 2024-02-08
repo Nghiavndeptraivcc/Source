@@ -2586,7 +2586,7 @@ spawn(function()
         if _G.AutoSailBoat then
             pcall(function()
                 for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
-                    if v:FindFirstChild("Owner") and v:FindFirstChild("Owner").Value == game.Players.LocalPlayer.Name then
+                    if v:FindFirstChild("Owner") and v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
                         table.foreach(v:GetDescendants(), function(a, child)
                             if child:IsA("BasePart") or child:IsA("MeshPart") or child:IsA("Part") then
                                 child.CanCollide = false
