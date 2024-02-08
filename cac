@@ -1803,6 +1803,10 @@ spawn(function()
                             Tween(PosCursedBoss)
                         end
                     end
+                else
+                    if game.Players.LocalPlayer.Data.Race.Value == "Ghoul" then
+                        Options.AutoGhoulRaceToggle:SetValue(false)
+                    end
                 end
             end)
         end
