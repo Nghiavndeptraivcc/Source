@@ -715,11 +715,11 @@ function Tween(Pos)
         teleport:Play()
         if _G.StopTween then
             teleport:Cancel()
-            NoClip = false
+            NoCLip = false
         end
-        NoClip = true
+        NoCLip = true
         wait(Distance/Speed)
-        NoClip = false
+        NoCLip = false
     end)
 end
 
