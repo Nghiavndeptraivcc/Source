@@ -2582,7 +2582,7 @@ SelectZoneDropDown:OnChanged(function(Value)
 end)
 
 
-local SailBoatToZoneSelect = Tabs.Main:AddToggle("SailBoatToZoneSelect", {Title = "Sail Boat To Zone Select", Default = false })
+local SailBoatToZoneSelect = Tabs.SH:AddToggle("SailBoatToZoneSelect", {Title = "Sail Boat To Zone Select", Default = false })
 
 SailBoatToZoneSelect:OnChanged(function(Value)
         _G.AutoSailBoat = Value
