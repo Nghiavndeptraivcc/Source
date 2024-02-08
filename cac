@@ -2560,6 +2560,8 @@ end)
 
 -- Shop Tab :
 
+local MeleeSHop = Tabs.UR:AddSection("Melee")
+
 Tabs.SH:AddButton({
     Title = "Buy BlackLeg",
     Description = "Click The Buttons to buy the Black Leg",
@@ -2667,6 +2669,46 @@ Tabs.SH:AddButton({
         SelectWP = "SanguineArt"
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySanguineArt", true)
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySanguineArt")
+    end
+})
+
+local FragmentShop = Tabs.UR:AddSection("Fragment")
+
+Tabs.SH:AddButton({
+    Title = "Reroll Race",
+    Description = "Click The Buttons To Buy The Reroll Race With 3.000 Fragment",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","2")
+    end
+})
+
+Tabs.SH:AddButton({
+    Title = "Refund Stats",
+    Description = "Click The Buttons To Buy The Refund Stats With 2.500 Fragment",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
+    end
+})
+
+Tabs.SH:AddButton({
+    Title = "Kabucha",
+    Description = "Click The Buttons To Buy The Kabucha With 1.500 Fragment",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","2")
+    end
+})
+
+local EctoplasmShop = Tabs.UR:AddSection("Ectoplasm")
+
+Tabs.SH:AddButton({
+    Title = "Bizarre Rifle",
+    Description = "Click The Buttons To Buy The Bizarre Rifle With 250 Ectoplasm",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
     end
 })
 
@@ -2881,6 +2923,23 @@ spawn(function()
         end
     end
 end)
+
+local AntiKickToggle = Tabs.S:AddToggle("AntiKickToggle", {Title = "Anti Afk", Default = true })
+
+AntiKickToggle:OnChanged(function(Value)
+    local vu = game:GetService("VirtualUser")
+    repeat wait() until game:IsLoaded() 
+        game:GetService("Players").LocalPlayer.Idled:connect(function()
+        game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+        game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+        wait(1)
+        game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    end)
+end)
+
+Options.AntiKickToggle:SetValue(true)
+
+
 
 local AutoBuso = Tabs.S:AddToggle("AutoBuso", {Title = "Auto Buso", Default = true })
 
