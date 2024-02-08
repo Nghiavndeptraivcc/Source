@@ -710,6 +710,9 @@ end
 function Tween(Pos)
     local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     local Speed = Distance >= 1 and 325 or 1
+    if game.Players.LocalPlayer.Humanoid.Sit == true and not _G.AutoTerror and not _G.AutoShark and not _G.AutoFish and not _G.AutoPiranha then
+        game.Players.LocalPlayer.Humanoid.Sit = false
+    end
     pcall(function()
         local teleport = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = Pos})
         teleport:Play()
@@ -2594,24 +2597,30 @@ spawn(function()
     while wait() do
         if _G.AutoSailBoat then
             pcall(function()
-                for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
-                    if v.Name == "PirateBrigade" then
-                        if v.Owner.Value == game.Players.LocalPlayer.Name then
-                            if v:FindFirstChild("VehicleSeat") then
-                                if _G.SelectZone == "Zone 1" then
-                                    v:WaitForChild("VehicleSeat").CFrame = CFrame.new(-21357.2266, 10.7780914, 1155.76111)
-                                elseif _G.SelectZone == "Zone 2" then
-                                    v:WaitForChild("VehicleSeat").CFrame =  CFrame.new(-24182.0918, 10.778532, 4834.44336)
-                                elseif _G.SelectZone == "Zone 3" then
-                                    v:WaitForChild("VehicleSeat").CFrame =  CFrame.new(-29711.7559, 10.7788849, 10440.8223)
-                                elseif _G.SelectZone == "Zone 4" then
-                                    v:WaitForChild("VehicleSeat").CFrame =  CFrame.new(-31355.7344, 11.2131805, 13939.2627)
-                                elseif _G.SelectZone == "Zone 5" then
-                                    v:WaitForChild("VehicleSeat").CFrame =  CFrame.new(-32875.5742, 10.7767515, 13985.6514)
-                                elseif _G.SelectZone == "Zone 6" then
-                                    v:WaitForChild("VehicleSeat").CFrame =  CFrame.new(-44842.3945, 10.7790766, 16911.3477)
-                                end
+                for i, v in pairs(workspace.Boats:GetChildren()) do
+                    if v:FindFirstChild("Owner") and v:FindFirstChild("Owner").Value == plr then
+                        table.foreach(v:GetDescendants(), function(a, child)
+                            if child:IsA("BasePart") or child:IsA("MeshPart") or child:IsA("Part") then
+                                child.CanCollide = false
                             end
+                        end)
+                        v:FindFirstChild("Humanoid"):GetPropertyChangedSignal("Value"):Connect(function(g)
+                            if g == 0 then
+                            print("Vailon")
+                            end
+                        end)
+                        if _G.SelectZone == "Zone 1" then
+                            v:FindFirstChild("VehicleSeat").CFrame = CFrame.new(-21357.2266, 10.7780914, 1155.76111)
+                        elseif _G.SelectZone == "Zone 2" then
+                            v:FindFirstChild("VehicleSeat").CFrame =  CFrame.new(-24182.0918, 10.778532, 4834.44336)
+                        elseif _G.SelectZone == "Zone 3" then
+                            v:FindFirstChild("VehicleSeat").CFrame =  CFrame.new(-29711.7559, 10.7788849, 10440.8223)
+                        elseif _G.SelectZone == "Zone 4" then
+                            v:FindFirstChild("VehicleSeat").CFrame =  CFrame.new(-31355.7344, 11.2131805, 13939.2627)
+                        elseif _G.SelectZone == "Zone 5" then
+                            v:FindFirstChild("VehicleSeat").CFrame =  CFrame.new(-32875.5742, 10.7767515, 13985.6514)
+                        elseif _G.SelectZone == "Zone 6" then
+                            v:FindFirstChild("VehicleSeat").CFrame =  CFrame.new(-44842.3945, 10.7790766, 16911.3477)
                         end
                     end
                 end
