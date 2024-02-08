@@ -812,7 +812,7 @@ end
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
+            if _G.AutoFishCrew or _G.AutoShark or _G.AutoTerror or _G.AutoPiranha or _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
                 if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -830,7 +830,7 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
+            if _G.AutoFishCrew or _G.AutoShark or _G.AutoTerror or _G.AutoPiranha or _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
                 for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -2613,6 +2613,170 @@ Tabs.SE:AddButton({
         Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
     end
 })
+
+local AutoSharkToggle = Tabs.SE:AddToggle("AutoSharkToggle", {Title = "Auto Shark", Default = false })
+
+AutoSharkToggle:OnChanged(function(Value)
+        _G.AutoShark = Value -- dit me may hub tao deo skid ok
+    end)
+
+    Options.AutoSharkToggle:SetValue(false)
+
+spawn(function()
+    while wait() do
+        if _G.AutoShark then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Shark") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Shark" then
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 63, 2))
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                                until not _G.AutoShark or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Shark") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Shark").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local AutoTerrorSharkToggle = Tabs.SE:AddToggle("AutoTerrorSharkToggle", {Title = "Auto Shark", Default = false })
+
+AutoTerrorSharkToggle:OnChanged(function(Value)
+        _G.AutoTerror = Value -- dit me may hub tao deo skid ok
+    end)
+
+Options.AutoTerrorSharkToggle:SetValue(false)
+
+spawn(function()
+    while wait() do
+        if _G.AutoTerror then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Terrorshark" then
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 63, 2))
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                                until not _G.AutoTerror or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local AutoPiranhaToggle = Tabs.SE:AddToggle("AutoPiranhaToggle", {Title = "Auto Piranha", Default = false })
+
+AutoPiranhaToggle:OnChanged(function(Value)
+        _G.AutoPiranha = Value -- dit me may hub tao deo skid ok
+    end)
+
+Options.AutoPiranhaToggle:SetValue(false)
+
+spawn(function()
+    while wait() do
+        if _G.AutoPiranha then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Piranha") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Piranha" then
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 63, 2))
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                                until not _G.AutoPiranha or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Piranha") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Piranha").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local AutoFishCrewToggle = Tabs.SE:AddToggle("AutoFishCrewToggle", {Title = "Auto Fish Crew Member", Default = false })
+
+AutoFishCrewToggle:OnChanged(function(Value)
+        _G.AutoFishCrew = Value -- dit me may hub tao deo skid ok
+    end)
+
+Options.AutoFishCrewToggle:SetValue(false)
+
+spawn(function()
+    while wait() do
+        if _G.AutoFishCrew then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Fish Crew Member" then
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 63, 2))
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                                until not _G.AutoFishCrew or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Fish Crew Member") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Fish Crew Member").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    end
+                end
+            end)
+        end
+    end
+end)
 
 -- Shop Tab :
 
