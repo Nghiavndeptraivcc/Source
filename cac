@@ -2484,8 +2484,8 @@ spawn(function()
                         if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 150 then
                             repeat task.wait()
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 3))
-                                AutoHaki()
-                                EquipTool(_G.SelectWeaponTrial)
+                                EnableBuso()
+                                EquipTool(SelectWP)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Head.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
@@ -2500,6 +2500,32 @@ spawn(function()
         end
     end
 end)
+
+spawn(function()
+    while wait() do
+        if _G.TrialV4 then
+            repeat task.wait()
+                if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+                    game:GetService("VirtualUser"):CaptureController()
+                    game:GetService("VirtualUser"):SetKeyDown("0x65")
+                    wait(2)
+                    game:GetService("VirtualUser"):SetKeyUp("0x65")
+                end
+            until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or not _G.KillV4
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.TrialV4 then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
+            wait(0.1)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
+        end
+    end
+end)
+
 
 spawn(function()
     while wait() do
