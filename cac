@@ -2560,7 +2560,7 @@ end)
 
 -- Shop Tab :
 
-local MeleeSHop = Tabs.UR:AddSection("Melee")
+local MeleeSHop = Tabs.SH:AddSection("Melee")
 
 Tabs.SH:AddButton({
     Title = "Buy BlackLeg",
@@ -2672,7 +2672,7 @@ Tabs.SH:AddButton({
     end
 })
 
-local FragmentShop = Tabs.UR:AddSection("Fragment")
+local FragmentShop = Tabs.SH:AddSection("Fragment")
 
 Tabs.SH:AddButton({
     Title = "Reroll Race",
@@ -2701,7 +2701,7 @@ Tabs.SH:AddButton({
     end
 })
 
-local EctoplasmShop = Tabs.UR:AddSection("Ectoplasm")
+local EctoplasmShop = Tabs.SH:AddSection("Ectoplasm")
 
 Tabs.SH:AddButton({
     Title = "Bizarre Rifle",
