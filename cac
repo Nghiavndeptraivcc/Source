@@ -813,7 +813,7 @@ end
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
+            if _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
                 if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -831,7 +831,7 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
+            if _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
                 for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -2455,6 +2455,46 @@ spawn(function()
                     repeat task.wait()
                         _G.KillNear = true
                     until not _G.AutoRaceV3 or not game.Players.LocalPlayer.Data.Race.Value ~= "Ghoul" or string.find(RaceV, "V3")
+                end
+            end)
+        end
+    end
+end)
+
+local TweenTemplete = Tabs.UR:AddSection("Tween")
+
+
+
+local Trials = Tabs.UR:AddSection("Trials")
+
+local AutoKillPlyAfterTrial = Tabs.UR:AddToggle("AutoKillPlyAfterTrial", {Title = "Auto Kill Players After Trials", Default = false })
+
+AutoKillPlyAfterTrial:OnChanged(function(Value)
+    _G.TrialV4 = Value
+end)
+
+Options.AutoKillPlyAfterTrial:SetValue(false)
+
+spawn(function()
+    while wait() do
+        if _G.TrialV4 then
+            pcall(function()
+                for i, v in pairs(game.Workspace.Characters:GetChildren()) do
+                    if v.Name ~= game.Players.LocalPlayer.Name then
+                        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 150 then
+                            repeat task.wait()
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 3))
+                                AutoHaki()
+                                EquipTool(_G.SelectWeaponTrial)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Head.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                game:GetService("VirtualUser"):CaptureController()
+                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                            until _G.TrialV4 == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
+                        end
+                    end
                 end
             end)
         end
