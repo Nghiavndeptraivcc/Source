@@ -712,13 +712,17 @@ function Tween(Pos)
     if game.Players.LocalPlayer.Character.Humanoid.Sit and not _G.KillShark and not _G.KillPiranha and not _G.KillTerrorShark and not _G.KillFishCrew then
         game.Players.LocalPlayer.Character.Humanoid.Sit = false
     end
+    local Speed = Distance >= 1 and 325 or 1
     pcall(function()
         local tween = game:GetService("TweenService"):Create(
             game.Players.LocalPlayer.Character.HumanoidRootPart,
-            TweenInfo.new(Distance/325, Enum.EasingStyle.Linear),
+            TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
             {CFrame = Pos}
         )
         tween:Play()
+        NoClip = true
+        wait(Distance/Speed)
+        NoClip = false
         if Distance <= 250 or _G.StopTween then
             tween:Cancel()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
@@ -2557,6 +2561,22 @@ spawn(function()
         end
     end
 end)
+
+-- Sea Event Tab :
+
+Tabs.SH:AddButton({
+    Title = "Buy Boats",
+    Description = "Click The Buttons to buy the Buy Boats",
+    Callback = function()
+        Tween(CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906))
+        wait(0.5)
+        local args = {
+            [1] = "BuyBoat",
+            [2] = "PirateBrigade"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end
+})
 
 -- Shop Tab :
 
