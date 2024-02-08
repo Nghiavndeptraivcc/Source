@@ -2575,11 +2575,11 @@ Tabs.SE:AddButton({
 
 local SailBoatToZone6 = Tabs.SE:AddToggle("SailBoatToZone6", {Title = "Sail Boat To Zone 6", Default = false })
 
-SailBoatToZoneSelect:OnChanged(function(Value)
+SailBoatToZone6:OnChanged(function(Value)
         _G.AutoSailBoat = Value
     end)
 
-Options.SailBoatToZoneSelect:SetValue(false)
+Options.SailBoatToZone6:SetValue(false)
 
 spawn(function()
     while wait() do
