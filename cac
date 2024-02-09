@@ -2811,9 +2811,9 @@ spawn(function()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if not v.Name == "Shark" and not v.Name == "Terrorshark" and not v.Name == "Fish Crew Member" and not v.Name == "Piranha" then
                         Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                    else
+                        game.Players.LocalPlayer.Character.Humanoid.Sit = false
                     end
-                else
-                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
                 end
             end)
         end
