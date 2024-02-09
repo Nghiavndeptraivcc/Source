@@ -2440,8 +2440,7 @@ spawn(function()
                                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                                 v.HumanoidRootPart.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                                game:GetService("VirtualUser"):CaptureController()
-                                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                                                Click()
                                             until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 3") or not v.Parent or v.Humanoid.Health <= 0 or _G.AutoRaceV2 == false
                                             StartEvoMagnet = false
                                         end
@@ -2512,8 +2511,7 @@ spawn(function()
                                 v.Head.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
                                 v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
-                                game:GetService("VirtualUser"):CaptureController()
-                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                                Click()
                             until _G.TrialV4 == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
                         end
                     end
@@ -2645,7 +2643,7 @@ AutoSharkToggle:OnChanged(function(Value)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.KillShark and taodangosea3 and game:GetService("Workspace").Enemies:FindFirstChild("Shark") then
+            if _G.KillShark and taodangosea3 then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Shark") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Shark" then
