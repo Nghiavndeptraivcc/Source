@@ -990,8 +990,8 @@ end)
 local TweenButtons = Tabs.G:AddSection("Cancel Tween")
 
 Tabs.G:AddButton({
-    Title = "Redeem All Codes",
-    Description = "Click the buttons to redeem all codes",
+    Title = "Cancel Tween",
+    Description = "Click the buttons to Cancel Tween",
     Callback = function()
         Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
     end
