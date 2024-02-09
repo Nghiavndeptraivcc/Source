@@ -2626,7 +2626,7 @@ AutoSharkToggle:OnChanged(function(Value)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.KillShark and taodangosea3 then
+            if _G.KillShark and taodangosea3 and game:GetService("Workspace").Enemies:FindFirstChild("Shark") then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Shark") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Shark" then
@@ -2668,7 +2668,7 @@ Options.AutoTerrorSharkToggle:SetValue(false)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.AutoTerror and taodangosea3 then
+            if _G.AutoTerror and taodangosea3 and game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Terrorshark" then
@@ -2710,7 +2710,7 @@ Options.AutoFishCrewToggle:SetValue(false)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.KillFishCrew and taodangosea3 then
+            if _G.KillFishCrew and taodangosea3 and game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Fish Crew Member" then
@@ -2752,7 +2752,7 @@ Options.AutoPiranhaToggle:SetValue(false)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.KillPiranha and taodangosea3 then
+            if _G.KillPiranha and taodangosea3 and game:GetService("Workspace").Enemies:FindFirstChild("Piranha") then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Piranha") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Piranha" then
