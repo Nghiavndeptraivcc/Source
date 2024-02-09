@@ -2639,7 +2639,6 @@ AutoSharkToggle:OnChanged(function(Value)
 
     Options.AutoSharkToggle:SetValue(false)
 
-
 spawn(function()
     while wait() do
         pcall(function()
@@ -2666,7 +2665,6 @@ spawn(function()
                         end
                     end
                 else
-                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
                     if game:GetService("ReplicatedStorage"):FindFirstChild("Shark") then
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Shark").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
@@ -2710,7 +2708,6 @@ spawn(function()
                         end
                     end
                 else
-                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
                     if game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark") then
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark").HumanoidRootPart.CFrame * CFrame.new(2, 50, 2))
                     end
@@ -2754,7 +2751,6 @@ spawn(function()
                         end
                     end
                 else
-                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
                     if game:GetService("ReplicatedStorage"):FindFirstChild("Fish Crew Member") then
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Fish Crew Member").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
@@ -2805,6 +2801,20 @@ spawn(function()
                 end
             end
         end)
+    end
+end)
+
+spawn(function()
+    while task.wait() do
+        if _G.AutoShark or _G.AutoTerror or _G.AutoFishCrew or _G.AutoPiranha == true then
+            pcall(function()
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if not v.Name == "Shark" and not v.Name == "Terrorshark" and not v.Name == "Fish Crew Member" and not v.Name == "Piranha" then
+                        Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                    end
+                end
+            end)
+        end
     end
 end)
 
