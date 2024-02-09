@@ -2622,15 +2622,17 @@ AutoSharkToggle:OnChanged(function(Value)
 
     Options.AutoSharkToggle:SetValue(false)
 
+
 spawn(function()
     while wait() do
-        if _G.AutoShark then
-            pcall(function()
+        pcall(function()
+            if _G.KillShark and taodangosea3 then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Shark") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Shark" then
                             if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                repeat task.wait()
+                                repeat
+                                    task.wait()
                                     EnableBuso()
                                     EquipTool(SelectWP)
                                     v.HumanoidRootPart.CanCollide = false
@@ -2640,7 +2642,7 @@ spawn(function()
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
-                                until not _G.AutoShark or not v.Parent or v.Humanoid.Health <= 0
+                                until not _G.KillShark or not v.Parent or v.Humanoid.Health <= 0
                             end
                         end
                     end
@@ -2650,8 +2652,8 @@ spawn(function()
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Shark").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
-            end)
-        end
+            end
+        end)
     end
 end)
 
@@ -2665,13 +2667,14 @@ Options.AutoTerrorSharkToggle:SetValue(false)
 
 spawn(function()
     while wait() do
-        if _G.AutoTerror then
-            pcall(function()
+        pcall(function()
+            if _G.AutoTerror and taodangosea3 then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Terrorshark" then
                             if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                repeat task.wait()
+                                repeat
+                                    task.wait()
                                     EnableBuso()
                                     EquipTool(SelectWP)
                                     v.HumanoidRootPart.CanCollide = false
@@ -2691,69 +2694,29 @@ spawn(function()
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark").HumanoidRootPart.CFrame * CFrame.new(2, 50, 2))
                     end
                 end
-            end)
-        end
+            end
+        end)
     end
 end)
 
-local AutoPiranhaToggle = Tabs.SE:AddToggle("AutoPiranhaToggle", {Title = "Auto Piranha", Default = false })
-
-AutoPiranhaToggle:OnChanged(function(Value)
-        _G.AutoPiranha = Value -- dit me may hub tao deo skid ok
-    end)
-
-Options.AutoPiranhaToggle:SetValue(false)
-
-spawn(function()
-    while wait() do
-        if _G.AutoPiranha then
-            pcall(function()
-                if game:GetService("Workspace").Enemies:FindFirstChild("Piranha") then
-                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v.Name == "Piranha" then
-                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                repeat task.wait()
-                                    EnableBuso()
-                                    EquipTool(SelectWP)
-                                    v.HumanoidRootPart.CanCollide = false
-                                    v.Humanoid.WalkSpeed = 0
-                                    v.Head.CanCollide = false
-                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                    game:GetService("VirtualUser"):CaptureController()
-                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
-                                until not _G.AutoPiranha or not v.Parent or v.Humanoid.Health <= 0
-                            end
-                        end
-                    end
-                else
-                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
-                    if game:GetService("ReplicatedStorage"):FindFirstChild("Piranha") then
-                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Piranha").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                    end
-                end
-            end)
-        end
-    end
-end)
-
-local AutoFishCrewToggle = Tabs.SE:AddToggle("AutoFishCrewToggle", {Title = "Auto Fish Crew Member", Default = false })
+local AutoFishCrewToggle = Tabs.SE:AddToggle("AutoFishCrewToggle", {Title = "Auto Fish Crew", Default = false })
 
 AutoFishCrewToggle:OnChanged(function(Value)
-        _G.AutoFishCrew = Value -- dit me may hub tao deo skid ok
-    end)
+    _G.KillFishCrew = Value -- dit me may hub tao deo skid ok
+end)
 
 Options.AutoFishCrewToggle:SetValue(false)
 
 spawn(function()
     while wait() do
-        if _G.AutoFishCrew then
-            pcall(function()
+        pcall(function()
+            if _G.KillFishCrew and taodangosea3 then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Fish Crew Member" then
                             if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                repeat task.wait()
+                                repeat
+                                    task.wait()
                                     EnableBuso()
                                     EquipTool(SelectWP)
                                     v.HumanoidRootPart.CanCollide = false
@@ -2763,7 +2726,7 @@ spawn(function()
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
-                                until not _G.AutoFishCrew or not v.Parent or v.Humanoid.Health <= 0
+                                until not _G.KillFishCrew or not v.Parent or v.Humanoid.Health <= 0
                             end
                         end
                     end
@@ -2773,8 +2736,50 @@ spawn(function()
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Fish Crew Member").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
-            end)
-        end
+            end
+        end)
+    end
+end)
+
+local AutoPiranhaToggle = Tabs.SE:AddToggle("AutoPiranhaToggle", {Title = "Auto Piranha", Default = false })
+
+AutoPiranhaToggle:OnChanged(function(Value)
+    _G.KillPiranha = Value -- dit me may hub tao deo skid ok
+end)
+
+Options.AutoPiranhaToggle:SetValue(false)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.KillPiranha and taodangosea3 then
+                if game:GetService("Workspace").Enemies:FindFirstChild("Piranha") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Piranha" then
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                repeat
+                                    task.wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                                until not _G.KillPiranha or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Piranha") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Piranha").HumanoidRootPart.CFrame  * CFrame.new(2, 20, 2))
+                    end
+                end
+            end
+        end)
     end
 end)
 
