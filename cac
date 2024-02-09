@@ -2642,7 +2642,7 @@ AutoSharkToggle:OnChanged(function(Value)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.KillShark and taodangosea3 then
+            if _G.AutoShark and taodangosea3 then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Shark") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Shark" then
@@ -2659,7 +2659,7 @@ spawn(function()
                                     _G.lencondaicanchetnguoi = true
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
-                                until not _G.KillShark or not v.Parent or v.Humanoid.Health <= 0
+                                until not _G.AutoShark or not v.Parent or v.Humanoid.Health <= 0
                                 _G.lencondaicanchetnguoi = false
                             end
                         end
@@ -2685,7 +2685,7 @@ Options.AutoTerrorSharkToggle:SetValue(false)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.AutoTerror and taodangosea3 and game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") then
+            if _G.AutoTerror and taodangosea3 then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Terrorshark" then
@@ -2728,7 +2728,7 @@ Options.AutoFishCrewToggle:SetValue(false)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.KillFishCrew and taodangosea3 and game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
+            if _G.AutoFishCrew and taodangosea3 then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Fish Crew Member" then
@@ -2745,7 +2745,7 @@ spawn(function()
                                     _G.lencondaicanchetnguoi = true
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
-                                until not _G.KillFishCrew or not v.Parent or v.Humanoid.Health <= 0
+                                until not _G.AutoFishCrew or not v.Parent or v.Humanoid.Health <= 0
                                 _G.lencondaicanchetnguoi = false
                             end
                         end
@@ -2763,7 +2763,7 @@ end)
 local AutoPiranhaToggle = Tabs.SE:AddToggle("AutoPiranhaToggle", {Title = "Auto Piranha", Default = false })
 
 AutoPiranhaToggle:OnChanged(function(Value)
-    _G.KillPiranha = Value -- dit me may hub tao deo skid ok
+    _G.AutoPiranha = Value -- dit me may hub tao deo skid ok
 end)
 
 Options.AutoPiranhaToggle:SetValue(false)
@@ -2771,7 +2771,7 @@ Options.AutoPiranhaToggle:SetValue(false)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.KillPiranha and taodangosea3 and game:GetService("Workspace").Enemies:FindFirstChild("Piranha") then
+            if _G.AutoShark and taodangosea3 and game:GetService("Workspace").Enemies:FindFirstChild("Piranha") then
                 if game:GetService("Workspace").Enemies:FindFirstChild("Piranha") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Piranha" then
@@ -2788,7 +2788,7 @@ spawn(function()
                                     _G.lencondaicanchetnguoi = true
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
-                                until not _G.KillPiranha or not v.Parent or v.Humanoid.Health <= 0
+                                until not _G.AutoPiranha or not v.Parent or v.Humanoid.Health <= 0
                                 _G.lencondaicanchetnguoi = false
                             end
                         end
@@ -2812,6 +2812,8 @@ spawn(function()
                     if not v.Name == "Shark" and not v.Name == "Terrorshark" and not v.Name == "Fish Crew Member" and not v.Name == "Piranha" then
                         Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
                     end
+                else
+                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
                 end
             end)
         end
