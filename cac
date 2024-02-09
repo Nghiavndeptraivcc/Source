@@ -811,6 +811,15 @@ end
 
 spawn(function()
     while wait() do
+        if _G.lencondaicanchetnguoi == true then
+            game:GetService("VirtualUser"):CaptureController()
+            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
         pcall(function()
             if _G.AutoFishCrew or _G.AutoShark or _G.AutoTerror or _G.AutoPiranha or _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
                 if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
@@ -2650,9 +2659,11 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     game.Players.LocalPlayer.Character.Humanoid.Sit = false
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    _G.lencondaicanchetnguoi = true
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
                                 until not _G.KillShark or not v.Parent or v.Humanoid.Health <= 0
+                                _G.lencondaicanchetnguoi = false
                             end
                         end
                     end
@@ -2692,9 +2703,11 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     game.Players.LocalPlayer.Character.Humanoid.Sit = false
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 50, 2))
+                                    _G.lencondaicanchetnguoi = true
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
                                 until not _G.AutoTerror or not v.Parent or v.Humanoid.Health <= 0
+                                _G.lencondaicanchetnguoi = false
                             end
                         end
                     end
@@ -2734,9 +2747,11 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     game.Players.LocalPlayer.Character.Humanoid.Sit = false
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    _G.lencondaicanchetnguoi = true
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
                                 until not _G.KillFishCrew or not v.Parent or v.Humanoid.Health <= 0
+                                _G.lencondaicanchetnguoi = false
                             end
                         end
                     end
@@ -2776,9 +2791,11 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     game.Players.LocalPlayer.Character.Humanoid.Sit = false
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    _G.lencondaicanchetnguoi = true
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
                                 until not _G.KillPiranha or not v.Parent or v.Humanoid.Health <= 0
+                                _G.lencondaicanchetnguoi = false
                             end
                         end
                     end
