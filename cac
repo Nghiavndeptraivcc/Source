@@ -978,6 +978,16 @@ task.spawn(function()
     end
 end)
 
+local TweenButtons = Tabs.G:AddSection("Cancel Tween")
+
+Tabs.G:AddButton({
+    Title = "Redeem All Codes",
+    Description = "Click the buttons to redeem all codes",
+    Callback = function()
+        Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
+})
+
 local FarmmingSettings = Tabs.G:AddSection("Farmming Settings")
 
 local Stats = Tabs.G:AddDropdown("Stats", {
