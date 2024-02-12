@@ -3123,6 +3123,16 @@ spawn(function()
     end
 end)
 
+spawn(function()
+    while task.wait() do
+        if _G.FastAttackOld == true then
+            wait(.1)
+            game:GetService("VirtualUser"):CaptureController()
+            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+        end
+    end
+end)
+
 local BringMob = Tabs.S:AddToggle("BringMob", {Title = "Bring Mob", Default = true })
 
 BringMob:OnChanged(function(Value)
