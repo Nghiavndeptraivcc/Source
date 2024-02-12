@@ -1170,7 +1170,7 @@ local FarmToggle = Tabs.G:AddToggle("FarmToggle", {Title = "Auto Farm", Default 
 local PosDaoSky3 = CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531)
 spawn(function()
     while wait() do
-        if _G.LevelFarm and game.Players.LocalPlayer.Data.Level.Value >= 10 and game.Players.LocalPlayer.Data.Level.Value <= 149 then
+        if _G.LevelFarm and game.Players.LocalPlayer.Data.Level.Value >= 1 and game.Players.LocalPlayer.Data.Level.Value <= 149 then
             pcall(function()
                 if game:GetService("Workspace").Enemies:FindFirstChild("Shanda") or game:GetService("Workspace").Enemies:FindFirstChild("Royal Squad") or game:GetService("Workspace").Enemies:FindFirstChild("Royal Soldier") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
