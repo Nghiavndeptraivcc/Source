@@ -1145,6 +1145,7 @@ local FarmToggle = Tabs.G:AddToggle("FarmToggle", {Title = "Auto Farm", Default 
                                     EnableBuso()
                                     EquipTool(SelectWP)
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    Click()
                                     v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                     v.Humanoid.WalkSpeed = 0
                                     v.HumanoidRootPart.CanCollide = false
@@ -1205,6 +1206,7 @@ spawn(function()
                                     wait()
                                     EnableBuso()
                                     EquipTool(SelectWP)
+                                    Click()
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
@@ -1233,6 +1235,7 @@ spawn(function()
                                                 wait()
                                                 EnableBuso()
                                                 EquipTool(SelectWP)
+                                                Click()
                                                 v.HumanoidRootPart.CanCollide = false
                                                 v.Humanoid.WalkSpeed = 0
                                                 v.Head.CanCollide = false
@@ -1318,6 +1321,7 @@ spawn(function()
                                         task.wait()
                                         EnableBuso()
                                         EquipTool(SelectWP)
+                                        Click()
                                         v.HumanoidRootPart.CanCollide = false
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
