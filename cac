@@ -1715,7 +1715,7 @@ spawn(function()
                                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                         v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                         v.Humanoid.WalkSpeed = 0
-                                        v.HumanoidRootPart.CanCollide = 
+                                        v.HumanoidRootPart.CanCollide = false
                                         _G.AutoClick = true
                                         game:GetService'VirtualUser':CaptureController()
                                         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672),workspace.CurrentCamera.CFrame)
