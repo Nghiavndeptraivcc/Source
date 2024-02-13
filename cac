@@ -3091,7 +3091,7 @@ spawn(function()
 end)
 
 local FastDelay = Tabs.S:AddDropdown("FastDelay", {
-    Title = "Dropdown",
+    Title = "FastAttack Delay",
     Values = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
     Multi = false,
     Default = 1,
