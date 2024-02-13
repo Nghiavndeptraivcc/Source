@@ -1704,6 +1704,50 @@ spawn(function()
     end
 end)
 
+local AutoSawToggle = Tabs.G:AddToggle("AutoSawToggle", {Title = "Auto Saw Sword", Default = false })
+
+AutoSawToggle:OnChanged(function(Value)
+    _G.AutoSaw = Value
+end)
+
+Options.AutoSawToggle:SetValue(false)
+
+local PosSaw = CFrame.new(-687.616638, 13.8629713, 1580.74951)
+spawn(function()
+    while wait() do
+        if _G.AutoSaw and taodangosea1 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("The Saw") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "The Saw" and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoSaw then
+                            repeat task.wait()
+                                EnableBuso()
+                                EquipTool(SelectWP)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.CanCollide = false
+                                game:GetService("VirtualUser"):CaptureController()
+                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                            until v.Humanoid.Health <= 0 or not _G.AutoSaw or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (PosSaw.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            Taixiu(PosSaw)
+                        elseif (PosSaw.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(PosSaw)
+                        end
+                    else
+                        Tween(PosSaw)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 local AutoPoleToggle = Tabs.IQ:AddToggle("AutoPoleToggle", {Title = "Auto Pole", Default = false })
 
 AutoPoleToggle:OnChanged(function(Value)
