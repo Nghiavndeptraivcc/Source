@@ -887,7 +887,7 @@ spawn(function()
     repeat
         task.wait()
     until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
-    wait(.1)
+    wait(.3)
     require(game.ReplicatedStorage.Notification).new("<Color=Green>Welcome To Night Hub<Color=/>"):Display()
     wait(.2)
     require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Owner : ! NightX<Color=/>"):Display()
@@ -1150,9 +1150,9 @@ local FarmToggle = Tabs.G:AddToggle("FarmToggle", {Title = "Auto Farm", Default 
                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                         if BypassTP then
-                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMob.Position).Magnitude > 2000 then
-                                Taixiu(CFrameMob)
-                            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMob.Position).Magnitude < 2000 then
+                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
+                                Taixiu(CFrameQuest)
+                            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
                                 Tween(CFrameQuest)
                             end
                         else
