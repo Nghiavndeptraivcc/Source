@@ -823,7 +823,7 @@ function NightHubNoSkid(Item)
     return lon
 end
 
-function TweenIsland()
+function TeleportIsland()
     if _G.SelectIsland == "WindMill" then
         Tween(CFrame.new(979.79895019531, 16.516613006592, 1429.0466308594))
     elseif _G.SelectIsland == "Marine" then
