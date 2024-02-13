@@ -1226,6 +1226,7 @@ spawn(function()
                                     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                 until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0
                                 _G.AutoClick = false
+                                Tween(PosDaoSky3)
                             end
                         end
                     end
