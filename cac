@@ -843,6 +843,12 @@ function TeleportIsland()
     elseif _G.SelectIsland == "Colosseum" then
         Tween(CFrame.new(-1427.6203613281, 7.2881078720093, -2792.7722167969))
     elseif _G.SelectIsland == "Sky Island 1" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4607.82275, 872.54248, -1667.55688))
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4607.82275, 872.54248, -1667.55688))
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4607.82275, 872.54248, -1667.55688))
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4607.82275, 872.54248, -1667.55688))
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4607.82275, 872.54248, -1667.55688))
+        wait(0.5)
         Tween(CFrame.new(-4869.1025390625, 733.46051025391, -2667.0180664063))
     elseif _G.SelectIsland == "Sky Island 2" then
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4607.82275, 872.54248, -1667.55688))
