@@ -1185,8 +1185,8 @@ spawn(function()
                                     v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                     v.Humanoid.WalkSpeed = 0
                                     v.HumanoidRootPart.CanCollide = false
-                                    PosMon = v.HumanoidRootPart.CFrame
-                                    BringMob = true
+                                    BringSky = v.HumanoidRootPart.CFrame
+                                    SkipLevel = true
                                     game:GetService'VirtualUser':CaptureController()
                                     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                 until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0
@@ -3209,6 +3209,19 @@ spawn(function()
                             v.Humanoid.Animator:Destroy()
                         end
                         sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                    end
+                    if _G.LevelFarm and SkipLevel then
+                        if (v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                            v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                            v.HumanoidRootPart.CFrame = BringSky
+                            v.Humanoid:ChangeState(14)
+                            v.HumanoidRootPart.CanCollide = false
+                            v.Head.CanCollide = false
+                            if v.Humanoid:FindFirstChild("Animator") then
+                                v.Humanoid.Animator:Destroy()
+                            end
+                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                        end
                     end
                     if _G.AutoKatakuri and BringKatakuriMob then
                         if (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
