@@ -1748,6 +1748,50 @@ spawn(function()
     end
 end)
 
+local AutoGreybeardToggle = Tabs.IQ:AddToggle("AutoGreybeardToggle", {Title = "Auto Greybeard", Default = false })
+
+AutoGreybeardToggle:OnChanged(function(Value)
+    _G.AutoGreybeard = Value
+end)
+
+Options.AutoGreybeardToggle:SetValue(false)
+
+local PosGreybeard = CFrame.new(-4881.23095703125, 22.65204429626465, 4273.75244140625)
+spawn(function()
+    while wait() do
+        if _G.AutoGreybeard and taodangosea1 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Greybeard") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Greybeard" and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoSaw then
+                            repeat task.wait()
+                                EnableBuso()
+                                EquipTool(SelectWP)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.CanCollide = false
+                                game:GetService("VirtualUser"):CaptureController()
+                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                            until v.Humanoid.Health <= 0 or not _G.AutoGreybeard or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (PosGreybeard.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            Taixiu(PosGreybeard)
+                        elseif (PosGreybeard.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(PosGreybeard)
+                        end
+                    else
+                        Tween(PosGreybeard)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 local AutoPoleToggle = Tabs.IQ:AddToggle("AutoPoleToggle", {Title = "Auto Pole", Default = false })
 
 AutoPoleToggle:OnChanged(function(Value)
