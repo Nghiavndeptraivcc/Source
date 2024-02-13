@@ -3302,7 +3302,7 @@ end)
 spawn(function()
     while task.wait() do
         if _G.AutoClick == true then
-            wait(.1)
+            wait(_G.FastAttackDelay)
             game:GetService("VirtualUser"):CaptureController()
             game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
         end
