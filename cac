@@ -1132,6 +1132,14 @@ spawn(function()
     end
 end)
 
+local AutoClickToggle = Tabs.G:AddToggle("AutoClickToggle", {Title = "Auto Click", Default = false })
+
+AutoClickToggle:OnChanged(function(Value)
+        _G.AutoClick = Value
+    end)
+
+Options.AutoClickToggle:SetValue(false)
+
 local FarmmingSettings = Tabs.G:AddSection("Farmming Toggle")
 
 local FarmToggle = Tabs.G:AddToggle("FarmToggle", {Title = "Auto Farm", Default = false })
@@ -3282,7 +3290,7 @@ end)
 
 spawn(function()
     while task.wait() do
-        if _G.FastAttackOld == true then
+        if _G.AutoClick == true then
             wait(.1)
             game:GetService("VirtualUser"):CaptureController()
             game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
