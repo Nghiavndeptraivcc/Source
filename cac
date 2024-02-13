@@ -2518,7 +2518,7 @@ if taodangosea1 then
     "Under Water Island",
     "Fountain City",
     "Shank Room",
-    "Mob Island",},
+    "Mob Island",}
 elseif taodangosea2 then
     ValuesIsland = {"The Cafe",
     "Frist Spot",
@@ -2535,7 +2535,7 @@ elseif taodangosea2 then
     "Ice Castle",
     "Forgotten Island",
     "Ussop Island",
-    "Mini Sky Island"},
+    "Mini Sky Island"}
 elseif taodangosea3 then
     ValuesIsland = {"Mansion",
     "Port Town",
@@ -2550,7 +2550,7 @@ elseif taodangosea3 then
     "Cake Island",
     "Cocoa Island",
     "Tiki Outpost New",
-    "Candy Island New⛄"},
+    "Candy Island New⛄"}
 end
 local SelectIslandDropdown = Tabs.LC:AddDropdown("SelectIslandDropdown", {
     Title = "Select Island",
