@@ -1774,7 +1774,7 @@ spawn(function()
             pcall(function()
                 if game:GetService("Workspace").Enemies:FindFirstChild("Greybeard") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v.Name == "Greybeard" and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoSaw then
+                        if v.Name == "Greybeard" and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoGreybeard then
                             repeat task.wait()
                                 EnableBuso()
                                 EquipTool(SelectWP)
