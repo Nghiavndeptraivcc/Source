@@ -2294,7 +2294,7 @@ spawn(function()
     end
 end)
 
-local AutoBartiloToggle = Tabs.IQ:AddToggle("AutoBartiloToggle", {Title = "Auto Bartilo", Default = false })
+local AutoBartiloToggle = Tabs.IQ:AddToggle("AutoBartiloToggle", {Title = "Auto Bartilo Quest", Default = false })
 
 AutoBartiloToggle:OnChanged(function(Value)
     _G.AutoBartilo = Value
@@ -2320,12 +2320,12 @@ spawn(function()
                                             v.HumanoidRootPart.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))													
-                                            PosMonBarto =  v.HumanoidRootPart.CFrame
-                                            AutoBartiloBring = true
+                                            PosSwanMob =  v.HumanoidRootPart.CFrame
+                                            BringQuaiSwan = true
                                             game:GetService'VirtualUser':CaptureController()
                                             game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until not v.Parent or v.Humanoid.Health <= 0 or _G.AutoBartilo == false or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                        AutoBartiloBring = false
+                                        BringQuaiSwan = false
                                     end)
                                 end
                             end
@@ -3743,6 +3743,19 @@ spawn(function()
                         if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
                             v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
                             v.HumanoidRootPart.CFrame = PosMobBone
+                            v.Humanoid:ChangeState(14)
+                            v.HumanoidRootPart.CanCollide = false
+                            v.Head.CanCollide = false
+                            if v.Humanoid:FindFirstChild("Animator") then
+                                v.Humanoid.Animator:Destroy()
+                            end
+                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                        end
+                    end
+                    if _G.AutoBartilo and BringQuaiSwan then
+                        if v.Name == "Swan Pirate" and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (PosSwanMob.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                            v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                            v.HumanoidRootPart.CFrame = PosSwanMob
                             v.Humanoid:ChangeState(14)
                             v.HumanoidRootPart.CanCollide = false
                             v.Head.CanCollide = false
