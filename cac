@@ -1362,11 +1362,12 @@ spawn(function()
                                 until not _G.LevelFarm or game.Players.LocalPlayer.Data.Level.Value <= 149 or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                 _G.AutoClick = false
                             end
-                        end
-                        Tween(CFrameMob)
-                        BringMob = false
-                        if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
-                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        else
+                            Tween(CFrameMob)
+                            BringMob = false
+                            if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
+                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            end
                         end
                     end
                 elseif _G.SelectFarm == "Level" and SkipLv and game.Players.Localplayer.Data.Level.Value >= 1 and game.Players.Localplayer.Data.Level.Value <= 149 then
@@ -1439,11 +1440,12 @@ spawn(function()
                                 until not _G.LevelFarm or game.Players.LocalPlayer.Data.Level.Value <= 149 or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                 _G.AutoClick = false
                             end
-                        end
-                        Tween(CFrameMob)
-                        BringMob = false
-                        if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
-                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        else
+                            Tween(CFrameMob)
+                            BringMob = false
+                            if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
+                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            end
                         end
                     end
                 elseif _G.SelectFarm == "Katakuri" then
