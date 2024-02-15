@@ -1343,32 +1343,35 @@ spawn(function()
                         if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
                         end
-                    elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                        for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                if v.Name == Mob then
-                                    repeat wait()
-                                        EnableBuso()
-                                        EquipTool(SelectWP)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        Click()
-                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.HumanoidRootPart.CanCollide = false
-                                        PosMon = v.HumanoidRootPart.CFrame
-                                        BringMob = true
-                                        _G.AutoClick = true
-                                        game:GetService'VirtualUser':CaptureController()
-                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                    until not _G.LevelFarm or game.Players.LocalPlayer.Data.Level.Value <= 149 or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                    _G.AutoClick = false
+                    elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                        Checknhiemvu()
+                        if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                    if v.Name == Mob then
+                                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
+                                            repeat task.wait()
+                                                EquipTool(SelectWP)
+                                                EnableBuso()                                            
+                                                PosMon = v.HumanoidRootPart.CFrame
+                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.Humanoid.WalkSpeed = 0
+                                                v.Head.CanCollide = false
+                                                v.HumanoidRootPart.Size = Vector3.new(70,70,70)
+                                                BringMob = true
+                                                game:GetService'VirtualUser':CaptureController()
+                                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                            until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                        end
+                                    end
                                 end
-                            else
-                                Tween(CFrameMob)
-                                BringMob = false
-                                if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
-                                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                end
+                            end
+                        else
+                            Tween(CFrameMob)
+                            BringMob = false
+                            if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
+                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2 ,20 ,2))
                             end
                         end
                     end
@@ -1423,32 +1426,35 @@ spawn(function()
                         if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
                         end
-                    elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                        for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                if v.Name == Mob then
-                                    repeat wait()
-                                        EnableBuso()
-                                        EquipTool(SelectWP)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        Click()
-                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.HumanoidRootPart.CanCollide = false
-                                        PosMon = v.HumanoidRootPart.CFrame
-                                        BringMob = true
-                                        _G.AutoClick = true
-                                        game:GetService'VirtualUser':CaptureController()
-                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                    until not _G.LevelFarm or game.Players.LocalPlayer.Data.Level.Value <= 149 or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                    _G.AutoClick = false
+                    elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                        Checknhiemvu()
+                        if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                    if v.Name == Mob then
+                                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
+                                            repeat task.wait()
+                                                EquipTool(SelectWP)
+                                                EnableBuso()                                            
+                                                PosMon = v.HumanoidRootPart.CFrame
+                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.Humanoid.WalkSpeed = 0
+                                                v.Head.CanCollide = false
+                                                v.HumanoidRootPart.Size = Vector3.new(70,70,70)
+                                                BringMob = true
+                                                game:GetService'VirtualUser':CaptureController()
+                                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                            until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                        end
+                                    end
                                 end
-                            else
-                                Tween(CFrameMob)
-                                BringMob = false
-                                if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
-                                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                end
+                            end
+                        else
+                            Tween(CFrameMob)
+                            BringMob = false
+                            if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
+                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2 ,20 ,2))
                             end
                         end
                     end
