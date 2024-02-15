@@ -1084,7 +1084,7 @@ local G = Window:MakeTab({Name = "General", Icon = "rbxassetid://15541504459", P
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local IQ = Window:MakeTab({Name = "Item & Quest", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local RD = Window:MakeTab({Name = "Raid & Devil Fruit", Icon = "rbxassetid://15541504459", PremiumOnly = false })
-local ST = Window:MakeTab({Name = "Status and Servers", Icon = "rbxassetid://15541504459", PremiumOnly = false })
+local SV = Window:MakeTab({Name = "Status and Servers", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local RC = Window:MakeTab({Name = "Upgrated Race", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local SE = Window:MakeTab({Name = "Sea Event", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 
