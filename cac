@@ -1158,7 +1158,7 @@ G:AddToggle({
 	Name = "Skip Level If Farm(1 - 150)",
 	Default = false,
 	Save = true,
-	Flag = "Turn V4",
+	Flag = "Skip Level If Farm",
 	Callback = function(Value)
 		SkipLv = Value
 	end    
@@ -1323,6 +1323,10 @@ spawn(function()
     end
 end)
 
+
+local PosDaoSky3 = CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531)
+local PosBone = CFrame.new(-9515.75, 174.8521728515625, 6079.40625)
+local CakeIsland = CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375)
 spawn(function()
     while wait() do
         if _G.StartFarm then
