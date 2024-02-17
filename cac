@@ -969,6 +969,30 @@ function TeleportIsland()
     end
 end
 
+function TweenDaobian()
+    repeat wait()
+    until game:GetService("Workspace").Map:FindFirstChild("MysticIsland")
+    if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+        local AllNPCS = getnilinstances()
+        for _, v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+            table.insert(AllNPCS, v)
+        end
+        for _, v in pairs(AllNPCS) do
+            if v.Name == "Advanced Fruit Dealer" then
+                Teleport(v.HumanoidRootPart.CFrame)
+            end
+        end
+    end
+end
+
+function TweenFrozen()
+    pcall(function()
+        if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
+            Teleport(game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') * CFrame.new(2, 20, 2))
+        end
+    end)
+end
+
 spawn(function()
     while wait() do
         if _G.lencondaicanchetnguoi == true then
@@ -1083,6 +1107,7 @@ local I = Window:MakeTab({Name = "Info", Icon = "rbxassetid://15541504459", Prem
 local G = Window:MakeTab({Name = "General", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local IQ = Window:MakeTab({Name = "Item & Quest", Icon = "rbxassetid://15541504459", PremiumOnly = false })
+local LC = Window:MakeTab({Name = "LocalPlayer", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local RD = Window:MakeTab({Name = "Raid & Devil Fruit", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local SV = Window:MakeTab({Name = "Status and Servers", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local RC = Window:MakeTab({Name = "Upgrated Race", Icon = "rbxassetid://15541504459", PremiumOnly = false })
@@ -1325,6 +1350,156 @@ IQ:AddToggle({
 		_G.AutoGreyboard = Value
         Djtmestop(_G.AutoGreyboardr)
 	end    
+})
+
+IQ:AddToggle({
+	Name = "Auto Superhuman",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoSuperhuman = Value
+	end    
+})
+
+-- LocalPlayer Tab :
+
+local Section = ST:AddSection({
+	Name = "Travel"
+})
+
+LC:AddDropdown({
+	Name = "Select Sea",
+	Default = "1",
+	Options = {"1", "2", "3"},
+	Callback = function(Value)
+		_G.SelectSea = Value
+	end    
+})
+
+LC:AddButton({
+	Name = "Teleport To Sea",
+	Callback = function()
+        gteleporttosea()
+  	end    
+})
+
+local Section = LC:AddSection({
+	Name = "Islands"
+})
+
+if taodangosea1 then
+TL:AddDropdown({
+    Name = "Select Island",
+    Default = "",
+    Options = {"WindMill",
+    "Marine",
+    "Middle Town",
+    "Jungle",
+    "Pirate Village",
+    "Desert",
+    "Snow Island",
+    "MarineFord",
+    "Colosseum",
+    "Sky Island 1",
+    "Sky Island 2",
+    "Sky Island 3",
+    "Prison",
+    "Magma Village",
+    "Under Water Island",
+    "Fountain City",
+    "Shank Room",
+    "Mob Island",},
+    Flag = "Select Island",
+    Save = true,
+    Callback = function(Value)
+        _G.SelectIsland = Value
+    end    
+})
+
+end
+if taodangosea2 then
+TL:AddDropdown({
+    Name = "Select Island",
+    Default = "",
+    Options = {"The Cafe",
+    "Frist Spot",
+    "Dark Area",
+    "Flamingo Mansion",
+    "Flamingo Room",
+    "Green Zone",
+    "Factory",
+    "Colossuim",
+    "Zombie Island",
+    "Two Snow Mountain",
+    "Punk Hazard",
+    "Cursed Ship",
+    "Ice Castle",
+    "Forgotten Island",
+    "Ussop Island",
+    "Mini Sky Island"},
+    Flag = "Select Island",
+    Save = true,
+    Callback = function(Value)
+        _G.SelectIsland = Value
+    end    
+})
+end
+
+if taodangosea3 then
+TL:AddDropdown({
+    Name = "Select Island",
+    Default = "",
+    Options = {"Mansion",
+    "Port Town",
+    "Great Tree",
+    "Castle On The Sea",
+    "MiniSky", 
+    "Hydra Island",
+    "Floating Turtle",
+    "Haunted Castle",
+    "Ice Cream Island",
+    "Peanut Island",
+    "Cake Island",
+    "Cocoa Island",
+    "Tiki Outpost New",
+    "Candy Island New⛄"},
+    Flag = "Select Island",
+    Save = true,
+    Callback = function(Value)
+        _G.SelectIsland = Value
+    end    
+})
+end
+
+LC:AddButton({
+    Name = "Teleport To Island",
+    Callback = function()
+        TweenIsland()
+    end
+})
+
+LC:AddButton({
+	Name = "Stop Teleport",
+	Callback = function()
+        Djtmestop(All)
+  	end    
+})
+
+local Section = LC:AddSection({
+	Name = "Teleport Misc"
+})
+
+LC:AddButton({
+    Name = "Teleport To Frozen Leviathan",
+    Callback = function()
+        TweenFrozen()
+    end
+})
+
+LC:AddButton({
+    Name = "Teleport To Mirrage Island",
+    Callback = function()
+        TweenDaobian()
+    end
 })
 
 -- Devil Fruit and Raid Tab :
@@ -1957,6 +2132,79 @@ spawn(function()
             end)
         end
     end
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do 
+            if _G.AutoSuperhuman then
+                if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") or game.Players.LocalPlayer.Character:FindFirstChild("Combat") and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 150000 then
+                    UnEquipTool("Combat")
+                    wait(.1)
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
+                end   
+                if game.Players.LocalPlayer.Character:FindFirstChild("Superhuman") or game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman") then
+                    SelectWP = "Superhuman"
+                end  
+                if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") or game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") or game.Players.LocalPlayer.Character:FindFirstChild("Electro") or game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") or game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") or game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") then
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value <= 299 then
+                        SelectWP = "Black Leg"
+                    end
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value <= 299 then
+                        SelectWP = "Electro"
+                    end
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value <= 299 then
+                        SelectWP = "Fishman Karate"
+                    end
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value <= 299 then
+                        SelectWP = "Dragon Claw"
+                    end
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 300000 then
+                        UnEquipTool("Black Leg")
+                        wait(.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
+                    end
+                    if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Character:FindFirstChild("Black Leg").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 300000 then
+                        UnEquipTool("Black Leg")
+                        wait(.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
+                    end
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 750000 then
+                        UnEquipTool("Electro")
+                        wait(.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
+                    end
+                    if game.Players.LocalPlayer.Character:FindFirstChild("Electro") and game.Players.LocalPlayer.Character:FindFirstChild("Electro").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 750000 then
+                        UnEquipTool("Electro")
+                        wait(.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
+                    end
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value >= 300 and game:GetService("Players")["Localplayer"].Data.Fragments.Value >= 1500 then
+                        UnEquipTool("Fishman Karate")
+                        wait(.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2") 
+                    end
+                    if game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate").Level.Value >= 300 and game:GetService("Players")["Localplayer"].Data.Fragments.Value >= 1500 then
+                        UnEquipTool("Fishman Karate")
+                        wait(.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2") 
+                    end
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 3000000 then
+                        UnEquipTool("Dragon Claw")
+                        wait(.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
+                    end
+                    if game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 3000000 then
+                        UnEquipTool("Dragon Claw")
+                        wait(.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
+                    end 
+                end
+            end
+        end
+    end)
 end)
 
 spawn(function()
