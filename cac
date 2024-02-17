@@ -1363,28 +1363,28 @@ RD:AddToggle({
 
 --  Status and Servers Tab :
 
-local Section = ST:AddSection({
+local Section = SV:AddSection({
 	Name = "Status"
 })
 
-local Moon = ST:AddLabel("Moon : deo co moon")
-local Mirage = ST:AddLabel("Mirage : ❌")
-local Kitsune = ST:AddLabel("Kitsune Island : ❌")
-local Elite = ST:AddLabel("Elite : ❌")
-local Frozen = ST:AddLabel("Frozen Dimension : ❌")
+local Moon = SV:AddLabel("Moon : deo co moon")
+local Mirage = SV:AddLabel("Mirage : ❌")
+local Kitsune = SV:AddLabel("Kitsune Island : ❌")
+local Elite = SV:AddLabel("Elite : ❌")
+local Frozen = SV:AddLabel("Frozen Dimension : ❌")
 
-local Section = ST:AddSection({
+local Section = SV:AddSection({
 	Name = "Servers"
 })
 
-ST:AddButton({
+SV:AddButton({
 	Name = "Hop Servers",
 	Callback = function()
       	Hop()
   	end    
 })
 
-ST:AddTextbox({
+SV:AddTextbox({
 	Name = "Put Job Id here",
 	Default = "",
 	TextDisappear = true,
@@ -1393,7 +1393,7 @@ ST:AddTextbox({
 	end	  
 })
 
-ST:AddButton({
+SV:AddButton({
 	Name = "Join Job Id",
 	Callback = function()
         game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId,_G.ImPutJobId, game.Players.LocalPlayer)
