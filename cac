@@ -1329,7 +1329,7 @@ IQ:AddToggle({
 
 -- Devil Fruit and Raid Tab :
 
-ST:AddButton({
+RD:AddButton({
 	Name = "Random Fruit",
 	Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin","Buy")
