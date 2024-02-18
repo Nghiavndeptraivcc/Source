@@ -2371,7 +2371,7 @@ spawn(function()
                                 game:GetService("VirtualUser"):CaptureController()
                                 game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
                                 _G.AutoClick = true
-                            until _G.TrialV4 == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
+                            until _G.AutoKillPlyAfterTrial == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
                             _G.AutoClick = false
                         end
                     end
@@ -2392,16 +2392,6 @@ spawn(function()
                     game:GetService("VirtualUser"):SetKeyUp("0x65")
                 end
             until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or not _G.KillV4
-        end
-    end
-end)
-
-spawn(function()
-    while wait() do
-        if _G.AutoKillPlyAfterTrial then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
-            wait(0.1)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
         end
     end
 end)
