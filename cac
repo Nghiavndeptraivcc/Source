@@ -2356,22 +2356,52 @@ spawn(function()
     while wait() do
         if _G.AutoKillPlyAfterTrial then
             pcall(function()
-                for i, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                    if v.Name ~= game.Players.LocalPlayer.Name and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 150 then
-                        repeat task.wait()
-                            EnableBuso()
-                            EquipTool(SelectWP)
-                            v.HumanoidRootPart.CanCollide = false
-                            v.Humanoid.WalkSpeed = 0
-                            v.HumanoidRootPart.Size = Vector3.new(80,80,80)     
-                            _G.AutoClick = true                        
-                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                            game:GetService("VirtualUser"):CaptureController()
-                            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                        until v.Humanoid.Health <= 0 or not _G.AutoKillPlyAfterTrial or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                for i, v in pairs(game.Workspace.Characters:GetChildren()) do
+                    if v.Name ~= game.Players.LocalPlayer.Name then
+                        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 150 then
+                            repeat task.wait()
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 3))
+                                EnableBuso()
+                                EquipTool(SelectWP)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Head.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                Click()
+                                game:GetService("VirtualUser"):CaptureController()
+                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                _G.AutoClick = true
+                            until _G.TrialV4 == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
+                            _G.AutoClick = false
+                        end
                     end
                 end
             end)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoKillPlyAfterTrial then
+            repeat task.wait()
+                if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+                    game:GetService("VirtualUser"):CaptureController()
+                    game:GetService("VirtualUser"):SetKeyDown("0x65")
+                    wait(2)
+                    game:GetService("VirtualUser"):SetKeyUp("0x65")
+                end
+            until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or not _G.KillV4
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoKillPlyAfterTrial then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
+            wait(0.1)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
         end
     end
 end)
