@@ -2923,7 +2923,6 @@ spawn(function()
                                         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672),workspace.CurrentCamera.CFrame)
                                     until v.Humanoid.Health <= 0 or not _G.AutoSaber or NightHubNoSkid("Saber")
                                     _G.AutoClick = false
-                                    Options.AutoSaberToggle:SetValue(false)
                                     if v.Humanoid.Health <= 0 then
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","PlaceRelic")
                                     end
@@ -2982,7 +2981,8 @@ spawn(function()
     while wait() do
         if _G.AutoThirdSea then
             pcall(function()
-                if game.Players.LocalPlayer.Data.Level.Value >= 1500 and taodangosea2 then
+                if game:GetService("Players").LocalPlayer.Data.Level.Value >= 1500 and taodangosea2 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
                     if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "General") == 0 then
                         Tween(Mygame43Trash)
                         if (Mygame43Trash.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 then
@@ -3003,14 +3003,13 @@ spawn(function()
                                             _G.AutoClick = true
                                             game:GetService("VirtualUser"):CaptureController()
                                             game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
                                         until v.Humanoid.Health <= 0 or not _G.AutoThirdSea or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
                                         _G.AutoClick = false
                                     end
                                 end
                             end
                         end
-                    else
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
                     end
                 end
             end)
