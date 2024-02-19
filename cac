@@ -1570,6 +1570,24 @@ IQ:AddToggle({
 	end    
 })
 
+IQ:AddToggle({
+	Name = "Auto Swan",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoSwan = Value
+        Djtmestop(_G.AutoSwan)
+	end    
+})
+
+IQ:AddToggle({
+	Name = "Auto Third Sea",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoThirdSea = Value
+        Djtmestop(_G.AutoThirdSea)
+	end    
+})
+
 IQ:AddParagraph("Maretials","Select Maretials to Farm")
 
 IQ:AddDropdown({
@@ -2912,6 +2930,87 @@ spawn(function()
                                 end
                             end
                         end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local PosSwanRoom = CFrame.new(2284.91211, 15.1520348, 905.48291)
+spawn(function()
+    while wait() do
+        if _G.AutoSwan then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Swan") then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                            if v.Name == "Swan" then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.CanCollide = false
+                                    _G.AutoClick = true
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                until v.Humanoid.Health <= 0 or not _G.AutoSaw or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                                _G.AutoClick = false
+                            end
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (PosSwanRoom.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(2284.91211, 15.1520348, 905.48291))
+                        elseif (PosSwanRoom.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(PosSwanRoom)
+                        end
+                    else
+                        Tween(PosSwanRoom)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local Mygame43Trash = CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016)
+spawn(function()
+    while wait() do
+        if _G.AutoThirdSea then
+            pcall(function()
+                if game.Players.LocalPlayer.Data.Level.Value >= 1500 and taodangosea2 then
+                    if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "General") == 0 then
+                        Tween(Mygame43Trash)
+                        if (Mygame43Trash.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 then
+                            wait(0.5)
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress","Begin")
+                        end
+                        if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    if v.Name == "rip_indra" then
+                                        repeat task.wait()
+                                            EnableBuso()
+                                            EquipTool(SelectWP)
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.HumanoidRootPart.CanCollide = false
+                                            _G.AutoClick = true
+                                            game:GetService("VirtualUser"):CaptureController()
+                                            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                        until v.Humanoid.Health <= 0 or not _G.AutoThirdSea or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                                        _G.AutoClick = false
+                                    end
+                                end
+                            end
+                        end
+                    else
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
                     end
                 end
             end)
