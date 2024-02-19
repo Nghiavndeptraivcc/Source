@@ -24,6 +24,16 @@ if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
     end
 end
 
+-- tumlumtala :
+
+if taodangosea1 then
+    Maretialslist = {"Angel Swings", "Leather", "Magma Ore", "Scrap Metal", "Yeti Fur", "Fish Tail"}
+elseif taodangosea2 then
+    Maretialslist = {"Magma Ore", "Ectoplasm", "Mistic Droplet", "Radioactive Material", "Vampire Fang"}
+elseif taodangosea3 then
+    Maretialslist = {"Fish Tail", "Gunpowder", "Mini Tusk", "Conjured Cocoa", "Dragon Scale"}
+end
+
 -- cac :
 
 function Checknhiemvu()
@@ -644,6 +654,51 @@ function Checknhiemvu()
         end
     end
 end
+
+function CheckMaterials()
+    if _G.SelectMaterials == "Angel Swings" then
+        Mob = {"Shanda", "God's Guard", "Royal Squad", "Royal Soldier"}
+    elseif _G.SelectMaterials == "Leather" then
+        Mob = {"Pirate", "Brute"}
+    elseif _G.SelectMaterials == "Magma Ore" then
+        if taodangosea1 then
+            Mob = {"Military Soldier", "Military Spy"}
+        end
+        if taodangosea2 then
+            Mob = {"Magma Admiral", "Magma Ninja", "Lava Pirate"}
+        end
+    elseif _G.SelectMaterials == "Scrap Metal" then
+        Mob = {"Pirate", "Brute"}
+    elseif _G.SelectMaterials == "Yeti Fur" then
+        Mob = "Yeti"
+    elseif _G.SelectMaterials == "Ectoplasm" then
+        Mob = {"Ship Deckhand", "Ship Engineer ", "Ship Steward", "Ship Officer", "Cursed Captain"}
+    elseif _G.SelectMaterials == "Fish Tail" then
+        if taodangosea1 then
+            Mob = {"Fishman Commando", "Fishman Warrior"}
+        end
+        if taodangosea3 then
+            Mob = {"Fishman Raider", "Fishman Captain"}
+        end
+    elseif _G.SelectMaterials == "Gunpowder" then
+        Mob = "Pistol Billionaire"
+    elseif _G.SelectMaterials == "Mini Tusk" then
+        Mob = "Mythological Pirate"
+    elseif _G.SelectMaterials == "Mystic Droplet" then
+        Mob = {"Sea Soldier", "Water Fighter"}
+    elseif _G.SelectMaterials == "Radioactive Material" then
+        Mob = "Factory Staff"
+    elseif _G.SelectMaterials == "Vampire Fang" then
+        Mob = "Vampire"
+    elseif _G.SelectMaterials == "Conjured Cocoa" then
+        Mob = {"Cocoa Warrior", "Chocolate Bar Battler"}
+    elseif _G.SelectMaterials == "Demonic Wisp" then
+        Mob = "Demonic Souls"
+    elseif _G.SelectMaterials == "Dragon Scale" then
+        Mob = {"Dragon Crew Warrior", "Dragon Crew Archer"}
+    end
+end
+
 
 function Hop()
     local PlaceID = game.PlaceId
@@ -1516,6 +1571,26 @@ IQ:AddToggle({
 	end    
 })
 
+IQ:AddParagraph("Maretials","Select Maretials to Farm")
+
+IQ:AddDropdown({
+	Name = "Select Maretials",
+	Default = "",
+	Options = Maretialslist,
+	Callback = function(Value)
+		_G.SelectMaterials = Value
+	end    
+})
+
+IQ:AddToggle({
+	Name = "Auto Maretials",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoMaretials = Value
+        Djtmestop(_G.AutoMaretials)
+	end    
+})
+
 -- LocalPlayer Tab :
 
 local Section = ST:AddSection({
@@ -2174,7 +2249,46 @@ spawn(function()
         end
     end
 end)
-    
+
+spawn(function()
+    while wait() do
+        if _G.AutoMaretials then
+            pcall(function()
+                CheckMaterials()
+                if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                            if v.Name == Mob then
+                                repeat task.wait()
+                                    EquipTool(SelectWP)
+                                    EnableBuso()                                            
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(70,70,70)
+                                    PosMaretialsMob = v.HumanoidRootPart.CFrame
+                                    BringQuai = true
+                                    _G.AutoClick = true
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoMaretials
+                            end
+                        end
+                    end
+                    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                        if string.find(v.Name,Mob) then
+                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
+                                Tween(v.CFrame * CFrame.new(2, 20, 2))
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
 CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
 v = debug.getupvalues(CombatFrameworkR)[2]
@@ -2940,6 +3054,20 @@ spawn(function()
                         if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
                             v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
                             v.HumanoidRootPart.CFrame = PosMobBone
+                            v.Humanoid:ChangeState(14)
+                            v.HumanoidRootPart.CanCollide = false
+                            v.Head.CanCollide = false
+                            if v.Humanoid:FindFirstChild("Animator") then
+                                v.Humanoid.Animator:Destroy()
+                            end
+                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                        end
+                    end
+                    if _G.AutoMaretials and BringQuai then
+                        CheckMaterial()
+                        if (v.Name == Mob) and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                            v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                            v.HumanoidRootPart.CFrame = PosMaretialsMob
                             v.Humanoid:ChangeState(14)
                             v.HumanoidRootPart.CanCollide = false
                             v.Head.CanCollide = false
