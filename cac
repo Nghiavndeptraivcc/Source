@@ -1580,6 +1580,24 @@ IQ:AddToggle({
 })
 
 IQ:AddToggle({
+	Name = "Auto Darkbeard",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoDarkbeard = Value
+        Djtmestop(_G.AutoDarkbeard)
+	end    
+})
+
+local ToggleGhoulRace = IQ:AddToggle({
+	Name = "Auto Ghoul Race",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoGhoulRace = Value
+        Djtmestop(_G.AutoGhoulRace)
+	end    
+})
+
+IQ:AddToggle({
 	Name = "Auto Third Sea",
 	Default = false,
 	Callback = function(Value)
@@ -1589,11 +1607,37 @@ IQ:AddToggle({
 })
 
 IQ:AddToggle({
+	Name = "Auto Admin(rip_indra)",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoAdmin = Value
+        Djtmestop(_G.AutoAdmin)
+	end    
+})
+
+IQ:AddToggle({
+	Name = "Auto Dough King",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoDoughtKing = Value
+        Djtmestop(_G.AutoDoughtKing)
+	end    
+})
+
+IQ:AddToggle({
+	Name = "Auto Hallow Scythe",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoHallowSycthe = Value
+        Djtmestop(_G.AutoHallowSycthe)
+	end    
+})
+
+IQ:AddToggle({
 	Name = "Auto Buy Sword Legend",
 	Default = false,
 	Callback = function(Value)
 		_G.AutoBuyLegendarySword = Value
-        Djtmestop(_G.AutoBuyLegendarySword)
 	end    
 })
 
@@ -2656,6 +2700,103 @@ spawn(function()
     end)
 end)
 
+local PosCursedBoss = CFrame.new(913.893311, 187.405502, 33598.7578)
+local PosGhoulRace = CFrame.new(923.748596, 125.529785, 33454.4883)
+spawn(function()
+    while wait() do
+        if _G.AutoGhoulRace and taodangosea2 then
+            pcall(function()
+                if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hellfire Torch") then
+                    if BypassTP then
+                        if (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                        elseif (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(PosGhoulRace)
+                            wait(0.5)
+                            local a = {
+                                [1] = "Ectoplasm",
+                                [2] = "BuyCheck",
+                                [3] = 4
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                            local a = {
+                                [1] = "Ectoplasm",
+                                [2] = "Change",
+                                [3] = 4
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                        end
+                    else
+                        Tween(PosGhoulRace)
+                        wait(0.5)
+                        local a = {
+                            [1] = "Ectoplasm",
+                            [2] = "BuyCheck",
+                            [3] = 4
+                        }
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                        local a = {
+                            [1] = "Ectoplasm",
+                            [2] = "Change",
+                            [3] = 4
+                        }
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                    end
+                elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hellfire Torch") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Captain") then
+                        for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Cursed Captain" then
+                                if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoGhoulRace then
+                                    repeat task.wait()
+                                        EnableBuso()
+                                        EquipTool(SelectWP)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                        _G.AutoClick = true
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoGhoulRace == false
+                                    _G.AutoClick = false
+                                end
+                            end
+                        end
+                    else
+                        if BypassTP then
+                            if (PosCursedBoss.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                            elseif (PosCursedBoss.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                                Tween(PosCursedBoss)
+                            end
+                        else
+                            Tween(PosCursedBoss)
+                        end
+                    end
+                else
+                    if game.Players.LocalPlayer.Data.Race.Value == "Ghoul" then
+                        ToggleGhoulRace:Set(false)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 spawn(function()
     while wait() do
         if _G.TeleportToFruit then
@@ -2978,6 +3119,131 @@ spawn(function()
                         end
                     else
                         Tween(PosSwanRoom)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while wait(0.001) do
+     if _G.AutoHallowSycthe then
+     local args = {
+         [1] = "Bones",
+         [2] = "Buy",
+         [3] = 1,
+         [4] = 1
+         }
+         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end
+ end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoHallowSycthe then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper") then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if string.find(v.Name , "Soul Reaper") then
+                            repeat task.wait()
+                                AutoHaki()
+                                EquipTool(SelectWP)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+                                v.HumanoidRootPart.CFrame = OldCFrameThird
+                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                _G.AutoClick = true
+                                sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                            until v.Humanoid.Health <= 0 or _G.AutoHallowSycthe == false
+                            _G.AutoClick = false
+                        end
+                    end
+                elseif game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hallow Essence") then
+                    repeat Tween(CFrame.new(-8932.322265625, 146.83154296875, 6062.55078125)) wait() until (CFrame.new(-8932.322265625, 146.83154296875, 6062.55078125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 8                        
+                    EquipTool("Hallow Essence")
+                else
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoRipIndra and taodangosea3 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") or game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "rip_indra True Form" or v.Name == "rip_indra" then
+                            if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoRipIndra then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    _G.AutoClick = true
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                until v.Humanoid.Health <= 0  or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or not _G.AutoRipIndra
+                                _G.AutoClick = false
+                            end
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - AdminPos.Position).Magnitude > 1500 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-5005.29834, 314.858734, -3025.00659))
+                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - AdminPos.Position).Magnitude < 1500 then
+                            Tween(AdminPos)
+                        end
+                    else
+                        Tween(AdminPos)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoDarkbeard and taodangosea2 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Darkbeard") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Darkbeard" then
+                            if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoDarkbeard then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    _G.AutoClick = true
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoDarkbeard == false
+                                _G.AutoClick = false
+                            end
+                        end
+                    end
+                else
+                    Tween(CFrame.new(3677.08203125, 62.751937866211, -3144.8332519531))
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
             end)
