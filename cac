@@ -2981,34 +2981,32 @@ spawn(function()
         if _G.AutoThirdSea then
             pcall(function()
                 if game:GetService("Players").LocalPlayer.Data.Level.Value >= 1500 and taodangosea2 then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
                     if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "General") == 0 then
                         Tween(CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016))
-                        if (CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 then
+                        if (CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
                             wait(0.5)
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress","Begin")
                         end
+                        wait(0.5)
                         if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                    if v.Name == "rip_indra" then
-                                        repeat task.wait()
-                                            EnableBuso()
-                                            EquipTool(SelectWP)
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                            v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                            v.Humanoid.WalkSpeed = 0
-                                            v.HumanoidRootPart.CanCollide = false
-                                            _G.AutoClick = true
-                                            game:GetService("VirtualUser"):CaptureController()
-                                            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
-                                        until v.Humanoid.Health <= 0 or not _G.AutoThirdSea or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
-                                        _G.AutoClick = false
-                                    end
+                                if v.Name == "rip_indra" then
+                                    repeat task.wait()
+                                        EnableBuso()
+                                        EquipTool(SelectWP)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        v.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+                                        sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                    until _G.AutoThirdSea == false or v.Humanoid.Health <= 0 or not v.Parent
                                 end
                             end
-                        elseif not game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
+                        elseif not game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") and (CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress","Begin")
                         end
                     end
@@ -3052,44 +3050,6 @@ spawn(function()
                     end
                 end
             end)
-        end
-    end
-end)
-
-spawn(function()
-    while task.wait() do
-        if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
-            Moon:Set("🌕: Full Moon 100%")
-        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" then
-            Moon:Set("🌖’ : Full Moon 75%")
-        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
-            Moon:Set("🌗“ : Full Moon 50%")
-        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
-            Moon:Set("🌘 : Full Moon 25%")
-        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
-            Moon:Set("🌘: Full Moon 15%")
-        else
-            Moon:SetDesc("Deo co moon")
-        end
-        if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
-            Frozen:Set("Frozen Dimension : ✅ Spawn")
-        else
-            Frozen:Set("Frozen Dimension : ❌ Not Spawn")
-        end
-        if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
-            Mirage:Set("Mirrage : ✅ Spawn")
-        else
-            Mirage:Set("Mirrage : ❌ Not Spawn")
-        end
-        if game:GetService("Workspace").Map:FindFirstChild('KitsuneIsland') then
-            Kitsune:Set("Kitsune Island : ✅ Spawn")
-        else
-            Kitsune:Set("Kitsune Island : ❌ Not Spawn")
-        end
-        if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
-            Elite:Set("Elite : ✅ Spawn")	
-        else
-            Elite:Set("Elite : ❌ Not Spawn")	
         end
     end
 end)
