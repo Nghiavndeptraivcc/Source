@@ -2942,10 +2942,10 @@ spawn(function()
     while wait() do
         if _G.AutoSwan then
             pcall(function()
-                if game:GetService("Workspace").Enemies:FindFirstChild("Swan") then
+                if game:GetService("Workspace").Enemies:FindFirstChild("Don Swan") then
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                            if v.Name == "Swan" then
+                            if v.Name == "Don Swan" then
                                 repeat task.wait()
                                     EnableBuso()
                                     EquipTool(SelectWP)
