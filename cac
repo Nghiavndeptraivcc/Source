@@ -6,7 +6,7 @@ elseif game.PlaceId == 4442272183 then
 elseif game.PlaceId == 7449423635 then
     taodangosea3 = true
 else
-    game.Players.LocalPlayer:Kick("You Are Blacklist :))")
+    game.Players.LocalPlayer:Kick("Bro, My Script Support Only Blox Fruits and Please Wait Me Update New Game")
 end
 
 -- Join Teams :
@@ -32,6 +32,14 @@ elseif taodangosea2 then
     Maretialslist = {"Magma Ore", "Ectoplasm", "Mistic Droplet", "Radioactive Material", "Vampire Fang"}
 elseif taodangosea3 then
     Maretialslist = {"Fish Tail", "Gunpowder", "Mini Tusk", "Conjured Cocoa", "Dragon Scale"}
+end
+
+if taodangosea1 then
+    BossList = {"The Gorilla King","Bobby","Yeti","Mob Leader","Vice Admiral","Warden","Chief Warden","Swan","Magma Admiral","Fishman Lord","Wysper","Thunder God","Cyborg","Saber Expert"}
+elseif taodangosea2 then
+    BossList = {"Diamond","Jeremy","Fajita","Don Swan","Smoke Admiral","Cursed Captain","Darkbeard","Order","Awakened Ice Admiral","Tide Keeper"}
+elseif taodangosea3 then
+    BossList = {"Stone","Island Empress","Kilo Admiral","Captain Elephant","Beautiful Pirate","rip_indra True Form","Longma","Soul Reaper","Cake Queen"}
 end
 
 -- cac :
@@ -1525,6 +1533,30 @@ G:AddToggle({
 	end    
 })
 
+local Section = G:AddSection({
+	Name = "Boss and Mob"
+})
+
+G:AddDropdown({
+	Name = "Select Boss",
+	Default = "",
+	Options = BossList,
+	Callback = function(Value)
+		getgenv().SelectBoss = Value -- tao dùng getgenv() để chơi :))
+	end    
+})
+
+G:AddToggle({
+	Name = "Auto Farm Boss",
+	Default = false,
+	Save = true,
+	Flag = "Auto Boss",
+	Callback = function(Value)
+		_G.AutoBoss = Value
+        Djtmestop(_G.AutoBoss)
+	end    
+})
+
 -- Settings Tab :
 
 local Section = ST:AddSection({
@@ -2989,6 +3021,40 @@ spawn(function()
 end
 end)
 
+spawn(function()
+    while task.wait() do
+        if _G.AutoBoss then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild(_G.SelectBoss) then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == getgenv().SelectBoss then
+                            if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoBoss then
+                                repeat task.wait()
+                                    AutoHaki()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0))
+                                    _G.AutoClick = true
+                                until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBoss
+                            _G.AutoClick = false
+                            end
+                        end
+                    end
+                else
+                    if game:GetService("ReplicatedStorage"):FindFirstChild(getgenv().SelectBoss) then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild(getgenv().SelectBoss).HumanoidRootPart.CFrame * CFrame.new(0, 50, 0))
+                    else
+                        Notify("Có boss đéo mà chọn", 5)
+                        wait(2)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 local PosGreybeard = CFrame.new(-4881.23095703125, 22.65204429626465, 4273.75244140625)
 spawn(function()
     while wait() do
@@ -3189,16 +3255,16 @@ end)
 
 spawn(function()
     while wait(0.001) do
-     if _G.AutoHallowSycthe then
-     local args = {
-         [1] = "Bones",
-         [2] = "Buy",
-         [3] = 1,
-         [4] = 1
-         }
-         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        if _G.AutoHallowSycthe then
+            local memaybeochamaygay = {
+                [1] = "Bones",
+                [2] = "Buy",
+                [3] = 1,
+                [4] = 1
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(memaybeochamaygay))
+        end
     end
- end
 end)
 
 spawn(function()
@@ -3211,8 +3277,7 @@ spawn(function()
                             repeat task.wait()
                                 AutoHaki()
                                 EquipTool(SelectWP)
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
-                                v.HumanoidRootPart.CFrame = OldCFrameThird
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                 v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
