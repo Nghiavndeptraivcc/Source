@@ -814,7 +814,7 @@ function CheckBoss()
             Boss = "Tide Keeper"
             NameBoss = 'Tide Keeper'
             NameQuestBoss = "ForgottenQuest"
-            NumberQuest = 
+            NumberQuest = 3
             CFrameQuest = CFrame.new(-3053.9814453125, 237.18954467773, -10145.0390625)
             CFrameBoss = CFrame.new(-3795.6423339844, 105.88877105713, -11421.307617188)
             elseif getgenv().SelectBoss == "Darkbeard" then
