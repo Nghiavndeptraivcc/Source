@@ -3253,45 +3253,27 @@ spawn(function()
         if _G.AutoBoss then
             pcall(function()
                 CheckBoss()
-                if _G.GetQuestBoss and not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameBoss) and game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                    if BypassTP then
-                        if (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
-                            Taixiu(CFrameQuest)
-                        elseif (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
-                            Tween(CFrameQuest)
-                        end
-                    else
-                        Tween(CFrameQuest)
-                    end
-                    if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuestBoss, NumberQuest)
-                    end
-                elseif not _G.GetQuestBoss then
-                    if game:GetService("Workspace").Enemies:FindFirstChild(Boss) then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == getgenv().SelectBoss then
-                                if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoBoss then
-                                    repeat task.wait()
-                                        AutoHaki()
-                                        EquipTool(SelectWP)
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0))
-                                        _G.AutoClick = true
-                                    until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBoss
-                                _G.AutoClick = false
-                                end
+                if game:GetService("Workspace").Enemies:FindFirstChild(Boss) then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == Boss then
+                            if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoBoss then
+                                repeat task.wait()
+                                    AutoHaki()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0))
+                                    _G.AutoClick = true
+                                until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBoss
+                            _G.AutoClick = false
                             end
                         end
-                    else
-                        Tween(CFrameBoss)
-                        if game:GetService("ReplicatedStorage"):FindFirstChild(Boss) then
-                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Boss).HumanoidRootPart.CFrame * CFrame.new(0, 50, 0))
-                        else
-                            Notify("Có boss đéo mà chọn", 5)
-                            wait(2)
-                        end
+                    end
+                else
+                    Tween(CFrameBoss)
+                    if game:GetService("ReplicatedStorage"):FindFirstChild(Boss) then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Boss).HumanoidRootPart.CFrame * CFrame.new(0, 50, 0))
                     end
                 end
             end)
