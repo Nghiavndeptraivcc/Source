@@ -1510,7 +1510,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.AutoBartilo or _G.AutoGreybeard or _G.AutoSaw or _G.AutoFishCrew or _G.AutoShark or _G.AutoTerror or _G.AutoPiranha or _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
+            if _G.AutoBartilo or _G.AutoGreybeard or _G.AutoSaw or _G.AutoFishCrew or _G.AutoShark or _G.AutoTerror or _G.AutoPiranha or _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or NoCLip == true then
                 if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -1770,6 +1770,16 @@ G:AddDropdown({
 	Options = BossList,
 	Callback = function(Value)
 		getgenv().SelectBoss = Value -- tao dùng getgenv() để chơi :))
+	end    
+})
+
+G:AddToggle({
+	Name = "Auto GetQuest Boss",
+	Default = false,
+	Save = true,
+	Flag = "Auto GetQuest Boss",
+	Callback = function(Value)
+		_G.GetQuestBoss = Value
 	end    
 })
 
@@ -2379,6 +2389,7 @@ spawn(function()
                                                 v.HumanoidRootPart.Size = Vector3.new(70,70,70)
                                                 BringMob = true
                                                 _G.AutoClick = true
+                                                _G.LevelFarm = true
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                             until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
@@ -2563,7 +2574,7 @@ spawn(function()
                                             _G.AutoClick = true
                                             game:GetService'VirtualUser':CaptureController()
                                             game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                        until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0
+                                        until not _G.StartFarm or not v.Parent or v.Humanoid.Health <= 0
                                         _G.AutoClick = false
                                         Tween(PosDaoSky3)
                                     end
@@ -3274,6 +3285,61 @@ spawn(function()
                     Tween(CFrameBoss)
                     if game:GetService("ReplicatedStorage"):FindFirstChild(Boss) then
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Boss).HumanoidRootPart.CFrame * CFrame.new(0, 50, 0))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoBoss and _G.GetQuestBoss then
+            pcall(function()
+                CheckBoss()
+                if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameBoss) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                    if BypassTP then
+                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
+                            Taixiu(CFrameQuest)
+                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
+                            Tween(CFrameQuest)
+                        end
+                    else
+                        Tween(CFrameQuest)
+                    end
+                    if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuestBoss, NumberQuest)
+                    end
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    CheckBoss()
+                    if game:GetService("Workspace").Enemies:FindFirstChild(Boss) then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == Boss then
+                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameBoss) then
+                                        repeat task.wait()
+                                            EquipTool(SelectWP)
+                                            EnableBuso()                                            
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 50, 2))
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(70,70,70)
+                                            _G.AutoClick = true
+                                            game:GetService'VirtualUser':CaptureController()
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                        until not _G.AutoBoss or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                        _G.AutoClick = false
+                                    end
+                                end
+                            end
+                        end
+                    else
+                        Tween(CFrameBoss)
+                        if game:GetService("ReplicatedStorage"):FindFirstChild(Boss) then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Boss).HumanoidRootPart.CFrame * CFrame.new(2 ,50 ,2))
+                        end
                     end
                 end
             end)
