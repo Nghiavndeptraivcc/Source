@@ -1450,7 +1450,7 @@ local plr = game.Players.LocalPlayer
         return ret
     end
     
-    function AttackNoCD()
+    function Attack()
         if not _G.AutoClick then
             if not _G.AutoNextIsland or _G.KilLAura then
                 local AC = CbFw2.activeController
