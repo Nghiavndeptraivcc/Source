@@ -1438,7 +1438,7 @@ function TweenTemplete()
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586))
 end
 
-local CombatFramework = getupvalues(require(game.Players.Localplayer.PlayerScripts.CombatFramework))[2]
+local CombatFramework = getupvalues(require(game.Players.LocalPlayer.PlayerScripts.CombatFramework))[2]
 local CamShake = require(game.ReplicatedStorage.Util.CameraShaker)
 CamShake:Stop()
 
@@ -1453,7 +1453,7 @@ end
 function Attack()
     local activeControll = CombatFramework.activeController
     for i = 1, 1 do 
-        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(game.Players.Localplayer.Character,{game.Players.Localplayer.Character.HumanoidRootPart},60)
+        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(game.Players.LocalPlayer.Character,{game.Players.LocalPlayer.Character.HumanoidRootPart},60)
         local cac = {}
         local hash = {}
         for k, v in pairs(bladehit) do
@@ -1481,7 +1481,7 @@ function Attack()
                 debug.setupvalue(activeControll.attack, 4, u7)
                 debug.setupvalue(activeControll.attack, 7, u10)
                 pcall(function()
-                if game.Players.Localplayer.Character:FindFirstChildOfClass("Tool") and activeControll.blades and activeControll.blades[1] then
+                if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and activeControll.blades and activeControll.blades[1] then
                     activeControll.animator.anims.basic[1]:Play(0.01, 0.01, 0.01)
                     game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange", tostring(GetCurrentBlade()))
                     game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
