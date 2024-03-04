@@ -1,0 +1,162 @@
+-- Doors Not Skid
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Nghiavndeptraivcc/Orion-nhu-cut/main/Orion.Source')))()
+local Window = OrionLib:MakeWindow({Name = "Doors(Night Hub)", HidePremium = false,IntroText = "Night Library", SaveConfig = true, ConfigFolder = "Night Hub"})
+
+local G = Window:MakeTab({Name = "General", Icon = "rbxassetid://15541504459", PremiumOnly = false })
+
+G:AddToggle({
+	Name = "Ghosh",
+	Default = false,
+	Save = true,
+	Flag = "Ghosh",
+	Callback = function(Value)
+		_G.Dixuyentuong = Value
+	end    
+})
+
+G:AddToggle({
+	Name = "ESP Key",
+	Default = false,
+	Save = true,
+	Flag = "ESP Key",
+	Callback = function(Value)
+        for i,v in pairs(KeyEsp) do
+            v.Enabled = Value
+        end
+	end    
+})
+
+G:AddToggle({
+	Name = "ESP Book",
+	Default = false,
+	Save = true,
+	Flag = "ESP Book",
+	Callback = function(Value)
+        for i,v in pairs(EspSach) do
+            v.Enabled = Value
+        end
+	end    
+})
+
+G:AddToggle({
+	Name = "Esp Mob",
+	Default = false,
+	Save = true,
+	Flag = "Esp Mob",
+	Callback = function(Value)
+		for i, v in pairs(EspFinger) do
+            v.Enabled = Value
+        end
+	end    
+})
+
+G:AddDropdown({
+	Name = "WalkSpeed",
+	Default = "50",
+	Options = {"50", "60", "70"},
+	Callback = function(Value)
+		_G.Speed = value
+	end    
+})
+
+
+-- Funfciton
+
+function EspKey(cailon)
+    wait()
+    local ESP = Instance.new("Highlight")
+    ESP.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    ESP.FillColor = Color3.new(0.980392, 0.670588, 0)
+    ESP.FillTransparency = 0.5
+    ESP.OutlineColor = Color3.new(0.792156, 0.792156, 0.792156)
+    ESP.Parent = game:GetService("CoreGui")
+    ESP.Adornee = cailon
+    ESP.Enabled = OrionLib.Flags["KeyToggle"].Value
+    ESP.RobloxLocked = true
+    return ESP
+end
+
+local KeyText = coroutine.create(function()
+    workspace.CurrentRooms.DescendantAdded:Connect(function(cailon)
+        if cailon.Name == "KeyObtain" then
+            table.insert(KeyEsp,EspKey(cailon))
+        end
+    end)
+end)
+for i,v in ipairs(workspace:GetDescendants()) do
+    if v.Name == "KeyObtain" then
+        table.insert(KeyEsp,EspKey(v))
+    end
+end
+coroutine.resume(KeyText)
+
+function EspBookfunction(Cac)
+    if Cac:IsDescendantOf(game:GetService("Workspace").CurrentRooms:FindFirstChild("50")) and game:GetService("ReplicatedStorage").GameData.LatestRoom.Value == 50 then
+        wait()
+        local ESPBook = Instance.new("Highlight")
+        ESPBook.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+        ESPBook.FillColor = Color3.new(0, 1, 0.749019)
+        ESPBook.FillTransparency = 0.5
+        ESPBook.OutlineColor = Color3.new(0.792156, 0.792156, 0.792156)
+        ESPBook.Parent = game:GetService("CoreGui")
+        ESPBook.Enabled = OrionLib.Flags["BookToggle"].Value
+        ESPBook.Adornee = Cac
+        ESPBook.RobloxLocked = true
+        return ESPBook
+    end
+end
+
+function EspMobfunction(memaybeochamaygay)
+    wait()
+    local Cham = Instance.new("Highlight")
+    Cham.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    Cham.FillColor = Color3.new(1, 0, 0)
+    Cham.FillTransparency = 0.5
+    Cham.OutlineColor = Color3.new(0.792156, 0.792156, 0.792156)
+    Cham.Parent = game:GetService("CoreGui")
+    Cham.Enabled = OrionLib.Flags["FigureToggle"].Value
+    Cham.Adornee = memaybeochamaygay
+    Cham.RobloxLocked = true
+    return Cham
+end
+
+local BookCoroutine = coroutine.create(function()
+    task.wait(1)
+    for i,v in pairs(game:GetService("Workspace").CurrentRooms["50"].Assets:GetDescendants()) do
+        if v.Name == "LiveHintBook" then
+            table.insert(EspSach,EspBookfunction(v))
+        end
+    end
+end)
+local EntityCoroutine = coroutine.create(function()
+    local Entity = game:GetService("Workspace").CurrentRooms["50"].FigureSetup:WaitForChild("FigureRagdoll",5)
+    Entity:WaitForChild("Torso",2.5)
+    table.insert(EspFinger,EspMobfunction(Entity))
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = _G.Speed
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Ghosh == true then
+                if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
+                    local Noclip = Instance.new("BodyVelocity")
+                    Noclip.Name = "BodyClip"
+                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                    Noclip.Velocity = Vector3.new(0,0,0)
+                end
+            else
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+            end
+        end)
+    end
+end)
