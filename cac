@@ -3268,6 +3268,7 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    ClickNormal()
                                 until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoCastleRaid
                             end
                         end
@@ -3302,6 +3303,7 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                     Tween(CFrame.new(448.46756, 199.356781, -441.389252))
+                                    ClickNormal()
                                 until _G.AutoFactory == false or v.Humanoid.Health <= 0 or not v.Parent
                             end
                         end
@@ -3341,6 +3343,7 @@ spawn(function()
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                             sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                            ClickNormal()
                                         until not _G.AutoElite or v.Humanoid.Health <= 0 or not v.Parent
                                     end
                                 end
@@ -3481,6 +3484,7 @@ spawn(function()
                                                     v.Humanoid.WalkSpeed = 0
                                                     v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
                                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                                    ClickNormal()
                                                     sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
                                                     until v.Humanoid.Health <= 0 or not _G.AutoSaber
                                                     
@@ -3514,7 +3518,7 @@ spawn(function()
                                         v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                         v.Humanoid.WalkSpeed = 0
                                         v.HumanoidRootPart.CanCollide = false
-                                        
+                                        ClickNormal()
                                         game:GetService'VirtualUser':CaptureController()
                                         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672),workspace.CurrentCamera.CFrame)
                                     until v.Humanoid.Health <= 0 or not _G.AutoSaber or NightHubNoSkid("Saber")
@@ -3665,6 +3669,7 @@ spawn(function()
                                     v.Humanoid.WalkSpeed = 0
                                     v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
+                                    ClickNormal()
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBoss
                             
                             end
@@ -3715,6 +3720,7 @@ spawn(function()
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(70,70,70)
+                                            ClickNormal()
                                         until not _G.AutoBoss or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                     end
                                 end
@@ -3747,7 +3753,7 @@ spawn(function()
                                 v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                 v.Humanoid.WalkSpeed = 0
                                 v.HumanoidRootPart.CanCollide = false
-                                NormalAttack()
+                                ClickNormal()
                             until v.Humanoid.Health <= 0 or not _G.AutoGreybeard or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
                         end
                     end
