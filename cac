@@ -1050,11 +1050,6 @@ function EnableBuso()
     end
 end
 
-function Click()
-    game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-end
-
 function Taixiu(Pos)
     repeat task.wait()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
@@ -1407,6 +1402,20 @@ function TweenTopOnGreatTree()
     wait(0.5)
     if (ConNPCTemplete.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
         game.ReplicatedStorage.Remotes.CommF_:InvokeServer("RaceV4Progress", "TeleportBack")
+    end
+end
+
+function ClickNormal()
+    if _G.FastAttackOld then
+        local requireCombatFramework = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework)
+        local CombatFramework = debug.getupvalues(requireCombatFramework)[2]
+        local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
+        CameraShaker:Stop()
+        CombatFramework.activeController.attacking = false
+        CombatFramework.activeController.timeToNextAttack = -20
+        CombatFramework.activeController.hitboxMagnitude = 90
+        game:GetService'VirtualUser':CaptureController()
+        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
     end
 end
 
@@ -2444,6 +2453,24 @@ spawn(function()
     end
 end)
 
+spawn(function()
+    while wait() do
+        if _G.StartFarm == true and _G.SelectFarm == "Katakuri" and taodangosea3 then
+            pcall(function()
+                local spawnerData = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")
+                local dataLength = string.len(spawnerData)
+                if dataLength == 88 then
+                    CountMob = tonumber(string.sub(spawnerData, 39, 41)) - 500
+                elseif dataLength == 87 then
+                    CountMob = tonumber(string.sub(spawnerData, 40, 41)) - 500
+                elseif dataLength == 86 then
+                    CountMob = tonumber(string.sub(spawnerData, 41, 41)) - 500
+                end
+            end)
+        end
+    end
+end)
+
 local PosBone = CFrame.new(-9515.75, 174.8521728515625, 6079.40625)
 local CakeIsland = CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375)
 spawn(function()
@@ -2485,7 +2512,7 @@ spawn(function()
                                                 BringMob = true
                                                 _G.LevelFarm = true
                                             until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                            _G.AutoClick = false
+                                            
                                         end
                                     end
                                 end
@@ -2506,24 +2533,20 @@ spawn(function()
                                     repeat wait()
                                         EnableBuso()
                                         EquipTool(SelectWP)
-                                        Click()
-                                        _G.AutoClick = true
                                         v.HumanoidRootPart.CanCollide = false
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, -50, 0))
-
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, -20, 0))
                                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
-                                    _G.AutoClick = false
                                 end
                             end
                         end
                     else
                         if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") then
-                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince").HumanoidRootPart.CFrame * CFrame.new(20,- 50 ,20))
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince").HumanoidRootPart.CFrame * CFrame.new(20,- 20 ,20))
                         elseif game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
-                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Dough King").HumanoidRootPart.CFrame * CFrame.new(20,- 50 ,20))
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Dough King").HumanoidRootPart.CFrame * CFrame.new(20,- 20 ,20))
                         else
                             if CountMob == 0 then
                             end
@@ -2535,18 +2558,15 @@ spawn(function()
                                                 repeat wait()
                                                     EnableBuso()
                                                     EquipTool(SelectWP)
-                                                    Click()
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Humanoid.WalkSpeed = 0
                                                     v.Head.CanCollide = false
                                                     v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                                     BringKatakuriMob = true
-    
                                                     PosMobCake = v.HumanoidRootPart.CFrame
-
                                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
-                                                _G.AutoClick = false
+                                                
                                             end
                                         end
                                     end
@@ -2604,17 +2624,16 @@ spawn(function()
                                         repeat wait()
                                             EnableBuso()
                                             EquipTool(SelectWP)
-                                            Click()
+                                            
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                             StartCheckBone = true
-                                            _G.AutoClick = true
-
+                                            
                                         until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBone
-                                        _G.AutoClick = false
+                                        
                                     end
                                 end
                             end
@@ -2653,16 +2672,16 @@ spawn(function()
                                             EnableBuso()
                                             EquipTool(SelectWP)
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                            Click()
+                                            
                                             v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                             v.Humanoid.WalkSpeed = 0
                                             v.HumanoidRootPart.CanCollide = false
                                             BringSky = v.HumanoidRootPart.CFrame
                                             SkipLevel = true
-                                            _G.AutoClick = true
                                             
+                                
                                         until not _G.StartFarm or not v.Parent or v.Humanoid.Health <= 0
-                                        _G.AutoClick = false
+                                        
                                         Tween(PosDaoSky3)
                                     end
                                 end
@@ -2882,12 +2901,11 @@ spawn(function()
                                 v.Head.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
                                 v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
-                                Click()
                                 game:GetService("VirtualUser"):CaptureController()
                                 game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                                _G.AutoClick = true
+                                
                             until _G.AutoKillPlyAfterTrial == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
-                            _G.AutoClick = false
+                            
                         end
                     end
                 end
@@ -2925,12 +2943,11 @@ spawn(function()
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
                                 v.HumanoidRootPart.Size = Vector3.new(80,80,80)     
-                                _G.AutoClick = true                        
+                                                        
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                game:GetService("VirtualUser"):CaptureController()
-                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                Attack()
                             until v.Humanoid.Health <= 0 or not _G.AutoPole or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
-                            _G.AutoClick = false
+                            
                         end
                     end
                 else
@@ -3140,11 +3157,11 @@ spawn(function()
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                        _G.AutoClick = true
+                                        
                                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
 
                                     until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoGhoulRace == false
-                                    _G.AutoClick = false
+                                    
                                 end
                             end
                         end
@@ -3398,6 +3415,123 @@ spawn(function()
     end
 end)
 
+local PosJungle = CFrame.new(-1612.55884, 36.9774132, 148.719543)
+spawn(function()
+    while wait() do
+        if _G.AutoSaber and game.Players.LocalPlayer.Data.Level.Value >= 200 and taodangosea1 then
+            pcall(function()
+                if game:GetService("Workspace").Map.Jungle.Final.Part.Transparency == 0 then
+                    if game:GetService("Workspace").Map.Jungle.QuestPlates.Door.Transparency == 0 then
+                        if BypassTP then
+                            if (PosJungle.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                                Taixiu(PosJungle)
+                            elseif (PosJungle.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                                Tween(PosJungle)
+                            end
+                        else
+                            Tween(PosJungle)
+                        end
+                        if (PosJungle.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
+                            Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                            wait(1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate1.Button.CFrame
+                            wait(1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate2.Button.CFrame
+                            wait(1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate3.Button.CFrame
+                            wait(1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate4.Button.CFrame
+                            wait(1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate5.Button.CFrame
+                            wait(1)
+                        else
+                            print("Memaybeo bat BypassTP len")
+                        end
+                    else
+                        if game:GetService("Workspace").Map.Desert.Burn.Part.Transparency == 0 then
+                            if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Torch") or game.Players.LocalPlayer.Character:FindFirstChild("Torch") then
+                                EquipTool("Torch")
+                                Tween(CFrame.new(1114.01001, 4.92146635, 4350.58838, -0.28003493, 7.86557486e-09, 0.959989786, 1.55394595e-08, 1, -3.66043795e-09, -0.959989786, 1.38926719e-08, -0.28003493))
+                              else
+                                Tween(CFrame.new(-1610.00757, 11.5049858, 164.001587))
+                            end
+                        else
+                            if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","SickMan") ~= 0 then
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","GetCup")
+                                wait(0.5)
+                                EquipTool("Cup")
+                                wait(0.5)
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","FillCup",game:GetService("Players").LocalPlayer.Character.Cup)
+                                wait(0)
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","SickMan")
+                            else
+                                if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == nil then
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon")
+                                elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == 0 then
+                                if game:GetService("Workspace").Enemies:FindFirstChild("Mob Leader") or game:GetService("ReplicatedStorage"):FindFirstChild("Mob Leader") then
+                                    Tween(CFrame.new(-2967.59521, -4.91089821, 5328.70703))
+                                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                            if v.Name == "Mob Leader" then
+                                               if game:GetService("Workspace").Enemies:FindFirstChild("Mob Leader") then
+                                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                                    repeat task.wait()
+                                                    EnableBuso()
+                                                    EquipTool(SelectWP)
+                                                    v.HumanoidRootPart.CanCollide = false
+                                                    v.Humanoid.WalkSpeed = 0
+                                                    v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
+                                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                                    sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                                    until v.Humanoid.Health <= 0 or not _G.AutoSaber
+                                                    
+                                                 end
+                                            end
+                                            if game:GetService("ReplicatedStorage"):FindFirstChild("Mob Leader") then
+                                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Mob Leader").HumanoidRootPart.CFrame * Farm_Mode)
+                                            end
+                                        end
+                                    end
+                                 end
+                                elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == 1 then
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon")
+                                    wait(0.5)
+                                    EquipTool("Relic")
+                                    wait(0.5)
+                                    Tween(CFrame.new(-1404.91504, 29.9773273, 3.80598116, 0.876514494, 5.66906877e-09, 0.481375456, 2.53851997e-08, 1, -5.79995607e-08, -0.481375456, 6.30572643e-08, 0.876514494))
+                                end
+                            end
+                        end
+                    end
+                else
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Saber Expert") or game:GetService("ReplicatedStorage"):FindFirstChild("Saber Expert") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                if v.Name == "Saber Expert" then
+                                    repeat task.wait()
+                                        EnableBuso()
+                                        EquipTool(SelectWP)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.CanCollide = false
+                                        
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672),workspace.CurrentCamera.CFrame)
+                                    until v.Humanoid.Health <= 0 or not _G.AutoSaber or NightHubNoSkid("Saber")
+                                    
+                                    if v.Humanoid.Health <= 0 then
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","PlaceRelic")
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 spawn(function()
     while task.wait() do
         if _G.AutoStoreFruit then
@@ -3530,17 +3664,16 @@ spawn(function()
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Humanoid.WalkSpeed = 0
                                     v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0))
-                                    _G.AutoClick = true
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBoss
-                            _G.AutoClick = false
+                            
                             end
                         end
                     end
                 else
                     Tween(CFrameBoss)
                     if game:GetService("ReplicatedStorage"):FindFirstChild(Boss) then
-                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Boss).HumanoidRootPart.CFrame * CFrame.new(0, 50, 0))
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Boss).HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
                     end
                 end
             end)
@@ -3577,15 +3710,12 @@ spawn(function()
                                         repeat task.wait()
                                             EquipTool(SelectWP)
                                             EnableBuso()                                            
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 50, 2))
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(70,70,70)
-                                            _G.AutoClick = true
-                                            
                                         until not _G.AutoBoss or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                        _G.AutoClick = false
                                     end
                                 end
                             end
@@ -3593,7 +3723,7 @@ spawn(function()
                     else
                         Tween(CFrameBoss)
                         if game:GetService("ReplicatedStorage"):FindFirstChild(Boss) then
-                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Boss).HumanoidRootPart.CFrame * CFrame.new(2 ,50 ,2))
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Boss).HumanoidRootPart.CFrame * CFrame.new(2 ,20 ,2))
                         end
                     end
                 end
@@ -3617,9 +3747,8 @@ spawn(function()
                                 v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                 v.Humanoid.WalkSpeed = 0
                                 v.HumanoidRootPart.CanCollide = false
-                                _G.AutoClick = true
+                                NormalAttack()
                             until v.Humanoid.Health <= 0 or not _G.AutoGreybeard or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
-                            _G.AutoClick = false
                         end
                     end
                 else
@@ -3631,123 +3760,6 @@ spawn(function()
                         end
                     else
                         Tween(PosGreybeard)
-                    end
-                end
-            end)
-        end
-    end
-end)
-
-local PosJungle = CFrame.new(-1612.55884, 36.9774132, 148.719543)
-spawn(function()
-    while wait() do
-        if _G.AutoSaber and game.Players.LocalPlayer.Data.Level.Value >= 200 and taodangosea1 then
-            pcall(function()
-                if game:GetService("Workspace").Map.Jungle.Final.Part.Transparency == 0 then
-                    if game:GetService("Workspace").Map.Jungle.QuestPlates.Door.Transparency == 0 then
-                        if BypassTP then
-                            if (PosJungle.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
-                                Taixiu(PosJungle)
-                            elseif (PosJungle.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
-                                Tween(PosJungle)
-                            end
-                        else
-                            Tween(PosJungle)
-                        end
-                        if (PosJungle.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
-                            Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-                            wait(1)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate1.Button.CFrame
-                            wait(1)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate2.Button.CFrame
-                            wait(1)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate3.Button.CFrame
-                            wait(1)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate4.Button.CFrame
-                            wait(1)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate5.Button.CFrame
-                            wait(1)
-                        else
-                            print("Memaybeo bat BypassTP len")
-                        end
-                    else
-                        if game:GetService("Workspace").Map.Desert.Burn.Part.Transparency == 0 then
-                            if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Torch") or game.Players.LocalPlayer.Character:FindFirstChild("Torch") then
-                                EquipTool("Torch")
-                                Tween(CFrame.new(1114.01001, 4.92146635, 4350.58838, -0.28003493, 7.86557486e-09, 0.959989786, 1.55394595e-08, 1, -3.66043795e-09, -0.959989786, 1.38926719e-08, -0.28003493))
-                              else
-                                Tween(CFrame.new(-1610.00757, 11.5049858, 164.001587))
-                            end
-                        else
-                            if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","SickMan") ~= 0 then
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","GetCup")
-                                wait(0.5)
-                                EquipTool("Cup")
-                                wait(0.5)
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","FillCup",game:GetService("Players").LocalPlayer.Character.Cup)
-                                wait(0)
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","SickMan")
-                            else
-                                if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == nil then
-                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon")
-                                elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == 0 then
-                                if game:GetService("Workspace").Enemies:FindFirstChild("Mob Leader") or game:GetService("ReplicatedStorage"):FindFirstChild("Mob Leader") then
-                                    Tween(CFrame.new(-2967.59521, -4.91089821, 5328.70703))
-                                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                            if v.Name == "Mob Leader" then
-                                               if game:GetService("Workspace").Enemies:FindFirstChild("Mob Leader") then
-                                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                                    repeat task.wait()
-                                                    EnableBuso()
-                                                    EquipTool(SelectWP)
-                                                    v.HumanoidRootPart.CanCollide = false
-                                                    v.Humanoid.WalkSpeed = 0
-                                                    v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
-                                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                                    sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
-                                                    until v.Humanoid.Health <= 0 or not _G.AutoSaber
-                                                    _G.AutoClick = false
-                                                 end
-                                            end
-                                            if game:GetService("ReplicatedStorage"):FindFirstChild("Mob Leader") then
-                                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Mob Leader").HumanoidRootPart.CFrame * Farm_Mode)
-                                            end
-                                        end
-                                    end
-                                 end
-                                elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == 1 then
-                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon")
-                                    wait(0.5)
-                                    EquipTool("Relic")
-                                    wait(0.5)
-                                    Tween(CFrame.new(-1404.91504, 29.9773273, 3.80598116, 0.876514494, 5.66906877e-09, 0.481375456, 2.53851997e-08, 1, -5.79995607e-08, -0.481375456, 6.30572643e-08, 0.876514494))
-                                end
-                            end
-                        end
-                    end
-                else
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Saber Expert") or game:GetService("ReplicatedStorage"):FindFirstChild("Saber Expert") then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                if v.Name == "Saber Expert" then
-                                    repeat task.wait()
-                                        EnableBuso()
-                                        EquipTool(SelectWP)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.HumanoidRootPart.CanCollide = false
-                                        _G.AutoClick = true
-                                        game:GetService'VirtualUser':CaptureController()
-                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672),workspace.CurrentCamera.CFrame)
-                                    until v.Humanoid.Health <= 0 or not _G.AutoSaber or NightHubNoSkid("Saber")
-                                    _G.AutoClick = false
-                                    if v.Humanoid.Health <= 0 then
-                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","PlaceRelic")
-                                    end
-                                end
-                            end
-                        end
                     end
                 end
             end)
@@ -3771,9 +3783,8 @@ spawn(function()
                                     v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                     v.Humanoid.WalkSpeed = 0
                                     v.HumanoidRootPart.CanCollide = false
-                                    _G.AutoClick = true
                                 until v.Humanoid.Health <= 0 or not _G.AutoSaw or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
-                                _G.AutoClick = false
+                                
                             end
                         end
                     end
@@ -3820,10 +3831,10 @@ spawn(function()
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                 v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                 v.HumanoidRootPart.CanCollide = false
-                                _G.AutoClick = true
+                                
                                 sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
                             until v.Humanoid.Health <= 0 or _G.AutoHallowSycthe == false
-                            _G.AutoClick = false
+                            
                         end
                     end
                 elseif game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hallow Essence") then
@@ -3854,10 +3865,10 @@ spawn(function()
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                    _G.AutoClick = true
+                                    
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                 until v.Humanoid.Health <= 0  or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or not _G.AutoRipIndra
-                                _G.AutoClick = false
+                                
                             end
                         end
                     end
@@ -3892,10 +3903,10 @@ spawn(function()
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                    _G.AutoClick = true
+                                    
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                 until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoDarkbeard == false
-                                _G.AutoClick = false
+                                
                             end
                         end
                     end
@@ -3964,7 +3975,7 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.HumanoidRootPart.CanCollide = false
                             until v.Humanoid.Health <= 0 or not _G.AutoSaw or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
-                            _G.AutoClick = false
+                            
                         end
                     end
                 else
